@@ -1,0 +1,36 @@
+:root {
+    font-size: 62.5%;
+
+    /*theme*/
+
+    --fontFamilyCore: 'Nunito', sans-serif;
+    --fontFamilyTitle: 'Roboto', sans-serif;;
+    --fontColor: #686058;
+    --fontColor-dark:#444;
+    --dark: #444;
+
+    --body:#E5EFEF;
+    --primary: #006266;
+    --primary-light: #b2cfd1;
+    --secondary: #F79F1F;
+    --border: #66a0a3;
+
+    /*linearGradient*/
+    --gradiant-back: 350deg, var(--primary) 0%, var(--secondary) 100%;
+
+    /*messages*/
+    --warning: #EA2027;
+    --succes: #009432;
+
+    /*box-shadow*/
+    --box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    --text_shadow_soft: 0px 0px 1rem rgba(255, 255, 255, 0.6);
+
+    /*border-radius*/
+    --border-radius-large: 1rem;
+    --border-radius: 3px;
+
+    /*border*/
+    --border: 2px solid var(--border);
+
+}
