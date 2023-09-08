@@ -8,7 +8,7 @@ body{
     font-family: var(--fontFamilyCore);
     font-size: 1.6rem;
     color: var(--fontColor);
-    background: var(--primary);
+    background: var(--body);
     min-height: 100vh;
 }
 
