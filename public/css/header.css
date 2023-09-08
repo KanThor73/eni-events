@@ -1,0 +1,17 @@
+header{
+    box-shadow: var(--box-shadow);
+    background: var(--primary);
+    margin-bottom: 1rem;
+    justify-content: space-between;
+}
+
+.log{
+    margin-left: 2rem;
+}
+
+.logo{
+    background: url("../img/eni_events.svg") center center;
+    background-size: cover;
+    height: 9rem;
+    width: 9rem;
+}

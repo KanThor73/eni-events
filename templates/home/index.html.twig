@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+{% endblock %}
+{% block header %}
 {% endblock %}
 
 {% block body %}
@@ -14,4 +16,7 @@
             <h1>L'AVENTURE VOUS ATTENDS !</h1>
         </div>
     </div>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}
