@@ -22,17 +22,16 @@
     {% endblock %}
 </head>
 <body>
-<header>
-    <div class="logo"></div>
-    <div class="menu">
-        <a href=""></a>
-    </div>
-</header>
+{% block header %}
+    {% include('partials/_header') %}
+{% endblock %}
 <div class="body-container">
     {% block body %}
 
     {% endblock %}
 </div>
-<footer></footer>
+{% block footer %}
+
+{% endblock %}
 </body>
 </html>
