@@ -33,3 +33,7 @@ sc make:entity (User)
 sc make:entity (Event)
 sc make:migration
 sc doctrine:migrations:migrate
+
+2023-09-11 18:20
+
+composer require security-bundle
