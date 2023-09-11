@@ -18,3 +18,18 @@ php bin/console doctrine:migrations:migrate
 symfony console make:entity (Place)
 symfony console make:migration
 symfony console doctrine:migrations:migrate
+
+2023-09-11 17:30
+
+[user entity deleted]
+alias sc='symfony console'
+sc make:migration
+sc doctrine:migrations:migrate
+
+2023-09-11 17:45
+
+sc make:user
+sc make:entity (User)
+sc make:entity (Event)
+sc make:migration
+sc doctrine:migrations:migrate
