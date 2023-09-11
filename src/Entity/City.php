@@ -19,8 +19,8 @@ class City
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $postCode = null;
+    #[ORM\Column(length: 5)]
+    private ?string $postCode = null;
 
     #[ORM\OneToMany(mappedBy: 'city', targetEntity: Place::class, orphanRemoval: true)]
     private Collection $places;
@@ -47,7 +47,7 @@ class City
         return $this;
     }
 
-    public function getPostCode(): ?int
+    public function getPostCode(): ?string
     {
         return $this->postCode;
     }
