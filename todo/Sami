@@ -42,3 +42,9 @@ composer require web-profiler-bundle
 composer require monolog-bundle
 composer require debug-bundle
 [edit config/packages/security.yaml]
+
+2023-09-11 20:15
+
+sc make:auth
+
+
