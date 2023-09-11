@@ -6,3 +6,9 @@ composer require doctrine
 2023-09-11 12:25
 
 symfony console doctrine:database:create
+
+2023-09-11 13:40
+
+php bin/console make:entity (City)
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
