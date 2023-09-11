@@ -37,3 +37,8 @@ sc doctrine:migrations:migrate
 2023-09-11 18:20
 
 composer require security-bundle
+composer clear-cache
+composer require web-profiler-bundle
+composer require monolog-bundle
+composer require debug-bundle
+[edit config/packages/security.yaml]
