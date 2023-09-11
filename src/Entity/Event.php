@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -39,6 +41,22 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'event')]
     #[ORM\JoinColumn(nullable: false)]
     private ?State $state = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'isRegistred')]
+    private Collection $users;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Campus $campus = null;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $organizer = null;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +155,57 @@ class Event
     public function setState(?State $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addIsRegistred($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeIsRegistred($this);
+        }
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): static
+    {
+        $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getOrganizer(): ?User
+    {
+        return $this->organizer;
+    }
+
+    public function setOrganizer(?User $organizer): static
+    {
+        $this->organizer = $organizer;
 
         return $this;
     }
