@@ -1,4 +1,8 @@
-2023-09-11:11:30
+2023-09-11 11:30
 
 composer require orm -W
 composer require doctrine
+
+2023-09-11 12:25
+
+symfony console doctrine:database:create
