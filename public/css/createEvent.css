@@ -1,0 +1,26 @@
+.body-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container{
+    background: var(--primary-light);
+    padding: 3.5rem;
+    border-radius: 0.5rem;
+    border: 3px solid var(--primary);
+}
+
+.form-location{
+    justify-content: space-around;
+}
+.form-details{
+    justify-content: space-around;
+}
+
+.form-row{
+    margin: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 2rem;
+}
