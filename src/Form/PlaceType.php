@@ -21,6 +21,7 @@ class PlaceType extends AbstractType
             ->add('city', EntityType::class, [
                 'class' => City::class,
                 'choice_label' => 'name',
+                'multiple' => true,
                 'label' => 'Ville'
             ]);
         ;

@@ -13,3 +13,5 @@ symfony composer req form
 [12:35 PM]
 
 symfony composer req make
+
+composer require twig/intl-extra

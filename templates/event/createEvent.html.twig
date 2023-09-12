@@ -10,60 +10,60 @@
 {% block body %}
     <h1 class="m-2">Creer un event</h1>
     {{ form_start(eventForm) }}
-    <div class="event-form-container d-flex ">
-        <div class="form-details">
+    <div class="form-container d-flex ">
+        <div class="form-details d-flex flex-column m-1">
             <div class="form-row">
                 {{ form_label(eventForm.name) }}
                 {{ form_widget(eventForm.name) }}
-                {{ form_errors(eventForm.name) }}
             </div>
+            {{ form_errors(eventForm.name) }}
             <div class="form-row">
                 {{ form_label(eventForm.beginDate) }}
                 {{ form_widget(eventForm.beginDate) }}
-                {{ form_errors(eventForm.beginDate) }}
             </div>
+            {{ form_errors(eventForm.beginDate) }}
             <div class="form-row">
                 {{ form_label(eventForm.limitDate) }}
                 {{ form_widget(eventForm.limitDate) }}
-                {{ form_errors(eventForm.limitDate) }}
             </div>
+            {{ form_errors(eventForm.limitDate) }}
             <div class="form-row">
                 {{ form_label(eventForm.nbMaxInscription) }}
                 {{ form_widget(eventForm.nbMaxInscription) }}
-                {{ form_errors(eventForm.nbMaxInscription) }}
             </div>
+            {{ form_errors(eventForm.nbMaxInscription) }}
             <div class="form-row">
                 {{ form_label(eventForm.duration) }}
                 {{ form_widget(eventForm.duration) }}
-                {{ form_errors(eventForm.duration) }}
             </div>
+            {{ form_errors(eventForm.duration) }}
             <div class="form-row">
                 {{ form_label(eventForm.infoEvent) }}
                 {{ form_widget(eventForm.infoEvent) }}
-                {{ form_errors(eventForm.infoEvent) }}
             </div>
+            {{ form_errors(eventForm.infoEvent) }}
         </div>
-        <div class="form-location">
+        <div class="form-location d-flex flex-column m-1">
             <div class="form-row">
                 {{ form_label(eventForm.campus) }}
                 {{ form_widget(eventForm.campus) }}
-                {{ form_errors(eventForm.campus) }}
             </div>
+            {{ form_errors(eventForm.campus) }}
             <div class="form-row">
                 {{ form_label(placeForm.city) }}
                 {{ form_widget(placeForm.city) }}
-                {{ form_errors(placeForm.city) }}
             </div>
+            {{ form_errors(placeForm.city) }}
             <div class="form-row">
                 {{ form_label(placeForm.name) }}
                 {{ form_widget(placeForm.name) }}
-                {{ form_errors(placeForm.name) }}
             </div>
+            {{ form_errors(placeForm.name) }}
             <div class="form-row">
                 {{ form_label(placeForm.street) }}
                 {{ form_widget(placeForm.street) }}
-                {{ form_errors(placeForm.street) }}
             </div>
+            {{ form_errors(placeForm.street) }}
             <div class="form-row">
                 <label for="">Code Postale : </label>
                 <input type="text" value="{{ codePostale }}">
@@ -71,13 +71,13 @@
             <div class="form-row">
                 {{ form_label(placeForm.latitude) }}
                 {{ form_widget(placeForm.latitude) }}
-                {{ form_errors(placeForm.latitude) }}
             </div>
+            {{ form_errors(placeForm.latitude) }}
             <div class="form-row">
                 {{ form_label(placeForm.longitude) }}
                 {{ form_widget(placeForm.longitude) }}
-                {{ form_errors(placeForm.longitude) }}
             </div>
+            {{ form_errors(placeForm.longitude) }}
         </div>
     </div>
     <div class="buttons d-flex justify-content-center m-2">

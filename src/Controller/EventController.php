@@ -26,9 +26,11 @@ class EventController extends AbstractController
 
         $event = new Event();
         $place = new Place();
+        $city = new City();
 
         $eventForm = $this->createForm(EventType::class, $event)->handleRequest($request);
         $placeForm = $this->createForm(PlaceType::class, $place)->handleRequest($request);
+        $cityForm = $this->createForm(CityType::class, $city)->handleRequest($request);
 
         if ($eventForm->isSubmitted() && $eventForm->isValid() && $placeForm->isSubmitted() && $placeForm->isValid()) {
 
@@ -46,6 +48,7 @@ class EventController extends AbstractController
         return $this->render('event/createEvent.html.twig', [
             'eventForm' => $eventForm->createView(),
             'placeForm' => $placeForm->createView(),
+            'cityForm' => $cityForm->createView(),
             'codePostale' => '73000'
         ]);
     }
