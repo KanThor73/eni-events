@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Campus;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class UserProfilType extends AbstractType
 {
@@ -18,8 +20,10 @@ class UserProfilType extends AbstractType
             ->add('name')
             ->add('firstname')
             ->add('telephone')
-            ->add('campus')
-
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'choice_label' => 'name'
+                ])
         ;
     }
 

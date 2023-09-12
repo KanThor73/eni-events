@@ -6,10 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -175,23 +177,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Event>
      */
-    public function getIsRegistred(): Collection
+    public function getParticipations(): Collection
     {
         return $this->isRegistred;
     }
 
-    public function addIsRegistred(Event $isRegistred): static
+    public function addParticipation(Event $participation): static
     {
-        if (!$this->isRegistred->contains($isRegistred)) {
-            $this->isRegistred->add($isRegistred);
+        if (!$this->isRegistred->contains($participation)) {
+            $this->isRegistred->add($participation);
         }
 
         return $this;
     }
 
-    public function removeIsRegistred(Event $isRegistred): static
+    public function removeParticipation(Event $participation): static
     {
-        $this->isRegistred->removeElement($isRegistred);
+        $this->isRegistred->removeElement($participation);
 
         return $this;
     }
