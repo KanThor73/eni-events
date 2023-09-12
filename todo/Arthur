@@ -1,2 +1,12 @@
-11/09
-creatio
+11/09 : 14h00
+creation entités Campus et User et création des relations entre elles
+
+11/09 : 19h00
+création formulaire UserProfil
+
+12/09 : 9h00 restart process création formulaire "UserProfil"
+
+12/09 : 11h00 création  formulaire UserProfilType, userProfil.html.twig et UserProfilController
+
+12/09 : création bouton S'incrire et Annuler
+

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Espace pour la photo à gauche -->
+                <img src="chemin_de_votre_photo.jpg" alt="Votre photo" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <div class="text-center">
+                    <h1>Mon profil</h1>
+                    {{ form_start(userForm) }}
+                    <div class="form-container">
+                        <!-- Votre formulaire ici -->
+                    </div>
+
+                    {{ form_end(userForm) }}
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <button type="submit" class="btn btn-secondary">Annuler</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- Espace vide à droite -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
