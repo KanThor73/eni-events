@@ -49,7 +49,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectToRoute('home');
+        return new RedirectResponse('/home');
     }
 
     protected function getLoginUrl(Request $request): string
