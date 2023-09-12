@@ -10,6 +10,56 @@
 
 
 {% block body %}
+    <div class="info">
+        <div class="d-flex">
+            <label class="mr-1 " for="user">Date :</label>
+            <p>{{ "now" | date("d-m-Y") }}</p>
+        </div>
+        <div class="d-flex">
+            <label class="mr-1 " for="user">Participant :</label>
+            <p>{{ app.user.getFirstname }}</p>
+        </div>
+    </div>
+    <h1 class="m-2">Events</h1>
+    <div class="search-container">
+        <div class="part1">
+            {{ form_start(campusForm) }}
+            <div class="row">
+                {{ form_label(campusForm.name) }}
+                {{ form_widget(campusForm.name) }}
+                {{ form_errors(campusForm.name) }}
+            </div>
+            {{ form_end(campusForm) }}
+            <div class="row">
+                <label for="searchWord">Le nom de l'event contient :</label>
+                <input type="text" placeholder="search">
+            </div>
+            <div class="row">
+
+            </div>
+        </div>
+        <div class="part2">
+            <div class="row">
+                <input type="checkbox" name="isOrganizer">
+                <label for="isOrganizer">Events dont je suis l'organisateur/trice</label>
+            </div>
+            <div class="row">
+                <input type="checkbox" name="isRegistered" value="true">
+                <label for="isRegistered">Events auxquels je ne suis pas inscrit/e</label>
+            </div>
+            <div class="row">
+                <input type="checkbox" name="isOrganizer">
+                <label for="isOrganizer">Events auxquels je suis pas inscrit/e</label>
+            </div>
+            <div class="row">
+                <input type="checkbox" name="isOrganizer">
+                <label for="isOrganizer">Events passes</label>
+            </div>
+        </div>
+        <div class="part3">
+            <button class="btn-primary"> RECHERCHER</button>
+        </div>
+    </div>
     <div class="form-container">
 
     </div>

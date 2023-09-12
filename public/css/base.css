@@ -63,8 +63,13 @@ ul{
 }
 /*margin-padding*/
 
+
 .m-1{
     margin: 1rem;
+}
+
+.mr-1{
+    margin-right: 1rem;
 }
 
 .m-2{

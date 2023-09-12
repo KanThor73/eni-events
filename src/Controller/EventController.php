@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Event;
 use App\Entity\Place;
+use App\Form\CampusType;
 use App\Form\CityType;
 use App\Form\EventType;
 use App\Form\PlaceType;
@@ -55,13 +57,16 @@ class EventController extends AbstractController
     }
 
     #[Route('/showroom', name: 'event_showroom')]
-    public function eventShowroom(): Response
+    public function eventShowroom(Request $request): Response
     {
+        $campus = new Campus();
+
+        $campusForm = $this->createForm(CampusType::class, $campus)->handleRequest($request);
 
 
 
         return $this->render('event/eventShowroom.html.twig', [
-            'controller_name' => 'EventController',
+            'campusForm' => $campusForm->createView(),
         ]);
     }
 }

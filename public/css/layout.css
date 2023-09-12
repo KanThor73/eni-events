@@ -1,9 +1,11 @@
 .form-container{
+    flex-direction: row;
     background: var(--primary-light);
     padding: 3.5rem;
     border-radius: 0.5rem;
     border: 3px solid var(--primary);
     box-shadow: var(--box-shadow);
+    margin-top: 2rem;
 }
 
 .form-row{
