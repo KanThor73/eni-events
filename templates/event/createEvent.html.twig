@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/createEvent.css') }}">
+    {% endblock %}
+
+{% block title %}Create-Event{% endblock %}
+
+{% block body %}
+    <h1 class="m-2">Creer un event</h1>
+    {{ form_start(eventForm) }}
+    <div class="event-form-container d-flex ">
+        <div class="form-details">
+            <div class="form-row">
+                {{ form_label(eventForm.name) }}
+                {{ form_widget(eventForm.name) }}
+                {{ form_errors(eventForm.name) }}
+            </div>
+            <div class="form-row">
+                {{ form_label(eventForm.beginDate) }}
+                {{ form_widget(eventForm.beginDate) }}
+                {{ form_errors(eventForm.beginDate) }}
+            </div>
+            <div class="form-row">
+                {{ form_label(eventForm.limitDate) }}
+                {{ form_widget(eventForm.limitDate) }}
+                {{ form_errors(eventForm.limitDate) }}
+            </div>
+            <div class="form-row">
+                {{ form_label(eventForm.nbMaxInscription) }}
+                {{ form_widget(eventForm.nbMaxInscription) }}
+                {{ form_errors(eventForm.nbMaxInscription) }}
+            </div>
+            <div class="form-row">
+                {{ form_label(eventForm.duration) }}
+                {{ form_widget(eventForm.duration) }}
+                {{ form_errors(eventForm.duration) }}
+            </div>
+            <div class="form-row">
+                {{ form_label(eventForm.infoEvent) }}
+                {{ form_widget(eventForm.infoEvent) }}
+                {{ form_errors(eventForm.infoEvent) }}
+            </div>
+        </div>
+        <div class="form-location">
+            <div class="form-row">
+                {{ form_label(eventForm.campus) }}
+                {{ form_widget(eventForm.campus) }}
+                {{ form_errors(eventForm.campus) }}
+            </div>
+            <div class="form-row">
+                {{ form_label(placeForm.city) }}
+                {{ form_widget(placeForm.city) }}
+                {{ form_errors(placeForm.city) }}
+            </div>
+            <div class="form-row">
+                {{ form_label(placeForm.name) }}
+                {{ form_widget(placeForm.name) }}
+                {{ form_errors(placeForm.name) }}
+            </div>
+            <div class="form-row">
+                {{ form_label(placeForm.street) }}
+                {{ form_widget(placeForm.street) }}
+                {{ form_errors(placeForm.street) }}
+            </div>
+            <div class="form-row">
+                <label for="">Code Postale : </label>
+                <input type="text" value="{{ codePostale }}">
+            </div>
+            <div class="form-row">
+                {{ form_label(placeForm.latitude) }}
+                {{ form_widget(placeForm.latitude) }}
+                {{ form_errors(placeForm.latitude) }}
+            </div>
+            <div class="form-row">
+                {{ form_label(placeForm.longitude) }}
+                {{ form_widget(placeForm.longitude) }}
+                {{ form_errors(placeForm.longitude) }}
+            </div>
+        </div>
+    </div>
+    <div class="buttons d-flex justify-content-center m-2">
+        <button class="btn-primary" type="submit">Enregistrer</button>
+        <a href="#">
+            <button class="btn-primary">Publier</button>
+        </a>
+        <a href="#">
+            <button class="btn-primary">Annuler</button>
+        </a>
+    </div>
+    {{ form_end(eventForm, {'render_rest': false}) }}
+    </div>
+{% endblock %}

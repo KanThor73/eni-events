@@ -39,6 +39,39 @@ ul{
     list-style: none;
 }
 
+/*.btn-primary{*/
+/*    cursor: pointer;*/
+/*    color: var(--secondary);*/
+/*    background: var(--primary);*/
+/*    font-size: 2rem;*/
+/*    font-weight: 500;*/
+/*    padding: 1rem;*/
+/*    margin: 0rem 1rem;*/
+/*    border-radius: 0.4rem;*/
+/*    border: none;*/
+/*    letter-spacing: 0.1rem;*/
+/*}*/
+
+.btn-primary{
+    font-weight: 600;
+    padding: 1.3rem;
+    cursor: pointer;
+    color: var(--secondary);
+    background: var(--primary);
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+    transition: 0.25s;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0.5em 0.5em -0.4em var(--primary);
+    transform: translateY(-0.25em);
+}
 /*margin-padding*/
 
 .m-1{

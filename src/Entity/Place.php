@@ -104,6 +104,10 @@ class Place
         return $this;
     }
 
+    public function CityNameToString(){
+        return $this->city->getName();
+    }
+
     /**
      * @return Collection<int, Event>
      */
