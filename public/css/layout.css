@@ -1,12 +1,13 @@
-.body-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .form-container{
     background: var(--primary-light);
     padding: 3.5rem;
     border-radius: 0.5rem;
     border: 3px solid var(--primary);
+}
+
+.form-row{
+    margin: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 2rem;
 }
