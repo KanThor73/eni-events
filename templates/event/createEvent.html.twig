@@ -49,11 +49,12 @@
                 {{ form_widget(eventForm.campus) }}
             </div>
             {{ form_errors(eventForm.campus) }}
+                                {# recuperer le cmapus avec le user#}
             <div class="form-row">
-                {{ form_label(placeForm.city) }}
-                {{ form_widget(placeForm.city) }}
+                {{ form_label(cityForm.name) }}
+                {{ form_widget(cityForm.name) }}
             </div>
-            {{ form_errors(placeForm.city) }}
+            {{ form_errors(cityForm.name) }}
             <div class="form-row">
                 {{ form_label(placeForm.name) }}
                 {{ form_widget(placeForm.name) }}
@@ -65,9 +66,10 @@
             </div>
             {{ form_errors(placeForm.street) }}
             <div class="form-row">
-                <label for="">Code Postale : </label>
-                <input type="text" value="{{ codePostale }}">
+                {{ form_label(cityForm.postCode) }}
+                {{ form_widget(cityForm.postCode) }}
             </div>
+            {{ form_errors(cityForm.postCode) }}
             <div class="form-row">
                 {{ form_label(placeForm.latitude) }}
                 {{ form_widget(placeForm.latitude) }}

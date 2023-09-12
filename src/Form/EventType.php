@@ -36,12 +36,14 @@ class EventType extends AbstractType
             ->add('nbMaxInscription', null, [
                 'label' => 'Nbre max d\'inscription :'
             ])
-            ->add('infoEvent')
-            ->add('place')
-            ->add('state')
-            ->add('users')
-            ->add('campus', TextType::class, ['label' => 'Campus'])
-            ->add('organizer');
+            ->add('infoEvent', null, [
+                'label' => 'Description et infos :'
+            ])
+//            ->add('place')
+//            ->add('state')
+//            ->add('users')
+            ->add('campus', TextType::class, ['label' => 'Campus :']);
+//            ->add('organizer');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
