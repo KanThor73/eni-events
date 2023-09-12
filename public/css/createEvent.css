@@ -12,7 +12,15 @@
     border: 3px solid var(--primary);
     margin-top: 2rem;
 }
+.btn-add{
+    font-size: 1.5rem;
+    padding: 0.3rem;
+    margin: 0rem;
+}
 
+.add{
+    justify-content: space-between;
+}
 .form-location{
     justify-content: space-around;
 }
