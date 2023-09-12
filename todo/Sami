@@ -47,4 +47,6 @@ composer require debug-bundle
 
 sc make:auth
 
+2023-09-12 09:50
 
+composer require profiler
