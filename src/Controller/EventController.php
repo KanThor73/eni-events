@@ -32,16 +32,17 @@ class EventController extends AbstractController
         $placeForm = $this->createForm(PlaceType::class, $place)->handleRequest($request);
         $cityForm = $this->createForm(CityType::class, $city)->handleRequest($request);
 
-        if ($eventForm->isSubmitted() && $eventForm->isValid() && $placeForm->isSubmitted() && $placeForm->isValid()) {
+        if ($eventForm->isSubmitted() && $eventForm->isValid() && $placeForm->isSubmitted() && $placeForm->isValid() && $cityForm->isSubmitted() && $cityForm->isValid()) {
+
+
+
 
             $entityManager->persist($place);
-
+            $entityManager->persist($city);
             $entityManager->persist($event);
 
             $entityManager->flush();
-
             $this->addFlash('success', 'Felicitation, vous venez de creer un Eni-Event!');
-
             return $this->redirectToRoute('home');
         }
 
@@ -56,6 +57,9 @@ class EventController extends AbstractController
     #[Route('/showroom', name: 'event_showroom')]
     public function eventShowroom(): Response
     {
+
+
+
         return $this->render('event/eventShowroom.html.twig', [
             'controller_name' => 'EventController',
         ]);

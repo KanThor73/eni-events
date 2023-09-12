@@ -14,6 +14,11 @@ header{
     background-size: cover;
     height: 9rem;
     width: 9rem;
+    transition: 0.5s ease-in-out;
+}
+
+.logo:hover{
+    transform: scale(1.1);
 }
 
 h3{
