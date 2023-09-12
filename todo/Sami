@@ -50,3 +50,8 @@ sc make:auth
 2023-09-12 09:50
 
 composer require profiler
+
+2023-09-12 14:50
+
+composer require form validator
+sc make:registration-form
