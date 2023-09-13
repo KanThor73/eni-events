@@ -51,7 +51,6 @@
             </div>
             {{ form_errors(eventForm.campus) }}
             {% endif %}
-                                {# recuperer le cmapus avec le user#}
             <div class="form-row">
                 {{ form_label(cityForm.name) }}
                 {{ form_widget(cityForm.name) }}
@@ -96,6 +95,11 @@
             <button class="btn-primary">Annuler</button>
         </a>
     </div>
+    {{ form_widget(eventForm._token) }}
     {{ form_end(eventForm, {'render_rest': false}) }}
     </div>
 {% endblock %}
+    {% block javascripts %}
+        {{ parent() }}
+{#        <script defer src="{{ asset('js/dynamicSelect.js') }}"></script>#}
+    {% endblock %}

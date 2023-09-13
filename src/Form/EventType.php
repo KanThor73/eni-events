@@ -25,6 +25,7 @@ class EventType extends AbstractType
                 'label' => 'Date et heure de l\'event :'
             ])
             ->add('duration', TimeType::class, [
+                'input' => 'string',
                 'widget' => 'single_text',
                 'label' => 'Duree de l\'event :'
             ])
@@ -42,7 +43,7 @@ class EventType extends AbstractType
 //            ->add('place')
 //            ->add('state')
 //            ->add('users')
-            ->add('campus', TextType::class, ['label' => 'Campus :']);
+            ->add('campus');
 //            ->add('organizer');
     }
 

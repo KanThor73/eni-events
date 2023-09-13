@@ -6,6 +6,8 @@ use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Event;
 use App\Entity\Place;
+use App\Entity\State;
+use App\Entity\User;
 use App\Form\CampusType;
 use App\Form\CityType;
 use App\Form\EventType;
@@ -34,13 +36,18 @@ class EventController extends AbstractController
         $placeForm = $this->createForm(PlaceType::class, $place)->handleRequest($request);
         $cityForm = $this->createForm(CityType::class, $city)->handleRequest($request);
 
-        if ($eventForm->isSubmitted() && $eventForm->isValid() && $placeForm->isSubmitted() && $placeForm->isValid() && $cityForm->isSubmitted() && $cityForm->isValid()) {
 
+        if ($eventForm->isSubmitted() && $eventForm->isValid()) {
+            $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
+            $place = $entityManager->getRepository(Place::class)->find(1);
+            $state = $entityManager->getRepository(State::class)->find(1);
 
+            $event->setPlace($place);
+            $event->setCampus($this->getUser()->getCampus());
+            $event->setState($state);
+            $event->addMember($user);
+            $event->setOrganizer($this->getUser());
 
-
-            $entityManager->persist($place);
-            $entityManager->persist($city);
             $entityManager->persist($event);
 
             $entityManager->flush();
@@ -52,7 +59,6 @@ class EventController extends AbstractController
             'eventForm' => $eventForm->createView(),
             'placeForm' => $placeForm->createView(),
             'cityForm' => $cityForm->createView(),
-            'codePostale' => '73000'
         ]);
     }
 
