@@ -1,9 +1,9 @@
 <header class="p-1 d-flex align-items-center">
-    <div class="logo"></div>
+    <a href="{{ path('home') }}"><div class="logo"></div></a>
     <div class="menu d-flex align-items-center">
         <a href=""><h3>Events</h3></a>
         <div class="log d-flex flex-column align-items-center">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% if app.user %}
 	    	<a class="m-1" href="/logout"><h3>Log out</h3></a>
 	    {% else %}
                 <a class="m-1" href="/login"><h3>Log in</h3></a>

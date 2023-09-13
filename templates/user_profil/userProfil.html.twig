@@ -2,36 +2,59 @@
 
 {% block stylesheets %}
     {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/userProfil.css') }}">
 {% endblock %}
 
 {% block title %}Mon profil{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
+    <h1>Mon profil</h1>
+    <div class="form-container d-flex flex-column">
+        {{ form_start(userForm) }}
+        <div class="d-flex ">
+            <div class="photo">
                 <!-- Espace pour la photo à gauche -->
-                <img src="chemin_de_votre_photo.jpg" alt="Votre photo" class="img-fluid">
+                <img src="{{ asset('img/daffy.jpg') }}" alt="Daffy">
             </div>
-            <div class="col-md-6">
-                <div class="text-center">
-                    <h1>Mon profil</h1>
-                    {{ form_start(userForm) }}
-                    <div class="form-container">
-                        <!-- Votre formulaire ici -->
-                    </div>
-
-                    {{ form_end(userForm) }}
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                        <button type="submit" class="btn btn-primary">Annuler</button>
-                    </div>
+            <div class="form-user">
+                <div class="form-row">
+                    {{ form_label(userForm.email) }}
+                    {{ form_widget(userForm.email) }}
                 </div>
-            </div>
-            <div class="col-md-3">
-                <!-- Espace vide à droite -->
+                {{ form_errors(userForm.email) }}
+                <div class="form-row">
+                    {{ form_label(userForm.password) }}
+                    {{ form_widget(userForm.password) }}
+                </div>
+                {{ form_errors(userForm.password) }}
+                <div class="form-row">
+                    {{ form_label(userForm.name) }}
+                    {{ form_widget(userForm.name) }}
+                </div>
+                {{ form_errors(userForm.name) }}
+                <div class="form-row">
+                    {{ form_label(userForm.firstname) }}
+                    {{ form_widget(userForm.firstname) }}
+                </div>
+                {{ form_errors(userForm.firstname) }}
+                <div class="form-row">
+                    {{ form_label(userForm.telephone) }}
+                    {{ form_widget(userForm.telephone) }}
+                </div>
+                {{ form_errors(userForm.telephone) }}
+                <div class="form-row">
+                    {{ form_label(userForm.campus) }}
+                    {{ form_widget(userForm.campus) }}
+                </div>
+                {{ form_errors(userForm.campus) }}
             </div>
         </div>
+        <div class="buttons">
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="submit" class="btn btn-primary">Annuler</button>
+            </div>
+        </div>
+        {{ form_end(userForm) }}
     </div>
 {% endblock %}
-
