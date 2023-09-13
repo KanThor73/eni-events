@@ -57,16 +57,17 @@ class EventController extends AbstractController
     }
 
     #[Route('/showroom', name: 'event_showroom')]
-    public function eventShowroom(Request $request): Response
+    public function eventShowroom(Request $request, EntityManagerInterface $entityManager): Response
     {
         $campus = new Campus();
-
         $campusForm = $this->createForm(CampusType::class, $campus)->handleRequest($request);
 
-
+        $eventRepo = $entityManager->getRepository(Event::class);
+        $events = $eventRepo->findAll();
 
         return $this->render('event/eventShowroom.html.twig', [
             'campusForm' => $campusForm->createView(),
+            'events' => $events
         ]);
     }
 }

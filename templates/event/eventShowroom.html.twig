@@ -6,61 +6,132 @@
     {% endblock %}
 
 {% block title %}Event-Showroom{% endblock %}
-
-
-
 {% block body %}
+    {% set today = "now"|date("d-m-Y") %}
     <div class="info">
         <div class="d-flex">
             <label class="mr-1 " for="user">Date :</label>
-            <p>{{ "now" | date("d-m-Y") }}</p>
+            <p>{{ today }}</p>
         </div>
         <div class="d-flex">
             <label class="mr-1 " for="user">Participant :</label>
-            <p>{{ app.user.getFirstname }}</p>
+            <p>{{ app.user.firstname }}</p>
         </div>
     </div>
     <h1 class="m-2">Events</h1>
-    <div class="search-container">
-        <div class="part1">
-            {{ form_start(campusForm) }}
-            <div class="row">
-                {{ form_label(campusForm.name) }}
-                {{ form_widget(campusForm.name) }}
+    <form method="post" action="{{ path('event_showroom') }}">
+        <div class="search-container">
+            <div class="part1">
+                {{ form_start(campusForm) }}
+                <div class="row">
+                    {{ form_label(campusForm.name) }}
+                    {{ form_widget(campusForm.name) }}
+                </div>
                 {{ form_errors(campusForm.name) }}
+                {{ form_end(campusForm) }}
+                <div class="row">
+                    <label for="searchWord">Le nom de l'event contient :</label>
+                    <input type="text" id="searchWord" name="searchWord" placeholder="Search">
+                </div>
+                <div class="date">
+                    <div class="row">
+                        <label for="date1">Entre :</label>
+                        <input type="date" id="date1" name="date1">
+                    </div>
+                    <div class="row">
+                        <label for="date2">et :</label>
+                        <input type="date" id="date2" name="date2">
+                    </div>
+                </div>
             </div>
-            {{ form_end(campusForm) }}
-            <div class="row">
-                <label for="searchWord">Le nom de l'event contient :</label>
-                <input type="text" placeholder="search">
+            <div class="part2">
+                <div class="row">
+                    <input type="checkbox" name="isOrganizer" value="true">
+                    <label for="isOrganizer">Events dont je suis l'organisateur/trice</label>
+                </div>
+                <div class="row">
+                    <input type="checkbox" name="isRegistered" value="true">
+                    <label for="isRegistered">Events auxquels je ne suis pas inscrit/e</label>
+                </div>
+                <div class="row">
+                    <input type="checkbox" name="isOrganizer" value="true">
+                    <label for="isOrganizer">Events auxquels je suis inscrit/e</label>
+                </div>
+                <div class="row">
+                    <input type="checkbox" name="isOrganizer" value="true">
+                    <label for="isOrganizer">Events passes</label>
+                </div>
             </div>
-            <div class="row">
-
+            <div class="separator"></div>
+            <div class="part3">
+                <button class="btn-primary" type="submit"> RECHERCHER</button>
             </div>
         </div>
-        <div class="part2">
-            <div class="row">
-                <input type="checkbox" name="isOrganizer">
-                <label for="isOrganizer">Events dont je suis l'organisateur/trice</label>
-            </div>
-            <div class="row">
-                <input type="checkbox" name="isRegistered" value="true">
-                <label for="isRegistered">Events auxquels je ne suis pas inscrit/e</label>
-            </div>
-            <div class="row">
-                <input type="checkbox" name="isOrganizer">
-                <label for="isOrganizer">Events auxquels je suis pas inscrit/e</label>
-            </div>
-            <div class="row">
-                <input type="checkbox" name="isOrganizer">
-                <label for="isOrganizer">Events passes</label>
-            </div>
-        </div>
-        <div class="part3">
-            <button class="btn-primary"> RECHERCHER</button>
-        </div>
-    </div>
+    </form>
     <div class="form-container">
+        <div class="event-topbar">
+            <span>Nom</span>
+            <div class="separator-inline"></div>
+            <span>Date de l'envent</span>
+            <div class="separator-inline"></div>
+            <span>Cloture inscription</span>
+            <div class="separator-inline"></div>
+            <span>inscrits/places</span>
+            <div class="separator-inline"></div>
+            <span>Etat</span>
+            <div class="separator-inline"></div>
+            <span>Inscrit</span>
+            <div class="separator-inline"></div>
+            <span>Organisateur</span>
+            <div class="separator-inline"></div>
 
+            <span>Action</span>
+        </div>
+        {% if events %}
+
+            {% set isMember = false %}
+            {% for member in event.members %}
+                {% if member == app.user.firstname %}
+                    {% set isMember = true %}
+                {% endif %}
+            {% endfor %}
+
+            {% set isOrganizer = false %}
+            {% if event.organizer.id == app.user.id %}
+                {% set isOrganizer = true %}
+            {% endif %}
+
+            {% for event in events %}
+                <div class="event-topbar">
+                    <span>{{ event.name }}</span>
+                    <div class="separator-inline"></div>
+                    <span>{{ event.beginDate }}</span>
+                    <div class="separator-inline"></div>
+                    <span>{{ event.limitDate }}</span>
+                    <div class="separator-inline"></div>
+                    <span>{{ event.nbMaxInscription }}/{{ event.nbMaxInscription }}</span>
+                    <div class="separator-inline"></div>
+                    <span>{{ event.state }}</span>
+                    <div class="separator-inline"></div>
+                    {% if isMember %}
+                        <span>X</span>
+                    {% else %}
+                        <span> </span>
+                    {% endif %}
+                    <div class="separator-inline"></div>
+                    <span>{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) }}</span>
+                    <div class="separator-inline"></div>
+                    {% if isMember %}
+                        <span><a href="#">Afficher</a> - <a href="">Se desister</a></span>
+                    {% elseif isMember != true %}
+                        <span><a href="#">Afficher</a> </span>
+                    {% elseif isOrganizer %}
+                        <span><a href="#">Modifier</a> <button>Publier</button></span>
+                    {% elseif event.limitDate < today %}
+                        <span><a href="#">Afficher</a></span>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 {% endblock %}
