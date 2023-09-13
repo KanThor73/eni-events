@@ -8,8 +8,9 @@ body{
     font-family: var(--fontFamilyCore);
     font-size: 1.6rem;
     color: var(--fontColor);
-    background: var(--body);
-    min-height: 100vh;
+    background: url("../img/Fluid_background_2019_4-25.jpg") center center;
+    background-size: cover;
+        min-height: 100vh;
 }
 
 h1,h2,h3,h4,h5{
@@ -20,6 +21,8 @@ h1,h2,h3,h4,h5{
 
 h1{
     font-size: 4rem;
+    border-bottom: 3px solid var(--secondary);
+    padding-bottom: 2rem;
 }
 
 h2{
@@ -58,13 +61,18 @@ ul{
 .btn-primary:hover,
 .btn-primary:focus {
     border-color: var(--secondary);
-    box-shadow: 0 0.5em 0.5em -0.4em var(--primary);
+    box-shadow: 0 0.5em 0.5em -0.4em var(--secondary);
     transform: translateY(-0.25em);
 }
 /*margin-padding*/
 
+
 .m-1{
     margin: 1rem;
+}
+
+.mr-1{
+    margin-right: 1rem;
 }
 
 .m-2{

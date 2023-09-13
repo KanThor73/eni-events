@@ -1,9 +1,7 @@
 header{
-    box-shadow: var(--box-shadow);
-    background: var(--primary);
-    margin-bottom: 1rem;
+    margin: 1rem 3.5rem;
+    border-bottom: 3px solid var(--secondary);
     justify-content: space-between;
-    margin-bottom: 3rem;
 }
 
 .log{

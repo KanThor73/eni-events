@@ -44,11 +44,13 @@
             {{ form_errors(eventForm.infoEvent) }}
         </div>
         <div class="form-location d-flex flex-column m-1">
+            {% if app.user %}
             <div class="form-row">
-                {{ form_label(eventForm.campus) }}
-                {{ form_widget(eventForm.campus) }}
+                <label for="campus">Campus :</label>
+                <p>{{ app.user.getCampus.getname}}</p>
             </div>
             {{ form_errors(eventForm.campus) }}
+            {% endif %}
                                 {# recuperer le cmapus avec le user#}
             <div class="form-row">
                 {{ form_label(cityForm.name) }}
@@ -57,7 +59,10 @@
             {{ form_errors(cityForm.name) }}
             <div class="form-row">
                 {{ form_label(placeForm.name) }}
-                {{ form_widget(placeForm.name) }}
+                <div>
+                    {{ form_widget(placeForm.name) }}
+                    <a href="#"><button class="btn-primary btn-add">+</button></a>
+                </div>
             </div>
             {{ form_errors(placeForm.name) }}
             <div class="form-row">
