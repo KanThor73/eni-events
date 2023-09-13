@@ -29,6 +29,18 @@
 {% block header %}
     {% include('partials/_header.html.twig') %}
 {% endblock %}
+
+{# Affiche un message flash en cas de succès d'identhification #}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+
 <div class="body-container">
     {% block body %}
 

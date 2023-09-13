@@ -18,6 +18,11 @@
             </div>
             <div class="form-user">
                 <div class="form-row">
+                    {{ form_label(userForm.pseudo) }}
+                    {{ form_widget(userForm.pseudo) }}
+                </div>
+                {{ form_errors(userForm.pseudo) }}
+                <div class="form-row">
                     {{ form_label(userForm.email) }}
                     {{ form_widget(userForm.email) }}
                 </div>
