@@ -61,7 +61,7 @@ ul{
 .btn-primary:hover,
 .btn-primary:focus {
     border-color: var(--secondary);
-    box-shadow: 0 0.5em 0.5em -0.4em var(--primary);
+    box-shadow: 0 0.5em 0.5em -0.4em var(--secondary);
     transform: translateY(-0.25em);
 }
 /*margin-padding*/
