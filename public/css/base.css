@@ -8,8 +8,9 @@ body{
     font-family: var(--fontFamilyCore);
     font-size: 1.6rem;
     color: var(--fontColor);
-    background: var(--body);
+    background: url("../img/Fluid_background_2019_4-25.jpg");
     min-height: 100vh;
+    padding: 0rem 3rem;
 }
 
 h1,h2,h3,h4,h5{
@@ -20,6 +21,8 @@ h1,h2,h3,h4,h5{
 
 h1{
     font-size: 4rem;
+    border-bottom: 3px solid var(--secondary);
+    padding-bottom: 2rem;
 }
 
 h2{

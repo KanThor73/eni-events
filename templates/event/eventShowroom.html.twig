@@ -84,7 +84,6 @@
             <div class="separator-inline"></div>
             <span>Organisateur</span>
             <div class="separator-inline"></div>
-
             <span>Action</span>
         </div>
         {% if events %}
@@ -102,7 +101,7 @@
             {% endif %}
 
             {% for event in events %}
-                <div class="event-topbar">
+                <div class="event-item">
                     <span>{{ event.name }}</span>
                     <div class="separator-inline"></div>
                     <span>{{ event.beginDate }}</span>
