@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
@@ -92,11 +93,24 @@ class Event
         return $this->duration;
     }
 
-    public function setDuration(\DateInterval $duration): static
+//    public function setDuration(\DateInterval $duration): static
+//    {
+//        $this->duration = $duration;
+//
+//        return $this;
+//    }
+
+    /**
+     * @throws Exception
+     */
+    public function setDuration(string $duration): static
     {
-        $this->duration = $duration;
+        list($hours, $minutes, $seconds) = explode(":", $duration);
+        $iso8601Duration = "PT" . $hours . "H" . $minutes . "M" . $seconds . "S";
+        $this->duration = new \DateInterval($iso8601Duration);
 
         return $this;
+
     }
 
     public function getLimitDate(): ?\DateTimeInterface
@@ -179,11 +193,16 @@ class Event
         return $this->members;
     }
 
+    public function getNbrOfMembers(): int
+    {
+        return $this->members->count();
+    }
+
     public function addMember(User $member): static
     {
         if (!$this->members->contains($member)) {
             $this->members->add($member);
-            $member->addIsRegistred($this);
+            $member->addParticipation($this);
         }
 
         return $this;
@@ -192,7 +211,7 @@ class Event
     public function removeMember(User $member): static
     {
         if ($this->members->removeElement($member)) {
-            $member->removeIsRegistred($this);
+            $member->removeParticipation($this);
         }
 
         return $this;

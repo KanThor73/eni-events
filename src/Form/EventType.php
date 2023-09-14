@@ -2,13 +2,20 @@
 
 namespace App\Form;
 
+use App\Entity\City;
 use App\Entity\Event;
+use App\Entity\Place;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventType extends AbstractType
@@ -25,6 +32,7 @@ class EventType extends AbstractType
                 'label' => 'Date et heure de l\'event :'
             ])
             ->add('duration', TimeType::class, [
+                'input' => 'string',
                 'widget' => 'single_text',
                 'label' => 'Duree de l\'event :'
             ])
@@ -39,11 +47,15 @@ class EventType extends AbstractType
             ->add('infoEvent', null, [
                 'label' => 'Description et infos :'
             ])
-//            ->add('place')
-//            ->add('state')
-//            ->add('users')
-            ->add('campus', TextType::class, ['label' => 'Campus :']);
-//            ->add('organizer');
+            ->add('campus')
+            ->add('place', EntityType::class, [
+                    'placeholder' => 'Choisir un lieu',
+                    'class' => Place::class,
+                    'choice_label' => 'name',
+                    'label' => 'Lieu :'
+                ]
+            );
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

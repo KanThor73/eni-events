@@ -87,30 +87,27 @@
             <span>Action</span>
         </div>
         {% if events %}
-
             {% set isMember = false %}
-            {% for member in event.members %}
-                {% if member == app.user.firstname %}
-                    {% set isMember = true %}
-                {% endif %}
-            {% endfor %}
-
-            {% set isOrganizer = false %}
-            {% if event.organizer.id == app.user.id %}
-                {% set isOrganizer = true %}
-            {% endif %}
-
             {% for event in events %}
+                {% for member in event.members %}
+                    {% if member == app.user %}
+                        {% set isMember = true %}
+                    {% endif %}
+                {% endfor %}
+                {% set isOrganizer = false %}
+                {% if event.organizer.id == app.user.id %}
+                    {% set isOrganizer = true %}
+                {% endif %}
                 <div class="event-item">
                     <span>{{ event.name }}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.beginDate }}</span>
+                    <span>{{ event.beginDate | date("m/d/Y")}}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.limitDate }}</span>
+                    <span>{{ event.limitDate | date("m/d/Y")}}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.nbMaxInscription }}/{{ event.nbMaxInscription }}</span>
+                    <span>{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.state }}</span>
+                    <span>{{ event.state.label }}</span>
                     <div class="separator-inline"></div>
                     {% if isMember %}
                         <span>X</span>
@@ -118,7 +115,7 @@
                         <span> </span>
                     {% endif %}
                     <div class="separator-inline"></div>
-                    <span>{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) }}</span>
+                    <span>{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</span>
                     <div class="separator-inline"></div>
                     {% if isMember %}
                         <span><a href="#">Afficher</a> - <a href="">Se desister</a></span>
@@ -133,4 +130,10 @@
             {% endfor %}
         {% endif %}
     </div>
+    <div class="button m-2">
+        <a href="{{ path('create_event') }}">
+            <button class="btn-primary">Creer un Event</button>
+        </a>
+    </div>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 {% endblock %}
