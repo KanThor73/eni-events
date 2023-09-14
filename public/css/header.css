@@ -28,3 +28,14 @@ h3{
 h3:hover{
     scale: 1.1;
 }
+
+.admin{
+    border: 2px solid var(--secondary);
+    padding: 0.6rem;
+}
+
+.separator-header{
+    width: 3px;
+    height: 4rem;
+    border-right: 2px solid var(--secondary);
+}

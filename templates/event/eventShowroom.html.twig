@@ -15,7 +15,10 @@
         </div>
         <div class="d-flex">
             <label class="mr-1 " for="user">Participant :</label>
-            <p>{{ app.user.firstname }}</p>
+            {% if app.user %}
+                <p>{{ app.user.firstname }}</p>
+            {% endif %}
+
         </div>
     </div>
     <h1 class="m-2">Events</h1>
@@ -101,9 +104,9 @@
                 <div class="event-item">
                     <span>{{ event.name }}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.beginDate | date("m/d/Y")}}</span>
+                    <span>{{ event.beginDate | date("m/d/Y") }}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.limitDate | date("m/d/Y")}}</span>
+                    <span>{{ event.limitDate | date("m/d/Y") }}</span>
                     <div class="separator-inline"></div>
                     <span>{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</span>
                     <div class="separator-inline"></div>

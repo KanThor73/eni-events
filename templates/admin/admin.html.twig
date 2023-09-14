@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+{% block title %}Admin{% endblock %}
+
+
+{% block body %}
+    <div class="form-container">
+        <a href="{{ path('app_register') }}">
+            <button class="btn-primary">Utilisateurs</button>
+        </a>
+        <a href="">
+            <button class="btn-primary">Campus</button>
+        </a>
+        <a href="">
+            <button class="btn-primary">Villes</button>
+        </a>
+    </div>
+{% endblock %}

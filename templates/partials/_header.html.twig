@@ -1,11 +1,19 @@
 <header class="p-1 d-flex align-items-center">
-    <a href="{{ path('home') }}"><div class="logo"></div></a>
+    <a href="{{ path('event_showroom') }}">
+        <div class="logo"></div>
+    </a>
     <div class="menu d-flex align-items-center">
-        <a href="{{ path('event_showroom') }}"><h3>Events</h3></a>
-        <div class="log d-flex flex-column align-items-center">
+        {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+            <a class="admin m-1" href="{{ path('app_admin') }}"><h3>Admin</h3></a>
+        {% endif %}
+        <div class="log d-flex align-items-center">
+            <a href="{{ path('event_showroom') }}"><h3>Events</h3></a>
+            <div class="separator-header"></div>
             {% if app.user %}
-	    	<a class="m-1" href="{{ path('app_logout') }}"><h3>Log out</h3></a>
-	    {% else %}
+                <a class="m-1" href="{{ path('app_user_profil') }}"><h3>Mon Profil</h3></a>
+                <div class="separator-header"></div>
+                <a class="m-1" href="{{ path('app_logout') }}"><h3>Log out</h3></a>
+            {% else %}
                 <a class="m-1" href="{{ path('app_login') }}"><h3>Log in</h3></a>
             {% endif %}
         </div>
