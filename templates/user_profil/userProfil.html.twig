@@ -28,10 +28,10 @@
                 </div>
                 {{ form_errors(userForm.email) }}
                 <div class="form-row">
-                    {{ form_label(userForm.password) }}
-                    {{ form_widget(userForm.password) }}
+                    {{ form_label(userForm.plainPassword) }}
+                    {{ form_widget(userForm.plainPassword) }}
                 </div>
-                {{ form_errors(userForm.password) }}
+                {{ form_errors(userForm.plainPassword) }}
                 <div class="form-row">
                     {{ form_label(userForm.name) }}
                     {{ form_widget(userForm.name) }}
