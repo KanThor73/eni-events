@@ -3,17 +3,22 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 {% endblock %}
+
 {% block header %}
 {% endblock %}
 
 {% block body %}
     <div class="start-background d-flex flex-column justify-content-end ">
         <div class=" arrow d-flex justify-content-end m-2">
-            <a href="{{ path('home') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+            {% if app.user %}
+                <a href="{{ path('event_showroom') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+                {% else %}
+                <a href="{{ path('app_login') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+            {% endif %}
         </div>
         <div class="start d-flex align-items-center flex-column m-2">
             <div class="logo m-1"></div>
-            <h1>L'AVENTURE VOUS ATTENDS !</h1>
+            <h1>L'AVENTURE VOUS ATTEND !</h1>
         </div>
     </div>
 {% endblock %}

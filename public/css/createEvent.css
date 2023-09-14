@@ -1,0 +1,23 @@
+.body-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-add{
+    font-size: 1.5rem;
+    padding: 0.3rem;
+    margin: 0rem;
+}
+
+.add{
+    justify-content: space-between;
+}
+.form-location{
+    justify-content: space-around;
+}
+.form-details{
+    justify-content: space-around;
+}
+

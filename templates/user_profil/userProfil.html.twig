@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/userProfil.css') }}">
+{% endblock %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+    <h1>Mon profil</h1>
+    <div class="form-container d-flex flex-column">
+        {{ form_start(userForm) }}
+        <div class="d-flex ">
+            <div class="photo">
+                <!-- Espace pour la photo à gauche -->
+                <img src="{{ asset('img/daffy.jpg') }}" alt="Daffy">
+            </div>
+            <div class="form-user">
+                <div class="form-row">
+                    {{ form_label(userForm.pseudo) }}
+                    {{ form_widget(userForm.pseudo) }}
+                </div>
+                {{ form_errors(userForm.pseudo) }}
+                <div class="form-row">
+                    {{ form_label(userForm.email) }}
+                    {{ form_widget(userForm.email) }}
+                </div>
+                {{ form_errors(userForm.email) }}
+                <div class="form-row">
+                    {{ form_label(userForm.plainPassword) }}
+                    {{ form_widget(userForm.plainPassword) }}
+                </div>
+                {{ form_errors(userForm.plainPassword) }}
+                <div class="form-row">
+                    {{ form_label(userForm.name) }}
+                    {{ form_widget(userForm.name) }}
+                </div>
+                {{ form_errors(userForm.name) }}
+                <div class="form-row">
+                    {{ form_label(userForm.firstname) }}
+                    {{ form_widget(userForm.firstname) }}
+                </div>
+                {{ form_errors(userForm.firstname) }}
+                <div class="form-row">
+                    {{ form_label(userForm.telephone) }}
+                    {{ form_widget(userForm.telephone) }}
+                </div>
+                {{ form_errors(userForm.telephone) }}
+                <div class="form-row">
+                    {{ form_label(userForm.campus) }}
+                    {{ form_widget(userForm.campus) }}
+                </div>
+                {{ form_errors(userForm.campus) }}
+            </div>
+        </div>
+        <div class="buttons">
+            <div class="form-actions">
+                <a href="{{ path('app_user_profil') }}"></a><button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="submit" class="btn btn-primary">Annuler</button>
+            </div>
+        </div>
+        {{ form_end(userForm) }}
+    </div>
+{% endblock %}

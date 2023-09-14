@@ -1,0 +1,59 @@
+2023-09-11 11:30
+
+composer require orm -W
+composer require doctrine
+
+2023-09-11 12:25
+
+symfony console doctrine:database:create
+
+2023-09-11 13:40
+
+php bin/console make:entity (City)
+php bin/console make:migration
+php bin/console doctrine:migrations:migrate
+
+2023-09-11 14:00
+
+symfony console make:entity (Place)
+symfony console make:migration
+symfony console doctrine:migrations:migrate
+
+2023-09-11 17:30
+
+[user entity deleted]
+alias sc='symfony console'
+sc make:migration
+sc doctrine:migrations:migrate
+
+2023-09-11 17:45
+
+sc make:user
+sc make:entity (User)
+sc make:entity (Event)
+sc make:migration
+sc doctrine:migrations:migrate
+
+2023-09-11 18:20
+
+composer require security-bundle
+composer clear-cache
+composer require web-profiler-bundle
+composer require monolog-bundle
+composer require debug-bundle
+[edit config/packages/security.yaml]
+
+2023-09-11 20:15
+
+sc make:auth
+
+2023-09-12 09:50
+
+composer require profiler
+
+2023-09-12 14:50
+
+composer require form validator
+sc make:registration-form
+
+

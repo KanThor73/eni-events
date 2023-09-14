@@ -1,0 +1,17 @@
+[12:25 PM]
+
+symfony composer req twig
+
+[12:26 PM]
+
+symfony composer req twig/extra-bundle
+
+[12:29 PM]
+
+symfony composer req form
+
+[12:35 PM]
+
+symfony composer req make
+
+composer require twig/intl-extra

@@ -1,5 +1,20 @@
-.body-container{
+.form-container {
+    flex-direction: row;
+    background: var(--primary-light);
+    border-radius: 0.3rem;
+    border: 2px solid var(--primary);
+    box-shadow: var(--box-shadow);
+    margin-top: 2rem;
+    padding: 3.5rem;
+}
+
+.form-row {
+    margin: 0.5rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    column-gap: 2rem;
+}
+
+.row {
+    justify-content: space-between;
 }

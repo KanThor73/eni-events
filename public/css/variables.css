@@ -4,7 +4,7 @@
     /*theme*/
 
     --fontFamilyCore: 'Nunito', sans-serif;
-    --fontFamilyTitle: 'Roboto', sans-serif;;
+    --fontFamilyTitle: 'Roboto', sans-serif;
     --fontColor: #686058;
     --fontColor-dark:#444;
     --dark: #444;
@@ -13,6 +13,7 @@
     --primary: #006266;
     --primary-light: #b2cfd1;
     --secondary: #F79F1F;
+    --secondary-light: #FDEBD2;
     --border: #66a0a3;
 
     /*linearGradient*/
@@ -28,7 +29,7 @@
 
     /*border-radius*/
     --border-radius-large: 1rem;
-    --border-radius: 3px;
+    --border-radius: 0.3rem;
 
     /*border*/
     --border: 2px solid var(--border);
