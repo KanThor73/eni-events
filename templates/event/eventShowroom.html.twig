@@ -21,7 +21,7 @@
 
         </div>
     </div>
-    <h1 class="m-2">Events</h1>
+    <h1 class="m-2">Évènements</h1>
     <form method="post" action="{{ path('event_showroom') }}">
         <div class="search-container">
             <div class="part1">
@@ -33,8 +33,8 @@
                 {{ form_errors(campusForm.name) }}
                 {{ form_end(campusForm) }}
                 <div class="row">
-                    <label for="searchWord">Le nom de l'event contient :</label>
-                    <input type="text" id="searchWord" name="searchWord" placeholder="Search">
+                    <label for="searchWord">Le nom contient :</label>
+                    <input type="text" id="searchWord" name="searchWord" placeholder="Rechercher">
                 </div>
                 <div class="date">
                     <div class="row">
@@ -42,7 +42,7 @@
                         <input type="date" id="date1" name="date1">
                     </div>
                     <div class="row">
-                        <label for="date2">et :</label>
+                        <label for="date2">&nbsp;et :</label>
                         <input type="date" id="date2" name="date2">
                     </div>
                 </div>
@@ -50,19 +50,19 @@
             <div class="part2">
                 <div class="row">
                     <input type="checkbox" name="isOrganizer" value="true">
-                    <label for="isOrganizer">Events dont je suis l'organisateur/trice</label>
+                    <label for="isOrganizer">Évènements que j'organise</label>
                 </div>
                 <div class="row">
                     <input type="checkbox" name="isRegistered" value="true">
-                    <label for="isRegistered">Events auxquels je ne suis pas inscrit/e</label>
+                    <label for="isRegistered">Évènements auxquels je ne suis pas inscrit/e</label>
                 </div>
                 <div class="row">
                     <input type="checkbox" name="isOrganizer" value="true">
-                    <label for="isOrganizer">Events auxquels je suis inscrit/e</label>
+                    <label for="isOrganizer">Évènements auxquels je suis inscrit/e</label>
                 </div>
                 <div class="row">
                     <input type="checkbox" name="isOrganizer" value="true">
-                    <label for="isOrganizer">Events passes</label>
+                    <label for="isOrganizer">Évènements passés</label>
                 </div>
             </div>
             <div class="separator"></div>
@@ -75,13 +75,13 @@
         <div class="event-topbar">
             <span>Nom</span>
             <div class="separator-inline"></div>
-            <span>Date de l'envent</span>
+            <span>Date</span>
             <div class="separator-inline"></div>
-            <span>Cloture inscription</span>
+            <span>Clôture inscription</span>
             <div class="separator-inline"></div>
-            <span>inscrits/places</span>
+            <span>Inscrits/Places</span>
             <div class="separator-inline"></div>
-            <span>Etat</span>
+            <span>État</span>
             <div class="separator-inline"></div>
             <span>Inscrit</span>
             <div class="separator-inline"></div>
@@ -123,7 +123,7 @@
                     <span>{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</span>
                     <div class="separator-inline"></div>
                     {% if isMember %}
-                        <span><a href="#">Afficher</a> - <a href="">Se desister</a></span>
+                        <span><a href="#">Afficher</a> - <a href="">Se désister</a></span>
                     {% elseif isMember != true %}
                         <span><a href="#">Afficher</a> </span>
                     {% elseif isOrganizer %}
@@ -137,7 +137,7 @@
     </div>
     <div class="button m-2">
         <a href="{{ path('create_event') }}">
-            <button class="btn-primary">Creer un Event</button>
+            <button class="btn-primary">Créer un évènement</button>
         </a>
     </div>
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">

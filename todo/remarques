@@ -1,3 +1,5 @@
-dans /user/profil, on ne peut pas annuler sans avoir rempli le champ mail (faire un <a> plutôt qu'un button)
+dans /user/profil et dans /event/create, on ne peut pas annuler sans avoir rempli le champ mail (faire un <a> plutôt qu'un button)
 
+est-ce normal de pouvoir modifier son prénom, nom, campus, en tant qu'utilisateur ?
 
+vérifier le numéro de téléphone avec regex. pour l'instant n'importe quel varchar(10) est accepté
