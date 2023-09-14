@@ -2,4 +2,4 @@ dans /user/profil et dans /event/create, on ne peut pas annuler sans avoir rempl
 
 est-ce normal de pouvoir modifier son prénom, nom, campus, en tant qu'utilisateur ?
 
-vérifier le numéro de téléphone avec regex. pour l'instant n'importe quel varchar(10) est accepté
+/bin/bash: ligne 1: q : commande introuvable
