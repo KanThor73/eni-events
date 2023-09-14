@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Eni-Events{% endblock %}</title>
-    {% block javascripts %}
-        <script defer src="{{ asset('js/index.js') }}"></script>
-    {% endblock %}
+
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/base.css') }}">
         <link rel="stylesheet" href="{{ asset('css/variables.css') }}">
@@ -51,3 +49,6 @@
 {% endblock %}
 </body>
 </html>
+{% block javascripts %}
+    <script defer src="{{ asset('js/index.js') }}"></script>
+{% endblock %}

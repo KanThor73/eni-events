@@ -15,7 +15,7 @@ class Place
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name:"name",length: 255)]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
@@ -136,5 +136,10 @@ class Place
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }
