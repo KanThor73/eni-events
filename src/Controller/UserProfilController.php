@@ -17,16 +17,22 @@ class UserProfilController extends AbstractController
     #[Route('/user/profil', name: 'app_user_profil')]
     public function create(
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+
     ): Response
     {
         $user = $this->getUser();
+
         $userForm =  $this->createForm(UserProfilType::class, $user);
 
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted()&&$userForm->isValid()){
-            dd($userForm);
+
+            $pseudo = $userForm->getData()->getPseudo();
+            dd($pseudo,$user);
+            $user->setPseudo($pseudo);
+
             $entityManager->persist($user);
             $entityManager->flush();
 
