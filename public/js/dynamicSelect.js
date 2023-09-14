@@ -1,9 +1,8 @@
 window.onload = () => {
-    let categorie = document.querySelector("#city_name");
-    categorie.addEventListener("change", function () {
+    let cityName = document.querySelector("#data_location_city");
+    cityName.addEventListener("change", function () {
         let form = this.closest("form");
         let data = this.name + "=" + this.value;
-
         fetch(form.action, {
             method: form.getAttribute("method"),
             body: data,
@@ -15,8 +14,9 @@ window.onload = () => {
             .then(html => {
                     let content = document.createElement("html");
                     content.innerHTML = html;
-                    let newSelect = content.querySelector("#city_places");
-                    document.querySelector("#city_places").replaceWith(newSelect);
+                    let newSelect = content.querySelector("#data_location_name");
+                    console.log(newSelect);
+                    document.querySelector("#data_location_name").replaceWith(newSelect);
                 }
             )
     });

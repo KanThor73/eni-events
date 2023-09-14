@@ -33,17 +33,6 @@ class CityType extends AbstractType
             ->add('places');
 
 //
-
-
-
-
-
-
-
-
-
-
-
 //        ->add('places', EntityType::class, [
 //            'class' => Place::class,
 //            'choice_label' => 'name',

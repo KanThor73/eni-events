@@ -10,9 +10,11 @@ use App\Entity\State;
 use App\Entity\User;
 use App\Form\CampusType;
 use App\Form\CityType;
+use App\Form\DataLocationType;
 use App\Form\EventType;
 use App\Form\PlaceType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,16 +36,19 @@ class EventController extends AbstractController
 
         $eventForm = $this->createForm(EventType::class, $event)->handleRequest($request);
         $placeForm = $this->createForm(PlaceType::class, $place)->handleRequest($request);
-        $cityForm = $this->createForm(CityType::class, $city)->handleRequest($request);
+        $dataLocationForm = $this->createForm(DataLocationType::class, $place)->handleRequest($request);
+//        $cityForm = $this->createForm(CityType::class, $city)->handleRequest($request);
+
+        $cities = $entityManager->getRepository(City::class)->findAll();
 
 
         if ($eventForm->isSubmitted() && $eventForm->isValid()) {
 
-            $cityName = $cityForm->getData()->getName();
-            $city = $entityManager->getRepository(City::class)->findOneBy(['name' => $cityName]);
+//            $cityName = $cityForm->getData()->getName();
+//            $city = $entityManager->getRepository(City::class)->findOneBy(['name' => $cityName]);
 
-            $placeId = $eventForm->getData()->getPlace()->getId();
-            $place = $entityManager->getRepository(Place::class)->find($placeId);
+            $placeName = $dataLocationForm->getData()->getName();
+            $place = $entityManager->getRepository(Place::class)->findOneBy(['name' => $placeName]);
 
             $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
 
@@ -65,7 +70,9 @@ class EventController extends AbstractController
         return $this->render('event/createEvent.html.twig', [
             'eventForm' => $eventForm->createView(),
             'placeForm' => $placeForm->createView(),
-            'cityForm' => $cityForm->createView(),
+            'locationForm' => $dataLocationForm->createView()
+//            'cities' => $cities
+//            'cityForm' => $cityForm->createView(),
         ]);
     }
 
@@ -83,4 +90,5 @@ class EventController extends AbstractController
             'events' => $events
         ]);
     }
+
 }
