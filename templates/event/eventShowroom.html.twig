@@ -98,8 +98,10 @@
                     {% endif %}
                 {% endfor %}
                 {% set isOrganizer = false %}
-                {% if event.organizer.id == app.user.id %}
-                    {% set isOrganizer = true %}
+                {% if app.user %}
+                    {% if event.organizer.id == app.user.id %}
+                        {% set isOrganizer = true %}
+                    {% endif %}
                 {% endif %}
                 <div class="event-item">
                     <span>{{ event.name }}</span>
