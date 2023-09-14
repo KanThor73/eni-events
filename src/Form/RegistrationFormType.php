@@ -46,6 +46,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+	    ->add('pseudo', TextType::class)
         ;
     }
 
