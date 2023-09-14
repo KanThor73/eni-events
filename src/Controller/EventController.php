@@ -38,8 +38,15 @@ class EventController extends AbstractController
 
 
         if ($eventForm->isSubmitted() && $eventForm->isValid()) {
+
+            $cityName = $cityForm->getData()->getName();
+            $city = $entityManager->getRepository(City::class)->findOneBy(['name' => $cityName]);
+
+            $placeId = $eventForm->getData()->getPlace()->getId();
+            $place = $entityManager->getRepository(Place::class)->find($placeId);
+
             $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
-            $place = $entityManager->getRepository(Place::class)->find(1);
+
             $state = $entityManager->getRepository(State::class)->find(1);
 
             $event->setPlace($place);
@@ -52,7 +59,7 @@ class EventController extends AbstractController
 
             $entityManager->flush();
             $this->addFlash('success', 'Felicitation, vous venez de creer un Eni-Event!');
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('event_showroom');
         }
 
         return $this->render('event/createEvent.html.twig', [

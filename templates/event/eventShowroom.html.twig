@@ -90,7 +90,7 @@
             {% set isMember = false %}
             {% for event in events %}
                 {% for member in event.members %}
-                    {% if member == app.user.firstname %}
+                    {% if member == app.user %}
                         {% set isMember = true %}
                     {% endif %}
                 {% endfor %}
@@ -105,7 +105,7 @@
                     <div class="separator-inline"></div>
                     <span>{{ event.limitDate | date("m/d/Y")}}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.nbMaxInscription }}/{{ event.nbMaxInscription }}</span>
+                    <span>{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</span>
                     <div class="separator-inline"></div>
                     <span>{{ event.state.label }}</span>
                     <div class="separator-inline"></div>

@@ -10,6 +10,8 @@
 {% block body %}
     <h1 class="m-2">Creer un event</h1>
     {{ form_start(eventForm) }}
+    {{ form_start(cityForm) }}
+    {{ form_start(cityForm) }}
     <div class="form-container d-flex ">
         <div class="form-details d-flex flex-column m-1">
             <div class="form-row">
@@ -45,11 +47,11 @@
         </div>
         <div class="form-location d-flex flex-column m-1">
             {% if app.user %}
-            <div class="form-row">
-                <label for="campus">Campus :</label>
-                <p>{{ app.user.getCampus.getname}}</p>
-            </div>
-            {{ form_errors(eventForm.campus) }}
+                <div class="form-row">
+                    <label for="campus">Campus :</label>
+                    <p>{{ app.user.getCampus.getname }}</p>
+                </div>
+                {{ form_errors(eventForm.campus) }}
             {% endif %}
             <div class="form-row">
                 {{ form_label(cityForm.name) }}
@@ -57,13 +59,15 @@
             </div>
             {{ form_errors(cityForm.name) }}
             <div class="form-row">
-                {{ form_label(placeForm.name) }}
+                {{ form_label(eventForm.place) }}
                 <div>
-                    {{ form_widget(placeForm.name) }}
-                    <a href="#"><button class="btn-primary btn-add">+</button></a>
+                    {{ form_widget(eventForm.place) }}
+                    <a href="#">
+                        <button class="btn-primary btn-add">+</button>
+                    </a>
                 </div>
             </div>
-            {{ form_errors(placeForm.name) }}
+            {{ form_errors(eventForm.place) }}
             <div class="form-row">
                 {{ form_label(placeForm.street) }}
                 {{ form_widget(placeForm.street) }}
@@ -87,19 +91,21 @@
         </div>
     </div>
     <div class="buttons d-flex justify-content-center m-2">
-        <button class="btn-primary" type="submit">Enregistrer</button>
+        <button class="btn-primary" type="submit" name="save">Enregistrer</button>
         <a href="#">
-            <button class="btn-primary">Publier</button>
+            <button class="btn-primary" type="submit" name="publish" >Publier</button>
         </a>
-        <a href="#">
+        <a href="{{ path('event_showroom') }}">
             <button class="btn-primary">Annuler</button>
         </a>
     </div>
     {{ form_widget(eventForm._token) }}
+    {{ form_end(placeForm,{'render_rest': false}) }}
+    {{ form_end(cityForm,{'render_rest': false}) }}
     {{ form_end(eventForm, {'render_rest': false}) }}
     </div>
 {% endblock %}
     {% block javascripts %}
         {{ parent() }}
-{#        <script defer src="{{ asset('js/dynamicSelect.js') }}"></script>#}
+        {#        <script defer src="{{ asset('js/dynamicSelect.js') }}"></script> #}
     {% endblock %}

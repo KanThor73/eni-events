@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Event;
+use App\Entity\Place;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -40,10 +42,17 @@ class EventType extends AbstractType
             ->add('infoEvent', null, [
                 'label' => 'Description et infos :'
             ])
+            ->add('campus')
+            ->add('place', EntityType::class, [
+                'placeholder' => 'Choisir un lieu',
+                'class' => Place::class,
+                'choice_label' => 'name',
+                'label' => 'Lieu :'
+            ]);
+
 //            ->add('place')
 //            ->add('state')
 //            ->add('users')
-            ->add('campus');
 //            ->add('organizer');
     }
 

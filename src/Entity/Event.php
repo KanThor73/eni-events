@@ -193,6 +193,11 @@ class Event
         return $this->members;
     }
 
+    public function getNbrOfMembers(): int
+    {
+        return $this->members->count();
+    }
+
     public function addMember(User $member): static
     {
         if (!$this->members->contains($member)) {
