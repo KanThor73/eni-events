@@ -22,13 +22,13 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-	    ->add('name', TextType::class)
-	    ->add('firstname', TextType::class)
-	    ->add('telephone', TelType::class)
-	    ->add('campus', EntityType::class, [
-	        'class' => Campus::class,
-		'choice_label' => 'name'
-		])
+            ->add('name', TextType::class)
+            ->add('firstname', TextType::class)
+            ->add('telephone', TelType::class)
+            ->add('campus', EntityType::class, [
+                'class' => Campus::class,
+                'choice_label' => 'name'
+            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -46,6 +46,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+        ->add('pseudo', TextType::class)
         ;
     }
 

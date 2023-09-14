@@ -31,7 +31,7 @@ class UserProfilType extends AbstractType
             ])
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
-                'choice_label' => 'Campus'
+                'choice_label' => 'name'
             ]);
     }
 
