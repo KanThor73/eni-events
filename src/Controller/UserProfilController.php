@@ -23,6 +23,7 @@ class UserProfilController extends AbstractController
     ): Response
     {
         $user = $this->getUser();
+
         $userForm =  $this->createForm(UserProfilType::class, $user);
 
         $userForm->handleRequest($request);
