@@ -31,33 +31,6 @@ class CityType extends AbstractType
                 'label' => 'Code postale :'
             ])
             ->add('places');
-
-//
-//        ->add('places', EntityType::class, [
-//            'class' => Place::class,
-//            'choice_label' => 'name',
-//            'placeholder' => 'Choisir un lieu',
-//            'label' => 'Lieu :'
-//        ]);
-
-//        $formModifier = function (FormInterface $form, City $city = null) {
-//            $places = (null === $city) ? [] : $city->getPlaces();
-//            $form->add('name', EntityType::class, [
-//                'class' => Place::class,
-//                'choices' => $places,
-//                'choice_label' => 'name',
-//                'placeholder' => 'Choisir un lieu',
-//                'label' => 'Lieu :'
-//            ]);
-//        };
-//
-//        $builder->get('name')->addEventListener(
-//            FormEvents::POST_SUBMIT,
-//            function (FormEvent $event) use ($formModifier) {
-//                $city = $event->getForm()->getData();
-//                $formModifier($event->getForm()->getParent(), $city);
-//            }
-//        );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
