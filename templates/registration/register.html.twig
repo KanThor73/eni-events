@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('css/register.css') }}" type="text/css">
+{% endblock %}
 {% block title %}Register{% endblock %}
 
 {% block body %}
@@ -8,8 +11,41 @@
     {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm) }}
-
-        <button type="submit" class="btn">Register</button>
+        <div class="container">
+		<div class="sub-container">
+			
+			<div class="row">
+				<label for="registrationForm[pseudo]">Pseudo :</label>
+				{{ form_widget(registrationForm.pseudo) }}
+			</div>
+			<div class="row">
+				<label for="registrationForm[email]">Email :</label>
+				{{ form_widget(registrationForm.email) }}
+			</div>
+			<div class="row">
+				<label for="registrationForm[name]">Nom :</label>
+				{{ form_widget(registrationForm.name) }}
+			</div>
+			<div class="row">
+				<label for="registrationForm[firstname]">Prénom :</label>
+				{{ form_widget(registrationForm.firstname) }}
+			</div>
+			<div class="row">
+				<label for="registrationForm[telephone]">Téléphone :</label>
+				{{ form_widget(registrationForm.telephone) }}
+			</div>
+			<div class="row">
+				<label for="registrationForm[campus]">Campus :</label>
+				{{ form_widget(registrationForm.campus) }}
+			</div>
+			<div class="row">
+				<label for="registrationForm[plainPassword]">Mot de passe :</label>
+				{{ form_widget(registrationForm.plainPassword) }}
+			</div>
+			<div class="row">
+				<button type="submit" class="btn btn-lg btn-primary">Register</button>
+			</div>
+		</div>
+	</div>
     {{ form_end(registrationForm) }}
 {% endblock %}
