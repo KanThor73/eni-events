@@ -1,13 +1,10 @@
 {% extends 'base.html.twig' %}
-
     {% block stylesheets %}
         {{ parent() }}
         <link rel="stylesheet" href="{{ asset('css/eventShowroom.css') }}">
         <link rel="stylesheet" href="{{ asset('css/eventShow.css') }}">
     {% endblock %}
-
 {% block title %}event.name{% endblock %}
-
 {% block body %}
 <h1 class="m-2">{{ event.name }}</h1>
 <div class="form-container d-flex ">

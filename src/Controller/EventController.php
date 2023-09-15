@@ -121,4 +121,12 @@ class EventController extends AbstractController
             'event' => $event,
         ]);
     }
+
+    #[Route('/delete/{id}', name: 'delete')]
+    public function delete(Event $event): Response
+    {
+        return $this->render('event/cancelEvent.html.twig', [
+            'event' => $event,
+        ]);
+    }
 }
