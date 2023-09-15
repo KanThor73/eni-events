@@ -88,7 +88,11 @@ class Event
         return $this;
     }
 
-    public function getDuration(): string
+    public function getDuration(): ?\DateInterval
+    {
+        return $this->duration;
+    }
+    public function getDurationString(): string
     {
         $heures = $this->duration->h;
         $minutes = $this->duration->i;
@@ -113,6 +117,7 @@ class Event
         $this->duration = new \DateInterval($iso8601Duration);
 
         return $this;
+
     }
 
     public function getLimitDate(): ?\DateTimeInterface
