@@ -70,7 +70,7 @@
     <div class="members">
         {% for member in event.members %}
             <div class="member-item {{ cycle(['dark', 'light'], loop.index) }}">
-                <span class="Pseudo">{{ member.Pseudo }}</span>
+                <span class="Pseudo"><a class="action" href="{{ path('showProfil',{id: member.id }) }}">{{ member.Pseudo }}</a></span>
                 <div class="separator-inline"></div>
                 <span class="Nom">{{ member.Pseudo }}</span>
             </div>

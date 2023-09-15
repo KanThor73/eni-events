@@ -6,7 +6,7 @@
 
 {% block body %}
     <h1>Profil de {{ user.name }}</h1>
-
+<div class="form-container">
     <p><strong>Nom :</strong> {{ user.name }}</p>
     <p><strong>Prénom :</strong> {{ user.firstname }}</p>
     <p><strong>Email :</strong> {{ user.email }}</p>
@@ -19,7 +19,5 @@
             <button type="submit" class="btn btn-primary">Retour</button>
         </div>
     </div>
-
-
-    <!-- Ajoutez d'autres informations d'utilisateur ici selon vos besoins -->
+</div>
 {% endblock %}
