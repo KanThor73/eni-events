@@ -130,12 +130,17 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/cancel/{id}', name: 'cancel')]
-    public function cancel(Event $event): Response
+    #[Route('/stash/{id}', name: 'stash')]
+    public function stash(Event $event, Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('event/cancelEvent.html.twig', [
-            'event' => $event,
-        ]);
+        $closeSate= $entityManager->getRepository(State::class)->find(3);
+        $motif =$request->get('motif');
+
+        $event->setInfoEvent('Motif d\'annulation de l\'event:' . PHP_EOL .$motif);
+        $event->setState($closeSate);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('event_showroom');
     }
 
 }

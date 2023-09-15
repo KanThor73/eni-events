@@ -8,30 +8,34 @@
     <h1 class="m-2">{{ event.name }}</h1>
     <div class="form-container d-flex ">
         <div class="form-details d-flex flex-column m-1">
-            <div class="form-row">
-                <label for="">Nom de la sortie :</label>
-                <p>{{ event.name }}</p>
-            </div>
-            <div class="form-row">
-                <label for="">Date de la sortie :</label>
-                <p>{{ event.beginDate|date('d-m-Y') }}</p>
-            </div>
-            <div class="form-row">
-                <label for="">Campus :</label>
-                <p>{{ event.campus.name }}</p>
-            </div>
-            <div class="form-row">
-                <label for="">Lieu :</label>
-                <p>{{ event.place.name }}</p>
-            </div>
-            <div class="form-row">
-                <label for="motif">Motif :</label>
-                <textarea name="motif" id="" cols="30" rows="10"></textarea>
-            </div>
-            <div class="buttons">
-                <a href=""><button class="btn-primary">Annuler l'event</button></a>
-                <a href="{{ path('event_showroom') }}"><button class="btn-primary">Retour</button></a>
-            </div>
+            <form method="post" action="{{ path('stash', {id :event.id}) }}">
+                <div class="form-row">
+                    <label for="">Nom de la sortie :</label>
+                    <p>{{ event.name }}</p>
+                </div>
+                <div class="form-row">
+                    <label for="">Date de la sortie :</label>
+                    <p>{{ event.beginDate|date('d-m-Y') }}</p>
+                </div>
+                <div class="form-row">
+                    <label for="">Campus :</label>
+                    <p>{{ event.campus.name }}</p>
+                </div>
+                <div class="form-row">
+                    <label for="">Lieu :</label>
+                    <p>{{ event.place.name }}</p>
+                </div>
+                <div class="form-row">
+                    <label for="motif">Motif :</label>
+                    <textarea name="motif" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="buttons">
+                    <button class="btn-primary" type="submit">Annuler l'event</button>
+                    <a href="{{ path('event_showroom') }}">
+                        <button class="btn-primary">Retour</button>
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 {% endblock %}
