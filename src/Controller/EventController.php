@@ -90,7 +90,7 @@ class EventController extends AbstractController
         $openSate = $entityManager->getRepository(State::class)->find(2);
         $event->setState($openSate);
         $entityManager->flush();
-        $this->addFlash('success', $event->getName() . '' . 'vient d\'etre ouvert aux inscritions');
+        $this->addFlash('success', $event->getName() . ' ' . 'vient d\'etre ouvert aux inscritions');
         return $this->redirectToRoute('event_showroom');
     }
 
@@ -122,11 +122,20 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'delete')]
-    public function delete(Event $event): Response
+    #[Route('/cancel/{id}', name: 'cancel')]
+    public function cancel(Event $event): Response
     {
         return $this->render('event/cancelEvent.html.twig', [
             'event' => $event,
         ]);
     }
+
+    #[Route('/cancel/{id}', name: 'cancel')]
+    public function cancel(Event $event): Response
+    {
+        return $this->render('event/cancelEvent.html.twig', [
+            'event' => $event,
+        ]);
+    }
+
 }

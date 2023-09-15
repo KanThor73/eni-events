@@ -97,7 +97,7 @@ class Event
         $heures = $this->duration->h;
         $minutes = $this->duration->i;
         $secondes = $this->duration->s;
-        return $heures . ':'.$minutes.':'.$secondes;
+        return $heures . 'h'.$minutes .'min';
     }
 
 

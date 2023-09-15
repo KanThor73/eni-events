@@ -120,7 +120,7 @@
                         <span class="isMember"> </span>
                     {% endif %}
                     <div class="separator-inline"></div>
-                    <span class="isOrganizer">{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</span>
+                    <span class="isOrganizer"><a href="{{ path('showProfil',{id: event.organizer.id }) }}">{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</a></span>
                     <div class="separator-inline"></div>
                     {% if isMember and not isOrganizer and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') %}
                         <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a href="{{ path('desist',{id: event.id }) }}">Se desister</a></span>
@@ -133,7 +133,7 @@
                     {% elseif event.limitDate | date("m/d/Y")|date('U') <= today | date("m/d/Y")|date('U') %}
                         <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a></span>
                     {% elseif event.state.label == 'Ouvert' and isOrganizer %}
-                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a class="action" href="#">Annuler</a></span>
+                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a class="action" href="{{ path('cancel',{id: event.id }) }}">Annuler</a></span>
                     {% endif %}
                 </div>
             {% endfor %}
