@@ -42,10 +42,14 @@ class EventController extends AbstractController
 
             $placeName = $dataLocationForm->getData()->getName();
             $place = $entityManager->getRepository(Place::class)->findOneBy(['name' => $placeName]);
-
             $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
 
-            $state = $entityManager->getRepository(State::class)->find(1);
+            $state = null;
+            if (isset($_POST['create'])) {
+                $state = $entityManager->getRepository(State::class)->find(1);
+            } elseif (isset($_POST['publish'])) {
+                $state = $entityManager->getRepository(State::class)->find(2);
+            }
 
             $event->setPlace($place);
             $event->setCampus($this->getUser()->getCampus());
@@ -133,10 +137,10 @@ class EventController extends AbstractController
     #[Route('/stash/{id}', name: 'stash')]
     public function stash(Event $event, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $closeSate= $entityManager->getRepository(State::class)->find(3);
-        $motif =$request->get('motif');
+        $closeSate = $entityManager->getRepository(State::class)->find(3);
+        $motif = $request->get('motif');
 
-        $event->setInfoEvent('Motif d\'annulation de l\'event:' . PHP_EOL .$motif);
+        $event->setInfoEvent('Motif d\'annulation de l\'event:' . PHP_EOL . $motif);
         $event->setState($closeSate);
         $entityManager->flush();
 
