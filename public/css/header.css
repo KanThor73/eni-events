@@ -1,14 +1,14 @@
-header{
+header {
     margin: 1rem 3.5rem;
     border-bottom: 3px solid var(--secondary);
     justify-content: space-between;
 }
 
-.log{
+.log {
     margin-left: 2rem;
 }
 
-.logo{
+.logo {
     background: url("../img/eni_events.svg") center center;
     background-size: cover;
     height: 9rem;
@@ -16,26 +16,49 @@ header{
     transition: 0.5s ease-in-out;
 }
 
-.logo:hover{
+.logo:hover {
     transform: scale(1.1);
 }
 
-h3{
+h3 {
     color: var(--secondary);
     transition: 0.5s ease-in-out;
 }
 
-h3:hover{
+h3:hover {
     scale: 1.1;
 }
 
-.admin{
+.admin {
     border: 2px solid var(--secondary);
     padding: 0.6rem;
 }
 
-.separator-header{
+.separator-header {
     width: 3px;
     height: 4rem;
     border-right: 2px solid var(--secondary);
+}
+
+.msgFlash {
+    display: flex;
+    justify-content: center;
+}
+
+.flash_error, .flash_success {
+    padding: 1rem;
+}
+
+.flash_success {
+    position: fixed;
+    color: var(--succes);
+    background: var(--succes-soft);
+    border: 3px solid var(--succes);
+}
+
+.flash_error {
+    position: fixed;
+    color: var(--warning);
+    background: var(--warning-soft);
+    border: 3px solid var(--warning);
 }

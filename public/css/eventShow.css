@@ -1,0 +1,23 @@
+.member-topbar {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 0rem 1rem;
+    background: var(--secondary);
+    border-radius: 4px;
+    font-weight: bold;
+}
+h4{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.member-item {
+    display: flex;
+    justify-content: center;
+}
+
+span {
+    text-align: center;
+    min-width: 12rem;
+}

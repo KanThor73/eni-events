@@ -19,8 +19,21 @@
         </div>
     </div>
 </header>
-<div class="msgFlash">
-    {% for flash in app.session.flashbag.get('success') %}
-        <p>flash</p>
-    {% endfor %}
-</div>
+{% if app.session.flashbag.has('success') or app.session.flashbag.has('error') %}
+    <div class="msgFlash">
+        {% if app.session.flashbag.has('error') %}
+            <div class="flash_error">
+                {% for flashError in app.session.flashbag.get('error') %}
+                    {{ flashError }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if app.session.flashbag.has('success') %}
+            <div class="flash_success">
+                {% for flashSuccess in app.session.flashbag.get('success') %}
+                    {{ flashSuccess }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
