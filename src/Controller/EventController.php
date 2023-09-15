@@ -91,4 +91,40 @@ class EventController extends AbstractController
         ]);
     }
 
+    #[Route('/publish/{id}', name: 'publish')]
+    public function publish(Event $event,EntityManagerInterface $entityManager): Response
+    {
+        $openSate=$entityManager->getRepository(State::class)->find(2);
+        $event->setState($openSate);
+        $entityManager->flush();
+        $this->addFlash('success', $event->getName(). '' . 'vient d\'etre ouvert aux inscritions');
+        return $this->redirectToRoute('event_showroom');
+    }
+    #[Route('/register/{id}', name: 'register')]
+    public function register(Event $event,EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        $event->addMember($user);
+        $entityManager->flush();
+        $this->addFlash('success', $event->getName(). ' ' . 'vient d\'etre ouvert aux inscritions');
+        return $this->redirectToRoute('event_showroom');
+    }
+    #[Route('/desist/{id}', name: 'desist')]
+    public function desist(Event $event,EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+        $event->removeMember($user);
+        $entityManager->flush();
+        $this->addFlash('success', 'Vous venez de vous desister de' . ' ' . $event->getName());
+        return $this->redirectToRoute('event_showroom');
+    }
+    #[Route('/show/{id}', name: 'show')]
+    public function show(Event $event,EntityManagerInterface $entityManager): Response
+    {
+
+        return $this->render('event/eventShow.html.twig', [
+            'event' => $event,
+        ]);
+    }
+
 }

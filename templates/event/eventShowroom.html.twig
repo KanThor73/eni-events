@@ -73,25 +73,25 @@
     </form>
     <div class="form-container">
         <div class="event-topbar">
-            <span>Nom</span>
+            <span class="name">Nom</span>
             <div class="separator-inline"></div>
-            <span>Date de l'envent</span>
+            <span class="begindate">Date</span>
             <div class="separator-inline"></div>
-            <span>Cloture inscription</span>
+            <span class="limitDate">Cloture</span>
             <div class="separator-inline"></div>
-            <span>inscrits/places</span>
+            <span class="inscription">Places</span>
             <div class="separator-inline"></div>
-            <span>Etat</span>
+            <span class="state">Etat</span>
             <div class="separator-inline"></div>
-            <span>Inscrit</span>
+            <span class="isMember">Inscrit</span>
             <div class="separator-inline"></div>
-            <span>Organisateur</span>
+            <span class="isOrganizer">Organisateur</span>
             <div class="separator-inline"></div>
-            <span>Action</span>
+            <span class="action">Action</span>
         </div>
         {% if events %}
-            {% set isMember = false %}
             {% for event in events %}
+                {% set isMember = false %}
                 {% for member in event.members %}
                     {% if member == app.user %}
                         {% set isMember = true %}
@@ -103,33 +103,37 @@
                         {% set isOrganizer = true %}
                     {% endif %}
                 {% endif %}
-                <div class="event-item">
-                    <span>{{ event.name }}</span>
+                <div class="event-item {{ cycle(['dark', 'light'], loop.index) }}">
+                    <span class="name">{{ event.name }}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.beginDate | date("m/d/Y") }}</span>
+                    <span class="begindate">{{ event.beginDate | date("m/d/Y") }}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.limitDate | date("m/d/Y") }}</span>
+                    <span class="limitDate">{{ event.limitDate | date("m/d/Y") }}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</span>
+                    <span class="inscription">{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</span>
                     <div class="separator-inline"></div>
-                    <span>{{ event.state.label }}</span>
+                    <span class="state">{{ event.state.label }}</span>
                     <div class="separator-inline"></div>
                     {% if isMember %}
-                        <span>X</span>
+                        <span class="isMember">X</span>
                     {% else %}
-                        <span> </span>
+                        <span class="isMember"> </span>
                     {% endif %}
                     <div class="separator-inline"></div>
-                    <span>{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</span>
+                    <span class="isOrganizer">{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</span>
                     <div class="separator-inline"></div>
-                    {% if isMember %}
-                        <span><a href="#">Afficher</a> - <a href="">Se desister</a></span>
-                    {% elseif isMember != true %}
-                        <span><a href="#">Afficher</a> </span>
-                    {% elseif isOrganizer %}
-                        <span><a href="#">Modifier</a> <button>Publier</button></span>
+                    {% if isMember and not isOrganizer %}
+                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a href="{{ path('desist',{id: event.id }) }}">Se desister</a></span>
+                    {% elseif not isMember and not isOrganizer and event.state.label == 'Ouvert' %}
+                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <span><a class="action" href="{{ path('register',{id: event.id }) }}">S'inscrire</a> </span>
+                    {% elseif isOrganizer and event.state.label == 'En cours' %}
+                        <span><a class="action" href="#">Modifier</a> / </span><a class="action" href="{{ path('publish',{id: event.id }) }}">Publier</a></span>
                     {% elseif event.limitDate < today %}
-                        <span><a href="#">Afficher</a></span>
+                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a></span>
+                    {% elseif event.state.label == 'Ouvert' and isOrganizer %}
+                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a class="action" href="#">Annuler</a></span>
+                    {% elseif event.state.label == 'En cours' and not isOrganizer %}
+                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a></span>
                     {% endif %}
                 </div>
             {% endfor %}

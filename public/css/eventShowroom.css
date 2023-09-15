@@ -1,11 +1,11 @@
-.body-container{
+.body-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.search-container{
+.search-container {
     display: flex;
     align-items: center;
     width: 100rem;
@@ -19,7 +19,7 @@
     margin-top: 2rem;
 }
 
-.info{
+.info {
     color: var(--secondary);
     width: 100%;
     display: flex;
@@ -29,30 +29,86 @@
     padding-right: 3rem;
 }
 
-.date{
+.date {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
 }
 
-.separator{
+.separator {
     width: 3px;
     height: 11rem;
     border-right: 2px solid var(--primary);
 }
 
-.separator-inline{
+.separator-inline {
     display: inline;
     border-right: 1px solid var(--primary);
     margin: 0rem 0.5rem;
 }
 
-.event-topbar{
-    background: var(--secondary-light);
-    padding: 1rem;
+.event-topbar {
+    padding: 0rem 1rem;
+    background: var(--secondary);
     border-radius: 4px;
+    font-weight: bold;
 }
 
-span{
-    width: 10rem;
+.event-item {
+    padding: 0rem 1rem;
+}
+
+span {
+    display: inline-block;
+    text-align: center;
+}
+
+/*###### tableau #######*/
+.dark {
+    background: var(--secondary-light);
+}
+
+.light {
+    background: var(--primary-light);
+}
+
+.name {
+    display: inline-block;
+    min-width: 13.5rem;
+}
+
+.begindate {
+    display: inline-block;
+    min-width: 10rem;
+}
+
+.limitDate {
+    display: inline-block;
+    min-width: 11rem;
+}
+
+.inscription {
+    text-align: center;
+    min-width: 6rem;
+}
+
+.state {
+    min-width: 6.5rem;
+        text-align: center;
+}
+
+.isMember {
+    min-width: 4.5rem;
+    text-align: center;
+
+}
+
+.isOrganizer {
+    text-align: center;
+    min-width: 11rem;
+}
+
+.action {
+    text-align: center;
+
 }

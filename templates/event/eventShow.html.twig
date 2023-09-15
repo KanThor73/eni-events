@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/eventShowroom.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/eventShow.css') }}">
+    {% endblock %}
+
+{% block title %}event.name{% endblock %}
+
+{% block body %}
+<h1 class="m-2">{{ event.name }}</h1>
+<div class="form-container d-flex ">
+    <div class="form-details d-flex flex-column m-1">
+        <div class="form-row">
+            <label for="">Date et heure de la sortie :</label>
+            <p>{{ event.beginDate|date('d-m-Y / H:i:s') }}</p>
+        </div>
+        <div class="form-row">
+            <label for="">Date limite d'inscription :</label>
+            <p>{{ event.limitDate|date('d-m-Y / H:i:s') }}</p>
+        </div>
+        <div class="form-row">
+            <label for="">Nombre de places :</label>
+            <p>{{ event.nbMaxInscription }}</p>
+        </div>
+        <div class="form-row">
+            <label for="">Duree :</label>
+            <p>{{ event.duration }}</p>
+        </div>
+        <div class="form-row">
+            <label for="">Descriptiion et infos :</label>
+            <p>{{ event.infoEvent }}</p>
+        </div>
+    </div>
+    <div class="form-location d-flex flex-column m-1">
+        <div class="form-row">
+            <label for="">Campus :</label>
+            <p>{{ event.campus }}</p>
+        </div>
+        <div class="form-row">
+            <label for="">Lieu :</label>
+            <p>{{ event.place.name }}</p>
+        </div>
+        <div class="form-row">
+            <label for="">Rue :</label>
+            <p>{{ event.place.street }}</p>
+        </div>
+        <div class="form-row">
+            <label for="">Code postal :</label>
+            <p>{{ event.place.city.postCode }}</p>
+        </div>
+        <div class="form-row">
+            <label for="">Latitude</label>
+            <p>{{ event.place.latitude }}</p>
+        </div>
+        <div class="form-row">
+            <label for="">Longitude</label>
+            <p>{{ event.place.longitude }}</p>
+        </div>
+    </div>
+</div>
+<div class="form-container">
+    <h4 >Participants</h4>
+    <div class="member-topbar">
+        <span class="Pseudo">Pseudo</span>
+        <div class="separator-inline"></div>
+        <span class="Nom">Nom</span>
+    </div>
+    <div class="members">
+        {% for member in event.members %}
+            <div class="member-item {{ cycle(['dark', 'light'], loop.index) }}">
+                <span class="Pseudo">{{ member.Pseudo }}</span>
+                <div class="separator-inline"></div>
+                <span class="Nom">{{ member.Pseudo }}</span>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+    {% endblock %}
