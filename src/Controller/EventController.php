@@ -26,9 +26,6 @@ class EventController extends AbstractController
     #[Route('/create', name: 'create_event')]
     public function createEvent(Request $request, EntityManagerInterface $entityManager): Response
     {
-        //recupere le campus la rue et le code postal quand utilisateur connecte pour les injecter dans la vue
-//        $user = $this->getUser();
-//        $campus = $user->getCampus();
 
         $event = new Event();
         $place = new Place();
@@ -37,15 +34,11 @@ class EventController extends AbstractController
         $eventForm = $this->createForm(EventType::class, $event)->handleRequest($request);
         $placeForm = $this->createForm(PlaceType::class, $place)->handleRequest($request);
         $dataLocationForm = $this->createForm(DataLocationType::class, $place)->handleRequest($request);
-//        $cityForm = $this->createForm(CityType::class, $city)->handleRequest($request);
 
         $cities = $entityManager->getRepository(City::class)->findAll();
 
 
         if ($eventForm->isSubmitted() && $eventForm->isValid()) {
-
-//            $cityName = $cityForm->getData()->getName();
-//            $city = $entityManager->getRepository(City::class)->findOneBy(['name' => $cityName]);
 
             $placeName = $dataLocationForm->getData()->getName();
             $place = $entityManager->getRepository(Place::class)->findOneBy(['name' => $placeName]);
@@ -92,25 +85,27 @@ class EventController extends AbstractController
     }
 
     #[Route('/publish/{id}', name: 'publish')]
-    public function publish(Event $event,EntityManagerInterface $entityManager): Response
+    public function publish(Event $event, EntityManagerInterface $entityManager): Response
     {
-        $openSate=$entityManager->getRepository(State::class)->find(2);
+        $openSate = $entityManager->getRepository(State::class)->find(2);
         $event->setState($openSate);
         $entityManager->flush();
-        $this->addFlash('success', $event->getName(). '' . 'vient d\'etre ouvert aux inscritions');
+        $this->addFlash('success', $event->getName() . '' . 'vient d\'etre ouvert aux inscritions');
         return $this->redirectToRoute('event_showroom');
     }
+
     #[Route('/register/{id}', name: 'register')]
-    public function register(Event $event,EntityManagerInterface $entityManager): Response
+    public function register(Event $event, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $event->addMember($user);
         $entityManager->flush();
-        $this->addFlash('success', $event->getName(). ' ' . 'vient d\'etre ouvert aux inscritions');
+        $this->addFlash('success', 'Vous venez de vous inscrire a l\'evenement:' . ' ' . $event->getName());
         return $this->redirectToRoute('event_showroom');
     }
+
     #[Route('/desist/{id}', name: 'desist')]
-    public function desist(Event $event,EntityManagerInterface $entityManager): Response
+    public function desist(Event $event, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
         $event->removeMember($user);
@@ -118,13 +113,12 @@ class EventController extends AbstractController
         $this->addFlash('success', 'Vous venez de vous desister de' . ' ' . $event->getName());
         return $this->redirectToRoute('event_showroom');
     }
-    #[Route('/show/{id}', name: 'show')]
-    public function show(Event $event,EntityManagerInterface $entityManager): Response
-    {
 
+    #[Route('/show/{id}', name: 'show')]
+    public function show(Event $event): Response
+    {
         return $this->render('event/eventShow.html.twig', [
             'event' => $event,
         ]);
     }
-
 }
