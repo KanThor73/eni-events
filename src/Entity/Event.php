@@ -96,12 +96,6 @@ class Event
         return $heures . ':'.$minutes.':'.$secondes;
     }
 
-//    public function setDuration(\DateInterval $duration): static
-//    {
-//        $this->duration = $duration;
-//
-//        return $this;
-//    }
 
     /**
      * @throws Exception
