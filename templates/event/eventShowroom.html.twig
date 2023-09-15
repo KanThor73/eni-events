@@ -122,18 +122,18 @@
                     <div class="separator-inline"></div>
                     <span class="isOrganizer">{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</span>
                     <div class="separator-inline"></div>
-                    {% if isMember and not isOrganizer %}
+                    {% if isMember and not isOrganizer and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') %}
                         <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a href="{{ path('desist',{id: event.id }) }}">Se desister</a></span>
-                    {% elseif not isMember and not isOrganizer and event.state.label == 'Ouvert' %}
-                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <span><a class="action" href="{{ path('register',{id: event.id }) }}">S'inscrire</a> </span>
+                    {% elseif not isMember and not isOrganizer and event.state.label == 'Ouvert' and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') and  event.getNbrOfMembers < event.nbMaxInscription %}
+                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a class="action" href="{{ path('register',{id: event.id }) }}">S'inscrire</a> </span>
                     {% elseif isOrganizer and event.state.label == 'En cours' %}
-                        <span><a class="action" href="#">Modifier</a> / </span><a class="action" href="{{ path('publish',{id: event.id }) }}">Publier</a></span>
-                    {% elseif event.limitDate < today %}
+                        <span><a class="action" href="#">Modifier</a> / <a class="action" href="{{ path('publish',{id: event.id }) }}">Publier</a></span>
+                    {% elseif isOrganizer and event.state.label == 'En creation' %}
+                        <span><a class="action" href="#">Modifier</a></span>
+                    {% elseif event.limitDate | date("m/d/Y")|date('U') <= today | date("m/d/Y")|date('U') %}
                         <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a></span>
                     {% elseif event.state.label == 'Ouvert' and isOrganizer %}
                         <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a class="action" href="#">Annuler</a></span>
-                    {% elseif event.state.label == 'En cours' and not isOrganizer %}
-                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a></span>
                     {% endif %}
                 </div>
             {% endfor %}
