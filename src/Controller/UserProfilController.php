@@ -16,8 +16,7 @@ use Symfony\Component\Form\Exception\InvalidArgumentException;
 class UserProfilController extends AbstractController
 {
 
-
-    #[Route('/user', name: 'app_user')]
+    #[Route('/user/profil', name: 'app_user_profil')]
     public function create(
         Request $request,
 	UserPasswordHasherInterface $userPasswordHasher,
@@ -50,22 +49,6 @@ class UserProfilController extends AbstractController
 
         return $this->render('user_profil/userProfil.html.twig', [
             'userForm' => $userForm->createView()
-        ]);
-    }
-    #[Route('/profil', name: 'app_user_profil')]
-    public function showUserProfile(int $id): Response
-    {
-        // Récupérez l'utilisateur à partir de la base de données en fonction de l'ID
-        $userRepository = $this->getDoctrine()->getRepository(User::class);
-        $user = $userRepository->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException('L\'utilisateur n\'a pas été trouvé.');
-        }
-
-        // Ensuite, passez l'utilisateur à la vue pour l'afficher ( vue d'exemple la vue twig est à crée)
-        return $this->render('user/show_profile.html.twig', [
-            'user' => $user,
         ]);
     }
 }
