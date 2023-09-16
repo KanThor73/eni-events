@@ -6,10 +6,13 @@ use App\Entity\User;
 use App\Entity\Campus;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Length;
 
 class UserProfilType extends AbstractType
@@ -23,8 +26,8 @@ class UserProfilType extends AbstractType
             ])
             ->add('plainPassword', PasswordType::class, [
                 'label' => 'Nouveau mot de passe :',
-		'mapped' => false,
-		'required' => false,
+                'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     #new NotBlank([
                     #    'message' => 'Please enter a password',
@@ -52,6 +55,21 @@ class UserProfilType extends AbstractType
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'name'
+            ])
+            ->add('userPicture', FileType::class, [
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '50k',
+                        'maxSizeMessage' => 'Votre fichier {{ name }} fait {{ size }} {{ suffix }} / {{ limit }} {{ suffix }} autorisé',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg'
+                        ],
+                        'mimeTypesMessage' => 'Formats autorises : {{ types }}',
+                    ])
+                ],
+                'mapped' => false,
+                'label' => 'Avatar :'
             ]);
     }
 
@@ -59,7 +77,7 @@ class UserProfilType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'require'=>false
+            'require' => false
         ]);
     }
 }

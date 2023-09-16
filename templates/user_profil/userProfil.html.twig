@@ -13,8 +13,12 @@
         {{ form_start(userForm) }}
         <div class="d-flex ">
             <div class="photo">
-                <!-- Espace pour la photo à gauche -->
                 <img src="{{ asset('img/daffy.jpg') }}" alt="Daffy">
+                <div class="form-row">
+                    {{ form_label(userForm.userPicture) }}
+                    {{ form_widget(userForm.userPicture) }}
+                </div>
+                {{ form_errors(userForm.userPicture) }}
             </div>
             <div class="form-user">
                 <div class="form-row">
