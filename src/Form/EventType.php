@@ -34,7 +34,7 @@ class EventType extends AbstractType
             ->add('duration', TimeType::class, [
                 'input' => 'string',
                 'widget' => 'single_text',
-                'label' => 'Duree de l\'event :'
+                'label' => 'Duree de l\'event :',
             ])
             ->add('limitDate', DateType::class, [
                 'widget' => 'single_text',

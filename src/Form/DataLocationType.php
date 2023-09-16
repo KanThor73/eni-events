@@ -17,19 +17,24 @@ class DataLocationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $defaultCity = $options['default_city'];
+        $defaultPlace = $options['default_place'];
+
         $builder
             ->add('city', EntityType::class, [
                 'placeholder' => 'Choisir une ville',
                 'class' => City::class,
                 'choice_label' => 'name',
                 'required' => false,
-                'label' => 'Ville :'
+                'label' => 'Ville :',
+                'data' => $defaultCity
             ])
             ->add('name', EntityType::class, [
                 'placeholder' => 'Choisir un lieu',
                 'class' => Place::class,
                 'choice_label' => 'name',
-                'label' => 'Lieu :'
+                'label' => 'Lieu :',
+                'data' => $defaultPlace
             ])
             ->add('street', null, ['label' => 'Rue :'])
             ->add('latitude', null, ['label' => 'Latitude :'])
@@ -59,6 +64,8 @@ class DataLocationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Place::class,
+            'default_city' => null,
+            'default_place' => null
         ]);
     }
 }

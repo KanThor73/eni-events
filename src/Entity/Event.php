@@ -88,18 +88,30 @@ class Event
         return $this;
     }
 
-    public function getDuration(): ?\DateInterval
+//    public function getDuration(): ?\DateInterval
+//    {
+//        return $this->duration;
+//    }
+
+    public function getDuration(): ?string
     {
-        return $this->duration;
+        if ($this->duration != null) {
+
+            $heures = $this->duration->h;
+            $minutes = $this->duration->i;
+            $secondes = $this->duration->s;
+            return sprintf("%02d:%02d:%02d", $heures, $minutes, $secondes);
+        }else{
+            return sprintf("%02d:%02d:%02d", '00', '00', '00');
+        }
     }
+
     public function getDurationString(): string
     {
         $heures = $this->duration->h;
         $minutes = $this->duration->i;
-        $secondes = $this->duration->s;
-        return $heures . 'h'.$minutes .'min';
+        return $heures . 'h' . $minutes . 'min';
     }
-
 
     /**
      * @throws Exception
@@ -107,11 +119,10 @@ class Event
     public function setDuration(string $duration): static
     {
         list($hours, $minutes, $seconds) = explode(":", $duration);
-        $iso8601Duration = "PT" . $hours . "H" . $minutes . "M" . $seconds . "S";
+        $iso8601Duration = "PT" . $hours . "H" . $minutes . "M";
         $this->duration = new \DateInterval($iso8601Duration);
 
         return $this;
-
     }
 
     public function getLimitDate(): ?\DateTimeInterface

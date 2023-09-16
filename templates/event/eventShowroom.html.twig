@@ -127,9 +127,9 @@
                     {% elseif not isMember and not isOrganizer and event.state.label == 'Ouvert' and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') and  event.getNbrOfMembers < event.nbMaxInscription %}
                         <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a class="action" href="{{ path('register',{id: event.id }) }}">S'inscrire</a> </span>
                     {% elseif isOrganizer and event.state.label == 'En cours' %}
-                        <span><a class="action" href="#">Modifier</a> / <a class="action" href="{{ path('publish',{id: event.id }) }}">Publier</a></span>
+                        <span><a class="action" href="{{ path('edit',{id: event.id }) }}">Modifier</a> / <a class="action" href="{{ path('publish',{id: event.id }) }}">Publier</a></span>
                     {% elseif isOrganizer and event.state.label == 'En creation' %}
-                        <span><a class="action" href="#">Modifier</a></span>
+                        <span><a class="action" href="{{ path('edit',{id: event.id }) }}">Modifier</a></span>
                     {% elseif event.limitDate | date("m/d/Y")|date('U') <= today | date("m/d/Y")|date('U') or event.state.label == 'Ferme'%}
                         <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a></span>
                     {% elseif event.state.label == 'Ouvert' and isOrganizer %}

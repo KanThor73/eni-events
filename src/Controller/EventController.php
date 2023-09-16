@@ -9,12 +9,10 @@ use App\Entity\Place;
 use App\Entity\State;
 use App\Entity\User;
 use App\Form\CampusType;
-use App\Form\CityType;
 use App\Form\DataLocationType;
 use App\Form\EventType;
 use App\Form\PlaceType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,14 +27,10 @@ class EventController extends AbstractController
 
         $event = new Event();
         $place = new Place();
-        $city = new City();
 
         $eventForm = $this->createForm(EventType::class, $event)->handleRequest($request);
         $placeForm = $this->createForm(PlaceType::class, $place)->handleRequest($request);
         $dataLocationForm = $this->createForm(DataLocationType::class, $place)->handleRequest($request);
-
-        $cities = $entityManager->getRepository(City::class)->findAll();
-
 
         if ($eventForm->isSubmitted() && $eventForm->isValid()) {
 
@@ -68,8 +62,56 @@ class EventController extends AbstractController
             'eventForm' => $eventForm->createView(),
             'placeForm' => $placeForm->createView(),
             'locationForm' => $dataLocationForm->createView()
-//            'cities' => $cities
-//            'cityForm' => $cityForm->createView(),
+        ]);
+    }
+
+    #[Route('/edit/{id}', name: 'edit')]
+    public function edit(Event $event, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if (isset($_POST['delete'])) {
+            $entityManager->remove($event);
+            $entityManager->flush();
+            $this->addFlash('error', $event->getName().' ' . 'vient d\'etre supprime');
+            return $this->redirectToRoute('event_showroom');
+        }
+
+        $place = new Place();
+        $defaultCity = $entityManager->getRepository(City::class)->find($event->getPlace()->getCity()->getId());
+
+        $defaultPlace = $entityManager->getRepository(Place::class)->find($event->getPlace()->getId());
+
+        $eventForm = $this->createForm(EventType::class, $event)->handleRequest($request);
+        $dataLocationForm = $this->createForm(DataLocationType::class, $place, ['default_city' => $defaultCity, 'default_place' => $defaultPlace])->handleRequest($request);
+
+        if ($eventForm->isSubmitted() && $eventForm->isValid()) {
+            $placeName = $dataLocationForm->getData()->getName();
+            $place = $entityManager->getRepository(Place::class)->findOneBy(['name' => $placeName]);
+            $user = $entityManager->getRepository(User::class)->find($this->getUser()->getId());
+
+            $state = null;
+            if (isset($_POST['create'])) {
+                $state = $entityManager->getRepository(State::class)->find(1);
+                $this->addFlash('success', 'Pour finaliser votre event vous devez le publier');
+            } elseif (isset($_POST['publish'])) {
+                $state = $entityManager->getRepository(State::class)->find(2);
+                $this->addFlash('success', 'Vous venez de publier' . ' ' . $event->getName());
+            }
+
+            $event->setPlace($place);
+            $event->setCampus($this->getUser()->getCampus());
+            $event->setState($state);
+            $event->addMember($user);
+            $event->setOrganizer($this->getUser());
+
+            $entityManager->flush();
+            $this->addFlash('success', 'Modifications sur ' . ' ' . $event->getName() . ' ' . 'effectuees avec succès');
+            return $this->redirectToRoute('event_showroom');
+        }
+
+        return $this->render('event/editEvent.html.twig', [
+            'eventForm' => $eventForm->createView(),
+            'locationForm' => $dataLocationForm->createView(),
+            'event' => $event
         ]);
     }
 
