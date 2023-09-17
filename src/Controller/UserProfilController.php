@@ -21,24 +21,24 @@ class UserProfilController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/user/profil', name: 'app_user_profil')]
+    #[Route('/user/profil/{id}', name: 'app_user_profil')]
     public function create(
         Request                     $request,
         UserPasswordHasherInterface $userPasswordHasher,
-        EntityManagerInterface      $entityManager
+        EntityManagerInterface      $entityManager,
+        User                        $user
     ): Response
     {
-        $user = $this->getUser();
         $userForm = $this->createForm(UserProfilType::class, $user);
         $userForm->handleRequest($request);
 
         if ($userForm->isSubmitted() && $userForm->isValid()) {
 
             /** @var UploadedFile $userPicture */
-            $userPicture = $userForm->get('userPicture')->getData();
-            $fileName = bin2hex(random_bytes(10));
-            $extension = $userPicture->guessExtension() ?? 'bin';
-            $userPicture->move('userPicture', $fileName .'.' . $extension);
+            $picture = $userForm->get('userPicture')->getData();
+            $extension = $picture->guessExtension() ?? 'bin';
+            $fileName = (bin2hex(random_bytes(10))) . '.' . $extension;
+            $picture->move('userPicture', $fileName);
 
             if ($userForm->get('plainPassword')->getData() != null) { // si la personne saisit un nouveau mot de passe
                 $user->setPassword(
@@ -52,8 +52,7 @@ class UserProfilController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Nouveau participant!');
-            //return $this->redirectToRoute('app_show_profil' ['id' => $user->getId()])
+            $this->addFlash('success', 'Modifications effectuees avec succes');
         }
 
         return $this->render('user_profil/userProfil.html.twig', [

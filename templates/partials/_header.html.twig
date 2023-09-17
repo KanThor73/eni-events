@@ -10,7 +10,7 @@
             <a href="{{ path('event_showroom') }}"><h3>Events</h3></a>
             <div class="separator-header"></div>
             {% if app.user %}
-                <a class="m-1" href="{{ path('app_user_profil') }}"><h3>Mon Profil</h3></a>
+                <a class="m-1" href="{{ path('app_user_profil', {id : app.user.id}) }}"><h3>Mon Profil</h3></a>
                 <div class="separator-header"></div>
                 <a class="m-1" href="{{ path('app_logout') }}"><h3>Log out</h3></a>
             {% else %}

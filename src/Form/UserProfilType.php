@@ -59,7 +59,7 @@ class UserProfilType extends AbstractType
             ->add('userPicture', FileType::class, [
                 'constraints' => [
                     new Image([
-                        'maxSize' => '50k',
+                        'maxSize' => '500k',
                         'maxSizeMessage' => 'Votre fichier {{ name }} fait {{ size }} {{ suffix }} / {{ limit }} {{ suffix }} autorisé',
                         'mimeTypes' => [
                             'image/png',
