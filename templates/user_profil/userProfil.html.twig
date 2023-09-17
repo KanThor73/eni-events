@@ -13,7 +13,7 @@
         {{ form_start(userForm) }}
         <div class="d-flex ">
             <div class="photo">
-                <img src="{{ asset('img/daffy.jpg') }}" alt="Daffy">
+                <img src="{{ asset(app.user.picture) }}" alt="userPicture">
                 <div class="form-row">
                     {{ form_label(userForm.userPicture) }}
                     {{ form_widget(userForm.userPicture) }}

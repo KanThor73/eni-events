@@ -40,6 +40,8 @@ class UserProfilController extends AbstractController
             $fileName = (bin2hex(random_bytes(10))) . '.' . $extension;
             $picture->move('userPicture', $fileName);
 
+            $user->setPicture($fileName);
+
             if ($userForm->get('plainPassword')->getData() != null) { // si la personne saisit un nouveau mot de passe
                 $user->setPassword(
                     $userPasswordHasher->hashPassword(

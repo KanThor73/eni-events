@@ -54,6 +54,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255,unique: true)]
     private ?string $pseudo = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $picture = null;
+
     public function __construct()
     {
         $this->isRegistred = new ArrayCollection();
@@ -238,6 +241,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return 'userPicture/'. $this->picture;
+    }
+
+    public function setPicture(?string $fileName): static
+    {
+        $this->picture = $fileName;
 
         return $this;
     }
