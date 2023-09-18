@@ -16,7 +16,7 @@
                 You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
             </div>
         {% endif %}
-        <h1 >Please sign in</h1>
+        <h1>Please sign in</h1>
         <div class="form-container">
             <div class="form-row">
                 <label for="inputEmail">Email</label>
@@ -30,7 +30,9 @@
                        autocomplete="current-password" required>
             </div>
             <div class="d-flex flex-column align-items-center m-1">
-                <a href="{{ path('reset-password') }}">Mot de passe oublie ?</a>
+                <small>
+                    <a class="reset-mdps" href="{{ path('reset_password') }}">Mot de passe oublie ?</a>
+                </small>
             </div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <button class="btn btn-lg btn-primary" type="submit">

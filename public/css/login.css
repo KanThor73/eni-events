@@ -1,3 +1,10 @@
+body{
+    display: flex;
+    flex-direction: column;
+    padding-top:3rem ;
+    align-items: center;
+}
+
 .body-container {
     display: flex;
     flex-direction: column;
@@ -12,6 +19,34 @@
     align-items: center;
 }
 
-.form-row{
+.form-row {
     width: 100%;
+}
+
+.reset-mdps:hover {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+.flash {
+    display: flex;
+    justify-content: center;
+}
+
+.flash-error, .flash-success {
+    padding: 1rem;
+}
+
+.flash-success {
+    position: fixed;
+    color: var(--succes);
+    background: var(--succes-soft);
+    border: 3px solid var(--succes);
+}
+
+.flash-error {
+    position: fixed;
+    color: var(--warning);
+    background: var(--warning-soft);
+    border: 3px solid var(--warning);
 }
