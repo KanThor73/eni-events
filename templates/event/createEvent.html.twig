@@ -65,15 +65,15 @@
             </div>
             <div class="form-row">
                 {{ form_label(locationForm.street) }}
-                {{ locationForm.postCode.vars.value }}
+                {{ locationForm.street.vars.value }}
             </div>
             <div class="form-row">
                 {{ form_label(locationForm.latitude) }}
-                {{ form_widget(locationForm.latitude) }}
+                {{ locationForm.latitude.vars.value }}
             </div>
             <div class="form-row">
                 {{ form_label(locationForm.longitude) }}
-                {{ form_widget(locationForm.longitude) }}
+                {{ locationForm.longitude.vars.value }}
             </div>
         </div>
     </div>
