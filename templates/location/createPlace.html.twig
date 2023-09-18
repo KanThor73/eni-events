@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('css/createPlace.css') }}">
+    {% endblock %}
+{% block title %}Create-Palce{% endblock %}
+
+{% block body %}
+    <h1 class="m-2">Creer un lieu</h1>
+    <div class="form-container">
+        {{ form_start(form) }}
+        <div class="form-row">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+        </div>
+        {{ form_errors(form.name) }}
+        <div class="form-row">
+            {{ form_label(form.street) }}
+            {{ form_widget(form.street) }}
+        </div>
+        {{ form_errors(form.street) }}
+        <div class="form-row">
+            {{ form_label(form.latitude) }}
+            {{ form_widget(form.latitude) }}
+        </div>
+        {{ form_errors(form.latitude) }}
+        <div class="form-row">
+            {{ form_label(form.longitude) }}
+            {{ form_widget(form.longitude) }}
+        </div>
+        {{ form_errors(form.longitude) }}
+        <div class="form-row">
+            {{ form_label(form.city) }}
+            {{ form_widget(form.city) }}
+        </div>
+        <div class="buttons d-flex justify-content-center m-2">
+            <button class="btn-primary" type="submit" name="create">Creer</button>
+            <a class="btn-primary" href="{{ path('event_showroom') }}">Annuler
+            </a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

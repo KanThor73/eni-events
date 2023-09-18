@@ -52,32 +52,29 @@
                 {{ form_label(locationForm.city) }}
                 {{ form_widget(locationForm.city) }}
             </div>
-            {{ form_errors(locationForm.city) }}
             <div class="form-row">
                 {{ form_label(locationForm.name) }}
                 <div>
                     {{ form_widget(locationForm.name) }}
-                    <a href="#">
-                        <button class="btn-primary btn-add">+</button>
-                    </a>
+                    <a class="btn-primary btn-add" href="{{ path('createPlace') }}">+</a>
                 </div>
             </div>
-            {{ form_errors(locationForm.name) }}
+            <div class="form-row">
+                {{ form_label(locationForm.postCode) }}
+                {{ locationForm.postCode.vars.value }}
+            </div>
             <div class="form-row">
                 {{ form_label(locationForm.street) }}
-                {{ form_widget(locationForm.street) }}
+                {{ locationForm.postCode.vars.value }}
             </div>
-            {{ form_errors(locationForm.street) }}
             <div class="form-row">
                 {{ form_label(locationForm.latitude) }}
                 {{ form_widget(locationForm.latitude) }}
             </div>
-            {{ form_errors(locationForm.latitude) }}
             <div class="form-row">
                 {{ form_label(locationForm.longitude) }}
                 {{ form_widget(locationForm.longitude) }}
             </div>
-            {{ form_errors(locationForm.longitude) }}
         </div>
     </div>
     <div class="buttons d-flex justify-content-center m-2">
@@ -89,6 +86,7 @@
         </a>
     </div>
     {{ form_widget(eventForm._token) }}
+    {{ form_widget(locationForm._token) }}
     {{ form_end(eventForm, {'render_rest': false}) }}
     </div>
 {% endblock %}

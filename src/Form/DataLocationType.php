@@ -36,19 +36,32 @@ class DataLocationType extends AbstractType
                 'label' => 'Lieu :',
                 'data' => $defaultPlace
             ])
-            ->add('street', null, ['label' => 'Rue :'])
-            ->add('latitude', null, ['label' => 'Latitude :'])
-            ->add('longitude', null, ['label' => 'Longitude :']);
+            ->add('postCode', TextType::class, [
+                'mapped' => false,
+                'label' => 'Code postale :'
+            ])
+            ->add('street', TextType::class, ['label' => 'Rue :'])
+            ->add('latitude', TextType::class, ['label' => 'Latitude :'])
+            ->add('longitude', TextType::class, ['label' => 'Longitude :']);
 
         $formModifier = function (FormInterface $form, City $city = null) {
             $places = (null === $city) ? [] : $city->getPlaces();
-            $form->add('name', EntityType::class, [
-                'class' => Place::class,
-                'choices' => $places,
-                'choice_label' => 'name',
-                'placeholder' => 'Choisir un lieu',
-                'label' => 'Lieu :'
-            ]);
+            $firstPlace = $places[0]->getStreet();
+//            $postCode = (null === $city) ? [] : $city->getPostCode();
+
+            $form
+                ->add('name', EntityType::class, [
+                    'class' => Place::class,
+                    'choices' => $places,
+                    'choice_label' => 'name',
+                    'placeholder' => 'Choisir un lieu',
+                    'label' => 'Lieu :'
+                ])
+                ->add('street', TextType::class, [
+                    'mapped' => true,
+                    'label' => 'Rue :',
+                    'data' => $firstPlace
+                ]);
         };
 
         $builder
@@ -60,6 +73,15 @@ class DataLocationType extends AbstractType
                 });
     }
 
+
+//                ->add('postCode', TextType::class, [
+//                    'mapped' => false,
+//                    'data' => $postCode,
+//                    'label' => 'Code postale :'
+//                ]);
+
+//        street / latitude / longitude
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
@@ -68,4 +90,32 @@ class DataLocationType extends AbstractType
             'default_place' => null
         ]);
     }
+
+//        $formModifier = function (FormInterface $form, Place $place = null) {
+//            $street = (null === $place) ? [] : $place->getStreet();
+//            $latitude = (null === $place) ? [] : $place->getLatitude();
+//            $longitude = (null === $place) ? [] : $place->getLongitude();
+//            $form
+//                ->add('street', TextType::class, [
+//                    'label' => 'Rue :',
+//                    'data' => $street
+//                ])
+//                ->add('latitude', TextType::class, [
+//                    'label' => 'Latitude :',
+//                    'data' => $latitude
+//                ])
+//                ->add('longitude', TextType::class, [
+//                    'label' => 'Longitude :',
+//                    'data' => $longitude
+//                ]);
+//        };
+//
+//        $builder
+//            ->get('name')->addEventListener(
+//                FormEvents::POST_SUBMIT,
+//                function (FormEvent $event) use ($formModifier) {
+//                    $place = $event->getForm()->getData();
+//                    echo($place);
+//                    $formModifier($event->getForm()->getParent(), $place);
+//                });
 }
