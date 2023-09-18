@@ -2,4 +2,8 @@ dans /user/profil et dans /event/create, on ne peut pas annuler sans avoir rempl
 
 est-ce normal de pouvoir modifier son prénom, nom, campus, en tant qu'utilisateur ?
 
-/bin/bash: ligne 1: q : commande introuvable
+numéro de téléphone : regex
+
+faire la validation des données dans les Entity plutôt que dans les formulaires
+
+tr td th sur event showroom

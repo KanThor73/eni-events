@@ -49,25 +49,25 @@
             </div>
             <div class="part2">
                 <div class="row">
-                    <input type="checkbox" name="isOrganizer" value="true">
+                    <input type="checkbox" name="isOrganizer" id="isOrganizer" value="true">
                     <label for="isOrganizer">Évènements que j'organise</label>
                 </div>
                 <div class="row">
-                    <input type="checkbox" name="isRegistered" value="true">
+                    <input type="checkbox" name="isRegistered" id="isRegistered" value="true">
                     <label for="isRegistered">Évènements auxquels je ne suis pas inscrit/e</label>
                 </div>
                 <div class="row">
-                    <input type="checkbox" name="isOrganizer" value="true">
-                    <label for="isOrganizer">Évènements auxquels je suis inscrit/e</label>
+                    <input type="checkbox" name="isMember" id="isMember" value="true">
+                    <label for="isMember">Évènements auxquels je suis inscrit/e</label>
                 </div>
                 <div class="row">
-                    <input type="checkbox" name="isOrganizer" value="true">
-                    <label for="isOrganizer">Évènements passés</label>
+                    <input type="checkbox" name="pastEvent" id="pastEvent" value="true">
+                    <label for="pastEvent">Évènements passés</label>
                 </div>
             </div>
             <div class="separator"></div>
             <div class="part3">
-                <button class="btn-primary" type="submit"> RECHERCHER</button>
+                <button class="btn-primary" type="submit">RECHERCHER</button>
             </div>
         </div>
     </form>
@@ -124,7 +124,7 @@
                     <div class="separator-inline"></div>
                     {% if isMember %}
                         <span><a href="#">Afficher</a> - <a href="">Se désister</a></span>
-                    {% elseif isMember != true %}
+                    {% elseif not isMember %}
                         <span><a href="#">Afficher</a> </span>
                     {% elseif isOrganizer %}
                         <span><a href="#">Modifier</a> <button>Publier</button></span>

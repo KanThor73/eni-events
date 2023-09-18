@@ -20,6 +20,41 @@ class EventRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Event::class);
     }
+	
+    public function findDynamic($userId, $campusId, $params): array
+    {
+	    $query = $this->createQueryBuilder('e')
+		->andWhere('e.campus = :val')
+		->setParameter('val', $campusId);
+
+		// searchWord
+
+		// date1
+	    	// date2
+
+	    if ($params->get('isOrganizer') != null)
+	    {
+		    $query->andWhere('e.organizer = :orgaId')
+	    		->setParameter('orgaId', $userId);
+	    }
+
+	    if ($params->get('isRegistered') != null)
+	    {
+		
+	    }
+
+	    if ($params->get('isMember') != null)
+	    {
+
+	    }
+
+	    if ($params->get('pastEvent') != null)
+	    {
+		// $query->andWhere('e.beginDate before now');
+	    }
+
+	    return $query->getQuery()->getResult();
+    }
 
 //    /**
 //     * @return Event[] Returns an array of Event objects

@@ -82,8 +82,16 @@ class EventController extends AbstractController
         $campus = new Campus();
         $campusForm = $this->createForm(CampusType::class, $campus)->handleRequest($request);
 
-        $eventRepo = $entityManager->getRepository(Event::class);
-        $events = $eventRepo->findAll();
+	$eventRepo = $entityManager->getRepository(Event::class);
+
+	if ($campusForm->isSubmitted() && $campusForm->isValid()) {
+		$campusRepo = $entityManager->getRepository(Campus::class);
+		$realCampus = $campusRepo->findOneBy(['name' => $campus->getName()]);
+
+		$events = $eventRepo->findDynamic($this->getUser()->getId(), $realCampus->getId(), $request->request);
+	} else {
+		$events = $eventRepo->findAll();
+	}
 
         return $this->render('event/eventShowroom.html.twig', [
             'campusForm' => $campusForm->createView(),
