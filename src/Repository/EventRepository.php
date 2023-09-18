@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -27,10 +28,18 @@ class EventRepository extends ServiceEntityRepository
 		->andWhere('e.campus = :val')
 		->setParameter('val', $campusId);
 
-		// searchWord
+		//$query->andWhere($query->expr()->like('e.name', $query->expr()->literal('%' . ':chaine'. '%')))
+		 //->setParameter('chaine', $params->get('searchWord'));
 
-		// date1
-	    	// date2
+	    if (!empty($params->get('date1'))) {
+		    $query->andWhere($query->expr()->gte('e.beginDate', ':dateDebut'))
+	    	->setParameter('dateDebut', $params->get('date1'));
+	    }
+
+	    if (!empty($params->get('date2'))) {
+		    $query->andWhere($query->expr()->lte('e.beginDate', ':dateFin'))
+	    	->setParameter('dateFin', $params->get('date2'));
+	    }
 
 	    if ($params->get('isOrganizer') != null)
 	    {
@@ -50,7 +59,7 @@ class EventRepository extends ServiceEntityRepository
 
 	    if ($params->get('pastEvent') != null)
 	    {
-		// $query->andWhere('e.beginDate before now');
+		$query->andWhere($query->expr()->gt('e.beginDate', 'CURRENT_DATE()'));
 	    }
 
 	    return $query->getQuery()->getResult();
