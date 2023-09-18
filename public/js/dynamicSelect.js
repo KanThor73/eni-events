@@ -16,14 +16,14 @@ window.onload = () => {
                     let content = document.createElement("html");
                     content.innerHTML = html;
                     let newSelect = content.querySelector("#data_location_name");
-                    // let newPostCode = content.querySelector("#data_location_postCode");
                     document.querySelector("#data_location_name").replaceWith(newSelect);
-                    // document.querySelector("#data_location_postCode").replaceWith(newPostCode);
                     let newStreet = content.querySelector("#data_location_street");
                     document.querySelector("#data_location_street").replaceWith(newStreet);
                 }
             )
+                    // let newPostCode = content.querySelector("#data_location_postCode");
     });
+                    // document.querySelector("#data_location_postCode").replaceWith(newPostCode);
     //
     // let placeName = document.querySelector("#data_location_name");
     // placeName.addEventListener("change", function () {

@@ -1,15 +1,17 @@
-.container {
-	display: flex;
-	justify-content: center;
+.body-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
 }
 
-.sub-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: flex-end;
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.row {
-	margin: 1rem;
+.form-row{
+    width: 100%;
 }

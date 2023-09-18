@@ -38,6 +38,7 @@ class DataLocationType extends AbstractType
             ])
             ->add('postCode', TextType::class, [
                 'mapped' => false,
+                'data'=> '73000',
                 'label' => 'Code postale :'
             ])
             ->add('street', TextType::class, ['label' => 'Rue :'])
@@ -46,8 +47,8 @@ class DataLocationType extends AbstractType
 
         $formModifier = function (FormInterface $form, City $city = null) {
             $places = (null === $city) ? [] : $city->getPlaces();
-            $firstPlace = $places[0]->getStreet();
-//            $postCode = (null === $city) ? [] : $city->getPostCode();
+//            $firstPlace = $places[0]->getStreet();
+            $postCode = (null === $city) ? [] : $city->getPostCode();
 
             $form
                 ->add('name', EntityType::class, [
@@ -57,10 +58,10 @@ class DataLocationType extends AbstractType
                     'placeholder' => 'Choisir un lieu',
                     'label' => 'Lieu :'
                 ])
-                ->add('street', TextType::class, [
-                    'mapped' => true,
-                    'label' => 'Rue :',
-                    'data' => $firstPlace
+                ->add('postCode', TextType::class, [
+                    'mapped' => false,
+                    'data' => $postCode,
+                    'label' => 'Code postale :'
                 ]);
         };
 
@@ -74,11 +75,12 @@ class DataLocationType extends AbstractType
     }
 
 
-//                ->add('postCode', TextType::class, [
-//                    'mapped' => false,
-//                    'data' => $postCode,
-//                    'label' => 'Code postale :'
+//                ->add('street', TextType::class, [
+//                    'mapped' => true,
+//                    'label' => 'Rue :',
+//                    'data' => $firstPlace
 //                ]);
+
 
 //        street / latitude / longitude
 

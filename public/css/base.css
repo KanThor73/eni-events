@@ -1,49 +1,49 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     font-family: var(--fontFamilyCore);
     font-size: 1.6rem;
     color: var(--fontColor);
     background: url("../img/Fluid_background_2019_4-25.jpg") center center;
     background-size: cover;
-        min-height: 100vh;
+    min-height: 100vh;
 }
 
-h1,h2,h3,h4,h5{
+h1, h2, h3, h4, h5 {
     font-family: var(--fontFamilyTitle);
-    color:var(--fontColor-dark);
+    color: var(--fontColor-dark);
     letter-spacing: 1rem;
 }
 
-h1{
+h1 {
     font-size: 4rem;
     border-bottom: 3px solid var(--secondary);
     padding-bottom: 2rem;
 }
 
-h2{
+h2 {
     font-size: 3rem;
 }
 
-h3{
+h3 {
     font-size: 2rem;
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--fontColor);
 }
 
-ul{
+ul {
     list-style: none;
 }
 
 
-.btn-primary{
+.btn-primary {
     font-weight: 600;
     padding: 1.3rem;
     cursor: pointer;
@@ -64,60 +64,61 @@ ul{
     box-shadow: 0 0.5em 0.5em -0.4em var(--secondary);
     transform: translateY(-0.25em);
 }
+
 /*margin-padding*/
 
 
-.m-1{
+.m-1 {
     margin: 1rem;
 }
 
-.mr-1{
+.mr-1 {
     margin-right: 1rem;
 }
 
-.m-2{
-    margin:2rem;
+.m-2 {
+    margin: 2rem;
 }
 
-.p-1{
+.p-1 {
     padding: 1rem;
 }
 
-.p-2{
-    padding:2rem;
+.p-2 {
+    padding: 2rem;
 }
 
 /*flex*/
 
-.d-flex{
+.d-flex {
     display: flex;
 }
 
-.row-nowrap{
+.row-nowrap {
     flex-flow: row nowrap;
 }
 
-.row-wrap{
+.row-wrap {
     flex-flow: row wrap;
 }
 
-.flex-column{
+.flex-column {
     flex-direction: column;
 }
 
-.align-items-center{
+.align-items-center {
     align-items: center;
 }
 
-.align-items-end{
+.align-items-end {
     align-items: flex-end;
 }
 
-.justify-content-center{
+.justify-content-center {
     justify-content: center;
 }
 
-.justify-content-end{
+.justify-content-end {
     justify-content: flex-end;
 }
 
