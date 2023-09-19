@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Event;
+use App\Entity\FilterEvent;
 use App\Entity\Place;
 use App\Entity\State;
 use App\Entity\User;
 use App\Form\CampusType;
 use App\Form\DataLocationType;
 use App\Form\EventType;
+use App\Form\FilterEventType;
 use App\Form\PlaceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -116,14 +118,19 @@ class EventController extends AbstractController
     #[Route('/showroom', name: 'event_showroom')]
     public function eventShowroom(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $campus = new Campus();
-        $campusForm = $this->createForm(CampusType::class, $campus)->handleRequest($request);
+        $filterEvent = new FilterEvent();
+        $researchForm= $this->createForm(FilterEventType::class, $filterEvent);
 
         $eventRepo = $entityManager->getRepository(Event::class);
         $events = $eventRepo->findAll();
 
+        $researchForm->handleRequest($request);
+        if($researchForm->isSubmitted() && $researchForm->isValid()){
+
+        }
+
         return $this->render('event/eventShowroom.html.twig', [
-            'campusForm' => $campusForm->createView(),
+            'form' => $researchForm->createView(),
             'events' => $events
         ]);
     }
