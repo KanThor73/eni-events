@@ -7,15 +7,25 @@
 {% block header %}
 {% endblock %}
 {% block body %}
+    {% if app.flashes('success') or app.session.flashbag.has('error') %}
+        <div class="msgFlash">
+            {% if app.flashes('error') %}
+                <div class="flash_error">
+                    {% for flashError in app.session.flashbag.get('error') %}
+                        {{ flashError }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if app.flashes('success') %}
+                <div class="flash_success">
+                    {% for flashSuccess in app.session.flashbag.get('success') %}
+                        {{ flashSuccess }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
     <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey }}</div>
-        {% endif %}
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div>
-        {% endif %}
         <h1>Please sign in</h1>
         <div class="form-container">
             <div class="form-row">
