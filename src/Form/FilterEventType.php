@@ -20,6 +20,7 @@ class FilterEventType extends AbstractType
             ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'placeholder' => 'Choisir un campus',
+                'choice_label' => 'name',
                 'required' => false
             ])
             ->add('eventName', TextType::class, [

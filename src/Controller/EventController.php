@@ -126,10 +126,8 @@ class EventController extends AbstractController
         $researchForm->handleRequest($request);
 
         if ($researchForm->isSubmitted() && $researchForm->isValid()) {
-//            dd($filterEvent);
             $userId = $this->getUser();
-            $campus = $userId->getCampus();
-            $events = $filterEventRepository->findDynamic($userId, $campus, $filterEvent);
+            $events = $filterEventRepository->findDynamic($userId, $filterEvent);
         } else {
             $events = $eventRepo->findBy([], [], 10);
         }
