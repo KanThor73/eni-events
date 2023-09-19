@@ -71,7 +71,7 @@ class EventController extends AbstractController
         if (isset($_POST['delete'])) {
             $entityManager->remove($event);
             $entityManager->flush();
-            $this->addFlash('error', $event->getName().' ' . 'vient d\'etre supprime');
+            $this->addFlash('error', $event->getName() . ' ' . 'vient d\'etre supprime');
             return $this->redirectToRoute('event_showroom');
         }
 
@@ -119,14 +119,24 @@ class EventController extends AbstractController
     public function eventShowroom(Request $request, EntityManagerInterface $entityManager): Response
     {
         $filterEvent = new FilterEvent();
-        $researchForm= $this->createForm(FilterEventType::class, $filterEvent);
+        $researchForm = $this->createForm(FilterEventType::class, $filterEvent);
 
         $eventRepo = $entityManager->getRepository(Event::class);
-        $events = $eventRepo->findAll();
+
+//	if ($campusForm->isSubmitted() && $campusForm->isValid()) {
+//		$campusRepo = $entityManager->getRepository(Campus::class);
+//		$realCampus = $campusRepo->findOneBy(['name' => $campus->getName()]);
+//
+//		$events = $eventRepo->findDynamic($this->getUser()->getId(), $realCampus->getId(), $request->request);
+//	} else {
+//	}
+
 
         $researchForm->handleRequest($request);
-        if($researchForm->isSubmitted() && $researchForm->isValid()){
+        if ($researchForm->isSubmitted() && $researchForm->isValid()) {
 
+        } else {
+            $events = $eventRepo->findAll();
         }
 
         return $this->render('event/eventShowroom.html.twig', [

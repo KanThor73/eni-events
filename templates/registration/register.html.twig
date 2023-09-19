@@ -35,17 +35,16 @@
                     {{ form_widget(registrationForm.telephone) }}
                 </div>
                 <div class="row">
-                    <label for="registrationForm[campus]">Campus :</label>
+		    <label for="registrationForm[campus]">Campus :</label>
                     {{ form_widget(registrationForm.campus) }}
                 </div>
                 <div class="row">
-{#                    <label for="registrationForm[plainPassword]">Mot de passe :</label>#}
-                    {{ form_label(registrationForm.plainPassword) }}
+                    <label for="registrationForm[plainPassword]">Mot de passe :</label>
                     {{ form_widget(registrationForm.plainPassword) }}
                     {{ form_errors(registrationForm.plainPassword) }}
                 </div>
-                <div class="row">
-                    <button type="submit" class="btn btn-lg btn-primary">Register</button>
+                <div class="row middle">
+                    <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
                 </div>
             </div>
         </div>

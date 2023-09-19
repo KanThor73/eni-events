@@ -21,7 +21,7 @@
 
         </div>
     </div>
-    <h1 class="m-2">Events</h1>
+    <h1 class="m-2">Évènements</h1>
     <form method="post" action="{{ path('event_showroom') }}">
         <div class="search-container">
             {{ form_start(form) }}
@@ -65,7 +65,7 @@
             </div>
             <div class="separator"></div>
             <div class="part3">
-                <button class="btn-primary" type="submit"> RECHERCHER</button>
+                <button class="btn-primary" type="submit">RECHERCHER</button>
             </div>
             {{ form_end(form) }}
         </div>
@@ -74,13 +74,13 @@
         <div class="event-topbar">
             <span class="name">Nom</span>
             <div class="separator-inline"></div>
-            <span class="begindate">Date</span>
+            <span>Date</span>
             <div class="separator-inline"></div>
-            <span class="limitDate">Cloture</span>
+            <span>Clôture inscription</span>
             <div class="separator-inline"></div>
-            <span class="inscription">Places</span>
+            <span>Inscrits/Places</span>
             <div class="separator-inline"></div>
-            <span class="state">Etat</span>
+            <span>État</span>
             <div class="separator-inline"></div>
             <span class="isMember">Inscrit</span>
             <div class="separator-inline"></div>
@@ -145,7 +145,7 @@
     </div>
     <div class="button m-2">
         <a href="{{ path('create_event') }}">
-            <button class="btn-primary">Creer un Event</button>
+            <button class="btn-primary">Créer un évènement</button>
         </a>
     </div>
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
