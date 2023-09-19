@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\FilterEventRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FilterEventRepository::class)]
@@ -15,7 +14,7 @@ class FilterEvent
     private ?int $id = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?Campus $Campus = null;
+    private ?Campus $campus = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $eventName = null;
@@ -45,12 +44,12 @@ class FilterEvent
 
     public function getCampus(): ?object
     {
-        return $this->Campus;
+        return $this->campus;
     }
 
-    public function setCampus(?object $Campus): static
+    public function setCampus(?object $campus): static
     {
-        $this->Campus = $Campus;
+        $this->campus = $campus;
 
         return $this;
     }

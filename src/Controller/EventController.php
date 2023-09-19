@@ -14,6 +14,7 @@ use App\Form\DataLocationType;
 use App\Form\EventType;
 use App\Form\FilterEventType;
 use App\Form\PlaceType;
+use App\Repository\FilterEventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -116,27 +117,21 @@ class EventController extends AbstractController
     }
 
     #[Route('/showroom', name: 'event_showroom')]
-    public function eventShowroom(Request $request, EntityManagerInterface $entityManager): Response
+    public function eventShowroom(Request $request, EntityManagerInterface $entityManager, FilterEventRepository $filterEventRepository): Response
     {
         $filterEvent = new FilterEvent();
+
         $researchForm = $this->createForm(FilterEventType::class, $filterEvent);
-
         $eventRepo = $entityManager->getRepository(Event::class);
-
-//	if ($campusForm->isSubmitted() && $campusForm->isValid()) {
-//		$campusRepo = $entityManager->getRepository(Campus::class);
-//		$realCampus = $campusRepo->findOneBy(['name' => $campus->getName()]);
-//
-//		$events = $eventRepo->findDynamic($this->getUser()->getId(), $realCampus->getId(), $request->request);
-//	} else {
-//	}
-
-
         $researchForm->handleRequest($request);
-        if ($researchForm->isSubmitted() && $researchForm->isValid()) {
 
+        if ($researchForm->isSubmitted() && $researchForm->isValid()) {
+//            dd($filterEvent);
+            $userId = $this->getUser();
+            $campus = $userId->getCampus();
+            $events = $filterEventRepository->findDynamic($userId, $campus, $filterEvent);
         } else {
-            $events = $eventRepo->findAll();
+            $events = $eventRepo->findBy([], [], 10);
         }
 
         return $this->render('event/eventShowroom.html.twig', [
