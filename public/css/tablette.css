@@ -1,0 +1,25 @@
+/*Responsive pour tablette pour la page _header.html.twig*/
+@media screen and (max-width: 768px){
+    header{
+        margin: auto;
+        margin-bottom: 16px;
+    }
+    .menu{
+        margin-left: 8px;
+    }
+    h3{
+        width: auto;
+    }
+}
+
+
+
+/*Responsive pour tablette pour la page eventShowroom.html.twig.css*/
+@media screen and (max-width: 768px) {
+    .search-container {
+        /* Styles pour les tablettes */
+        /* Par exemple, une largeur réduite pour s'adapter à l'écran de la tablette */
+        width: 100%;
+        margin: 0 auto; /* Centrez horizontalement */
+    }
+}
