@@ -6,7 +6,7 @@
     <a href="{{ path('event_showroom') }}">
         <div class="logo"></div>
     </a>
-    <div class="j">
+    <div class="menu d-flex align-items-center">
         {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
             <a class="admin m-1" href="{{ path('app_admin') }}"><h3>Admin</h3></a>
         {% endif %}

@@ -1,20 +1,39 @@
 /*Responsive pour tablette pour la page _header.html.twig*/
-@media screen and (max-width: 768px){
-   header{
+@media screen and (max-width: 768px) {
 
-   }
+    header {
+        display: flex;
+        flex-direction: column;
+    }
+    .logo {
+        margin-bottom: 8px;
 
+    }
+    h1{
+        font-size: 20px;
+    }
 
 }
 
 
-
 /*Responsive pour tablette pour la page eventShowroom.html.twig.css*/
 @media screen and (max-width: 768px) {
-    .search-container {
-        /* Styles pour les tablettes */
-        /* Par exemple, une largeur réduite pour s'adapter à l'écran de la tablette */
-        width: 100%;
-        margin: 0 auto; /* Centrez horizontalement */
+
+    h1 {
+        color: #93c5fd;
+        margin-top: 8px;
     }
+
+    .search-container {
+        flex-direction: column;
+        margin:10px 10px;
+        max-width: 500px;
+        padding: 20px;
+    }
+
+    .separator{
+        display:none ;
+    }
+
+
 }
