@@ -1,3 +1,7 @@
+h1 {
+	text-align: center;
+}
+
 .container {
 	display: flex;
 	justify-content: center;
@@ -8,6 +12,24 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-end;
+	margin-top: 30px;
+}
+
+@media screen and (max-width: 425px) {
+	.sub-container {
+		align-items: center;
+	}
+
+	.row {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.middle {
+		display: flex;
+		justify-content: center;
+	}
 }
 
 .row {
