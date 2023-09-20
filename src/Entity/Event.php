@@ -56,6 +56,7 @@ class Event
     #[ORM\JoinColumn(nullable: false)]
     private ?User $organizer = null;
 
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
@@ -175,11 +176,10 @@ class Event
         return $this;
     }
 
-    public function getState(StateRepository $stateRepository): ?State
+    public function getState(): ?State
     {
-        $closeState = $stateRepository->find(3);
         if ($this->limitDate < new \DateTime('now')) {
-            return $closeState;
+            return $this->state->setLabel('Ferme');
         } else {
             return $this->state;
         }
