@@ -19,4 +19,11 @@
 
 .row {
 	margin: 1rem;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.middle {
+	justify-content: center;
 }

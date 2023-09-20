@@ -54,7 +54,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255,unique: true)]
     private ?string $pseudo = null;
 
+
     #[ORM\Column(length: 255,nullable: true)]
+
+
+
     private ?string $picture = null;
 
     public function __construct()

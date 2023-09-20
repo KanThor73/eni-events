@@ -1,15 +1,10 @@
 /*Responsive pour tablette pour la page _header.html.twig*/
 @media screen and (max-width: 768px){
-    header{
-        margin: auto;
-        margin-bottom: 16px;
-    }
-    .menu{
-        margin-left: 8px;
-    }
-    h3{
-        width: auto;
-    }
+   header{
+
+   }
+
+
 }
 
 

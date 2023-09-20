@@ -1,25 +1,44 @@
-.start-background{
-    /*width: 100vw;*/
+.start-background {
     min-height: 100vh;
     background: url("../img/background.jpg") center center;
-    background-size: cover;
-
+    background-size: 100% 100%;
 }
 
-h1{
-    margin-bottom: 5rem;
-    color: var(--secondary);
+body {
+    margin: 0rem;
+    padding: 0rem;
 }
 
-.fa-arrow-right-to-bracket{
+h1 {
+    color: var(--dark);
+    border-bottom: none;
+}
+
+.fa-arrow-right-to-bracket {
     color: var(--secondary);
-    font-size:8rem;
-    margin-right:6rem;
-    margin-bottom: 15rem;
+    font-size: 8rem;
+    margin-right: 6rem;
     transition: 0.5s ease-out;
 }
 
-.fa-arrow-right-to-bracket:hover{
+.fa-arrow-right-to-bracket:hover {
     text-shadow: var(--text_shadow_soft);
     transform: scale(1.2);
+}
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+.start {
+    width: fit-content;
+    background: var(--primary-light-40);
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+small {
+    color: var(--dark);
+    font-size: 4rem;
+    text-align: center;
 }
