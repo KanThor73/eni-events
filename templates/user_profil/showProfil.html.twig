@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Profil de {{ user.name }}</h1>
+    <h1>Profil de {{ user.name }} {{ user.firstname }}</h1>
 <div class="form-container">
     <p><strong>Nom :</strong> {{ user.name }}</p>
     <p><strong>Prénom :</strong> {{ user.firstname }}</p>
@@ -15,7 +15,6 @@
 
     <div class="buttons">
         <div class="form-actions">
-            <a href="{{ path('app_user_profil') }}"></a>
             <button type="submit" class="btn btn-primary">Retour</button>
         </div>
     </div>
