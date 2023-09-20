@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 class EventType extends AbstractType
 {
@@ -29,7 +30,13 @@ class EventType extends AbstractType
             ->add('beginDate', DateTimeType::class, [
                 'widget' => 'single_text',
                 'input' => 'datetime',
-                'label' => 'Date et heure de l\'event :'
+                'label' => 'Date et heure de l\'event :',
+                'constraints' => [
+                    new GreaterThanOrEqual([
+                        'value' => new \DateTime('today'), // Date actuelle
+                        'message' => 'La date ne peut pas être antérieure à aujourd\'hui.',
+                    ]),
+                ],
             ])
             ->add('duration', TimeType::class, [
                 'input' => 'string',
@@ -39,7 +46,13 @@ class EventType extends AbstractType
             ->add('limitDate', DateType::class, [
                 'widget' => 'single_text',
                 'input' => 'datetime',
-                'label' => 'Date limite d\'inscription :'
+                'label' => 'Date limite d\'inscription :',
+                'constraints' => [
+                    new GreaterThanOrEqual([
+                        'value' => new \DateTime('today'), // Date actuelle
+                        'message' => 'La date ne peut pas être antérieure à aujourd\'hui.',
+                    ]),
+                ],
             ])
             ->add('nbMaxInscription', null, [
                 'label' => 'Nbre max d\'inscription :'
