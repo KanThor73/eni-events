@@ -15,6 +15,7 @@ use App\Form\EventType;
 use App\Form\FilterEventType;
 use App\Form\PlaceType;
 use App\Repository\FilterEventRepository;
+use App\Repository\StateRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -117,7 +118,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/showroom', name: 'event_showroom')]
-    public function eventShowroom(Request $request, EntityManagerInterface $entityManager, FilterEventRepository $filterEventRepository): Response
+    public function eventShowroom(Request $request, EntityManagerInterface $entityManager, StateRepository $stateRepository, FilterEventRepository $filterEventRepository): Response
     {
         $filterEvent = new FilterEvent();
 
@@ -126,8 +127,9 @@ class EventController extends AbstractController
         $researchForm->handleRequest($request);
 
         if ($researchForm->isSubmitted() && $researchForm->isValid()) {
-            $userId = $this->getUser();
-            $events = $filterEventRepository->findDynamic($userId, $filterEvent);
+            $state = $stateRepository->find(3);
+            $user = $this->getUser();
+            $events = $filterEventRepository->findDynamic($user, $filterEvent, $state);
         } else {
             $events = $eventRepo->findBy([], [], 10);
         }

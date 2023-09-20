@@ -31,10 +31,12 @@ class FilterEventType extends AbstractType
                 )
             ])
             ->add('beginDate', DateType::class, [
+                'input' => 'datetime_immutable',
                 'label' => 'Entre le',
                 'required' => false,
             ])
             ->add('endDate', DateType::class, [
+                'input' => 'datetime_immutable',
                 'label' => 'Et le',
                 'required' => false,
             ])

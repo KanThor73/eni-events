@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Event;
 use App\Entity\FilterEvent;
+use App\Entity\State;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -22,7 +23,7 @@ class FilterEventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function findDynamic($userId, $params): array
+    public function findDynamic($user, $params, $state): array
     {
 
         $query = $this->createQueryBuilder('e');
@@ -33,41 +34,48 @@ class FilterEventRepository extends ServiceEntityRepository
                 ->setParameter('campusSelect', $params->getCampus());
         }
         if (!empty($params->getEventName())) {
-            $searchWord = '%'.$params->getEventName().'%';
+            $searchWord = '%' . $params->getEventName() . '%';
             $query
                 ->andWhere($query->expr()->like('e.name', ':chaine'))
-                ->setParameter('chaine',  $searchWord );
+                ->setParameter('chaine', $searchWord);
+        }
+        if (!empty($params->getBeginDate())) {
+            $query
+                ->andWhere($query->expr()->gte('e.beginDate', ':dateDebut'))
+                ->setParameter('dateDebut', $params->getBeginDate());
+        }
+        if (!empty($params->getEndDate())) {
+            $query
+                ->andWhere($query->expr()->lte('e.beginDate', ':dateFin'))
+                ->setParameter('dateFin', $params->getEndDate());
+        }
+        if ($params->isOrganizer()) {
+            $query
+                ->andWhere('e.organizer = :orgaId')
+                ->setParameter('orgaId', $user);
+        }
+        if ($params->isMember()) {
+            $query
+                ->join('e.members', 'm')
+                ->andWhere($query->expr()->eq('m', ':member'))
+                ->setParameter('member', $user);
+        }
+        if ($params->isNotMember()) {
+            $query
+                ->join('e.members', 'm')
+                ->andWhere($query->expr()->neq('m', ':member'))
+                ->setParameter('member', $user);
+        }
+        if ($params->isPassed()) {
+            $query
+                ->andWhere('e.state = :state')
+                ->setParameter('state', $state);
         }
         return $query
             ->getQuery()
             ->getResult();
     }
 
-//        if (!empty($params->getBeginDate())) {
-//            $query
-//                ->andWhere($query->expr()->gte('e.beginDate', ':dateDebut'))
-//                ->setParameter('dateDebut', $params->get('beginDate'));
-//        }
-//        if (!empty($params->getEndDate())) {
-//            $query
-//                ->andWhere($query->expr()->lte('e.beginDate', ':dateFin'))
-//                ->setParameter('dateFin', $params->get('endDate'));
-//        }
-//        if ($params->isOrganizer()) {
-//            $query
-//                ->andWhere('e.organizer = :orgaId')
-//                ->setParameter('orgaId', $userId);
-//        }
-//        if ($params->isMember()) {
-//
-//        }
-//        if ($params->isNotMember()) {
-//
-//        }
-//        if ($params->isPassed()) {
-//            $query
-//                ->andWhere($query->expr()->gt('e.beginDate', 'CURRENT_DATE()'));
-//        }
 
 //    /**
 //     * @return FilterEvent[] Returns an array of FilterEvent objects
