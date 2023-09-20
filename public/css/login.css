@@ -1,5 +1,8 @@
 h1 {
 	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 20px;
 }
 
 .container {
@@ -16,6 +19,11 @@ h1 {
 }
 
 @media screen and (max-width: 425px) {
+	
+	h1 {
+		font-size: 2rem;
+	}
+
 	.sub-container {
 		align-items: center;
 	}
