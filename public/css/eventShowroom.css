@@ -5,10 +5,27 @@
     align-items: center;
 }
 
+.row{
+    display: flex;
+    justify-content: start;
+    column-gap: 1.5rem;
+}
+
+.date{
+    display: flex;
+    column-gap: 1.5rem;
+}
+
+.part1{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
 .search-container {
     display: flex;
     align-items: center;
-    width: 100rem;
+    min-width: 100rem;
     flex-direction: row;
     justify-content: space-between;
     background: var(--primary-light);
@@ -37,14 +54,9 @@
 
 .separator {
     width: 3px;
+    margin: 0rem 1.5rem;
     height: 11rem;
     border-right: 2px solid var(--primary);
-}
-
-.separator-inline {
-    display: inline;
-    border-right: 1px solid var(--primary);
-    margin: 0rem 0.5rem;
 }
 
 .event-topbar {
