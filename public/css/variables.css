@@ -12,8 +12,10 @@
     --body:#E5EFEF;
     --primary: #006266;
     --primary-light: #b2cfd1;
+    --primary-light-40: rgba(178, 207, 209, 0.4);
     --secondary: #F79F1F;
     --secondary-light: #FDEBD2;
+    --secondary-light-60: rgba(253, 235, 210, 0.3);
     --border: #66a0a3;
 
     /*linearGradient*/

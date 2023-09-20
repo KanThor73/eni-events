@@ -8,17 +8,20 @@
 {% endblock %}
 
 {% block body %}
-    <div class="start-background d-flex flex-column justify-content-end ">
-        <div class=" arrow d-flex justify-content-end m-2">
-            {% if app.user %}
-                <a href="{{ path('event_showroom') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+    <div class="start-background d-flex flex-column justify-content-center ">
+            <div class=" arrow d-flex justify-content-end m-2">
+                {% if app.user %}
+                    <a href="{{ path('event_showroom') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
                 {% else %}
-                <a href="{{ path('app_login') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
-            {% endif %}
-        </div>
-        <div class="start d-flex align-items-center flex-column m-2">
-            <div class="logo m-1"></div>
-            <h1>L'AVENTURE VOUS ATTEND !</h1>
+                    <a href="{{ path('app_login') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+                {% endif %}
+            </div>
+        <div class="content">
+            <div class="start d-flex align-items-center flex-column">
+                <div class="logo m-1"></div>
+                <h1>Aussi bien que l'ENI ! </h1>
+                <small>(mais a jour)</small>
+            </div>
         </div>
     </div>
 {% endblock %}
