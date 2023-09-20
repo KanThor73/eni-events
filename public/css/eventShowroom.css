@@ -72,43 +72,7 @@ span {
     background: var(--primary-light);
 }
 
-.name {
-    display: inline-block;
-    min-width: 13.5rem;
-}
-
-.begindate {
-    display: inline-block;
-    min-width: 10rem;
-}
-
-.limitDate {
-    display: inline-block;
-    min-width: 11rem;
-}
-
-.inscription {
+th , td {
     text-align: center;
-    min-width: 6rem;
-}
-
-.state {
-    min-width: 6.5rem;
-        text-align: center;
-}
-
-.isMember {
-    min-width: 4.5rem;
-    text-align: center;
-
-}
-
-.isOrganizer {
-    text-align: center;
-    min-width: 11rem;
-}
-
-.action {
-    text-align: center;
-
+    padding: 0rem 0.5rem;
 }

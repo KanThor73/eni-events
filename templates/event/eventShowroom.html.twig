@@ -71,77 +71,70 @@
         </div>
     </form>
     <div class="form-container">
-        <div class="event-topbar">
-            <span class="name">Nom</span>
-            <div class="separator-inline"></div>
-            <span>Date</span>
-            <div class="separator-inline"></div>
-            <span>Clôture inscription</span>
-            <div class="separator-inline"></div>
-            <span>Inscrits/Places</span>
-            <div class="separator-inline"></div>
-            <span>État</span>
-            <div class="separator-inline"></div>
-            <span class="isMember">Inscrit</span>
-            <div class="separator-inline"></div>
-            <span class="isOrganizer">Organisateur</span>
-            <div class="separator-inline"></div>
-            <span class="action">Action</span>
-        </div>
-        {% if events %}
-            {% for event in events %}
-                {% set isMember = false %}
-                {% for member in event.members %}
-                    {% if member == app.user %}
-                        {% set isMember = true %}
+        <table>
+            <thead class="event-topbar">
+            <tr>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>Clôture inscription</th>
+                <th>Inscrits/Places</th>
+                <th>État</th>
+                <th>Inscrit</th>
+                <th>Organisateur</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if events %}
+                {% for event in events %}
+                    {% set isMember = false %}
+                    {% for member in event.members %}
+                        {% if member == app.user %}
+                            {% set isMember = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% set isOrganizer = false %}
+                    {% if app.user %}
+                        {% if event.organizer.id == app.user.id %}
+                            {% set isOrganizer = true %}
+                        {% endif %}
                     {% endif %}
+                    <tr class="event-item {{ cycle(['dark', 'light'], loop.index) }}">
+                        <td>{{ event.name }}</td>
+                        <td>{{ event.beginDate | date("m/d/Y") }}</td>
+                        <td>{{ event.limitDate | date("m/d/Y") }}</td>
+                        <td>{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</td>
+                        <td>{{ event.state.label }}</td>
+                        {% if isMember %}
+                            <td class="isMember">X</td>
+                        {% else %}
+                            <td class="isMember"></td>
+                        {% endif %}
+                        <td class="isOrganizer"><a
+                                    href="{{ path('showProfil',{id: event.organizer.id }) }}">{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</a>
+                        </td>
+                        {% if isMember and not isOrganizer and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') %}
+                            <td><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
+                                        href="{{ path('desist',{id: event.id }) }}">Se desister</a></td>
+                        {% elseif not isMember and not isOrganizer and event.state.label == 'Ouvert' and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') and  event.getNbrOfMembers < event.nbMaxInscription %}
+                            <td><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
+                                        href="{{ path('register',{id: event.id }) }}">S'inscrire</a></td>
+                        {% elseif isOrganizer and event.state.label == 'En cours' %}
+                            <td><a href="{{ path('edit',{id: event.id }) }}">Modifier</a> / <a
+                                        href="{{ path('publish',{id: event.id }) }}">Publier</a></td>
+                        {% elseif isOrganizer and event.state.label == 'En creation' %}
+                            <td><a href="{{ path('edit',{id: event.id }) }}">Modifier</a></td>
+                        {% elseif event.limitDate | date("m/d/Y")|date('U') <= today | date("m/d/Y")|date('U') or event.state.label == 'Ferme' %}
+                            <td><a href="{{ path('show',{id: event.id }) }}">Afficher</a></td>
+                        {% elseif event.state.label == 'Ouvert' and isOrganizer %}
+                            <td><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
+                                        href="{{ path('cancel',{id: event.id }) }}">Annuler</a></td>
+                        {% endif %}
+                    </tr>
                 {% endfor %}
-                {% set isOrganizer = false %}
-                {% if app.user %}
-                    {% if event.organizer.id == app.user.id %}
-                        {% set isOrganizer = true %}
-                    {% endif %}
-                {% endif %}
-                <div class="event-item {{ cycle(['dark', 'light'], loop.index) }}">
-                    <span class="name">{{ event.name }}</span>
-                    <div class="separator-inline"></div>
-                    <span class="begindate">{{ event.beginDate | date("m/d/Y") }}</span>
-                    <div class="separator-inline"></div>
-                    <span class="limitDate">{{ event.limitDate | date("m/d/Y") }}</span>
-                    <div class="separator-inline"></div>
-                    <span class="inscription">{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</span>
-                    <div class="separator-inline"></div>
-                    <span class="state">{{ event.state.label }}</span>
-                    <div class="separator-inline"></div>
-                    {% if isMember %}
-                        <span class="isMember">X</span>
-                    {% else %}
-                        <span class="isMember"> </span>
-                    {% endif %}
-                    <div class="separator-inline"></div>
-                    <span class="isOrganizer"><a
-                                href="{{ path('showProfil',{id: event.organizer.id }) }}">{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</a></span>
-                    <div class="separator-inline"></div>
-                    {% if isMember and not isOrganizer and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') %}
-                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
-                                    href="{{ path('desist',{id: event.id }) }}">Se desister</a></span>
-                    {% elseif not isMember and not isOrganizer and event.state.label == 'Ouvert' and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') and  event.getNbrOfMembers < event.nbMaxInscription %}
-                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
-                                    class="action" href="{{ path('register',{id: event.id }) }}">S'inscrire</a> </span>
-                    {% elseif isOrganizer and event.state.label == 'En cours' %}
-                        <span><a class="action" href="{{ path('edit',{id: event.id }) }}">Modifier</a> / <a
-                                    class="action" href="{{ path('publish',{id: event.id }) }}">Publier</a></span>
-                    {% elseif isOrganizer and event.state.label == 'En creation' %}
-                        <span><a class="action" href="{{ path('edit',{id: event.id }) }}">Modifier</a></span>
-                    {% elseif event.limitDate | date("m/d/Y")|date('U') <= today | date("m/d/Y")|date('U') or event.state.label == 'Ferme' %}
-                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a></span>
-                    {% elseif event.state.label == 'Ouvert' and isOrganizer %}
-                        <span><a class="action" href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
-                                    class="action" href="{{ path('cancel',{id: event.id }) }}">Annuler</a></span>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        {% endif %}
+            {% endif %}
+            </tbody>
+        </table>
     </div>
     <div class="button m-2">
         <a href="{{ path('create_event') }}">
