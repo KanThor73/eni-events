@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
+{% endblock %}
+{% block title %}Admin{% endblock %}
+{% block body %}
+    <div class="form-container">
+        <h4 class="m-1">Utilisateurs</h4>
+        <table>
+            <thead>
+            <tr>
+                <td>Nom</td>
+                <td>Prenom</td>
+                <td>Email</td>
+                <td>Telephone</td>
+                <td>Statut</td>
+                <td>Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr class="{{ cycle(['dark', 'light'], loop.index) }}">
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.telephone }}</td>
+                    {% for role in user.roles %}
+                        {% if role == 'ROLE_USER' %}
+                            <td>ACTIVE</td>
+                        {% endif %}
+                        {% if role == 'ROLE_DISABLE' %}
+                            <td>DESACTIVER</td>
+                        {% endif %}
+                        {% if role == 'ROLE_ADMIN' %}
+                            <td>ADMIN</td>
+                        {% endif %}
+                        <td>
+                            <div class="btn">
+                                {% if role == 'ROLE_DISABLE' %}
+                                    <a href="{{ path('enable',{id: user.id }) }}">
+                                        <button class="btn-primary" type="submit" name="disable">Activer</button>
+                                    </a>
+                                {% elseif role == 'ROLE_USER' %}
+                                    <a href="{{ path('disable',{id: user.id }) }}">
+                                        <button class="btn-primary" type="submit" name="disable">Desactiver</button>
+                                    </a>
+                                {% endif %}
+                                <a href="{{ path('delete',{id: user.id }) }}">
+                                    <button class="btn-primary" type="submit" name="delete">Supprimer</button>
+                                </a>
+                            </div>
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

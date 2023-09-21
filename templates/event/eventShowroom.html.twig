@@ -103,7 +103,7 @@
                         {% endif %}
                     {% endif %}
                     <tr class="event-item {{ cycle(['dark', 'light'], loop.index) }}">
-                        <td>{{ event.name }}</td>
+                        <td><a class="snicky" href="{{ path('show',{id: event.id }) }}">{{ event.name }}</a></td>
                         <td>{{ event.beginDate | date("m/d/Y") }}</td>
                         <td class="noSmartphone">{{ event.limitDate | date("m/d/Y") }}</td>
                         <td class="noSmartphone">{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</td>

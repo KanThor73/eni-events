@@ -93,6 +93,16 @@ span{
     width: 10rem;
 }
 
+.snicky {
+	text-decoration: none;
+	color: var(--fontColor);
+}
+
+.snicky:visited {
+	text-decoration: none;
+        color: var(--fontColor);
+}
+
 .smartphone {
 	display: none;
 }

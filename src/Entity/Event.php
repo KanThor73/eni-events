@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use App\Repository\StateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 
@@ -54,6 +56,7 @@ class Event
     #[ORM\JoinColumn(nullable: false)]
     private ?User $organizer = null;
 
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
@@ -101,7 +104,7 @@ class Event
             $minutes = $this->duration->i;
             $secondes = $this->duration->s;
             return sprintf("%02d:%02d:%02d", $heures, $minutes, $secondes);
-        }else{
+        } else {
             return sprintf("%02d:%02d:%02d", '00', '00', '00');
         }
     }
@@ -175,7 +178,11 @@ class Event
 
     public function getState(): ?State
     {
-        return $this->state;
+        if ($this->limitDate < new \DateTime('now')) {
+            return $this->state->setLabel('Ferme');
+        } else {
+            return $this->state;
+        }
     }
 
     public function setState(?State $state): static

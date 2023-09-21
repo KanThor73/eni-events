@@ -2,20 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Campus;
 use App\Entity\City;
 use App\Entity\Event;
 use App\Entity\FilterEvent;
 use App\Entity\Place;
 use App\Entity\State;
 use App\Entity\User;
-use App\Form\CampusType;
 use App\Form\DataLocationType;
 use App\Form\EventType;
 use App\Form\FilterEventType;
-use App\Form\PlaceType;
 use App\Repository\FilterEventRepository;
 use App\Repository\StateRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -205,5 +203,6 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('event_showroom');
     }
+
 
 }
