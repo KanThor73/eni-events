@@ -14,7 +14,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: center;
 }
 
 .row {
@@ -26,4 +26,14 @@
 
 .middle {
 	justify-content: center;
+}
+
+.right {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.right button {
+	padding: 0.5rem 1rem;
+	border-radius: 0.5rem;
 }

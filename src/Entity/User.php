@@ -51,14 +51,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'organizer', targetEntity: Event::class, orphanRemoval: true)]
     private Collection $organizedEvents;
 
-    #[ORM\Column(length: 255,unique: true)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $pseudo = null;
 
 
-    #[ORM\Column(length: 255,nullable: true)]
-
-
-
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
     public function __construct()
@@ -91,7 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -251,7 +248,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getPicture(): ?string
     {
-        return 'userPicture/'. $this->picture;
+        return 'userPicture/' . $this->picture;
     }
 
     public function setPicture(?string $fileName): static
