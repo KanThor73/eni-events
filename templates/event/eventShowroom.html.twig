@@ -77,12 +77,14 @@
             <tr>
                 <th>Nom</th>
                 <th>Date</th>
-                <th>Clôture inscription</th>
-                <th>Inscrits/Places</th>
-                <th>État</th>
-                <th>Inscrit</th>
-                <th>Organisateur</th>
-                <th>Action</th>
+                <th class="noSmartphone">Clôture inscription</th>
+                <th class="noSmartphone">Inscrits/Places</th>
+                <th class="noSmartphone">État</th>
+                <th class="noSmartphone">Inscrit</th>
+                <th class="noSmartphone">Organisateur</th>
+                <th class="noSmartphone">Action</th>
+		<th class="smartphone">Lieu</th>
+
             </tr>
             </thead>
             <tbody>
@@ -103,34 +105,35 @@
                     <tr class="event-item {{ cycle(['dark', 'light'], loop.index) }}">
                         <td>{{ event.name }}</td>
                         <td>{{ event.beginDate | date("m/d/Y") }}</td>
-                        <td>{{ event.limitDate | date("m/d/Y") }}</td>
-                        <td>{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</td>
-                        <td>{{ event.state.label }}</td>
+                        <td class="noSmartphone">{{ event.limitDate | date("m/d/Y") }}</td>
+                        <td class="noSmartphone">{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</td>
+                        <td class="noSmartphone">{{ event.state.label }}</td>
                         {% if isMember %}
-                            <td class="isMember">X</td>
+                            <td class="isMember noSmartphone">X</td>
                         {% else %}
-                            <td class="isMember"></td>
+                            <td class="isMember noSmartphone"></td>
                         {% endif %}
-                        <td class="isOrganizer"><a
+                        <td class="isOrganizer noSmartphone"><a
                                     href="{{ path('showProfil',{id: event.organizer.id }) }}">{{ event.organizer.firstname }} {{ event.organizer.name | slice(0, 1) | capitalize }}</a>
                         </td>
                         {% if isMember and not isOrganizer and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') %}
-                            <td><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
+                            <td class="noSmartphone"><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
                                         href="{{ path('desist',{id: event.id }) }}">Se desister</a></td>
                         {% elseif not isMember and not isOrganizer and event.state.label == 'Ouvert' and event.limitDate | date("m/d/Y")|date('U') > today | date("m/d/Y")|date('U') and  event.getNbrOfMembers < event.nbMaxInscription %}
-                            <td><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
+                            <td class="noSmartphone"><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
                                         href="{{ path('register',{id: event.id }) }}">S'inscrire</a></td>
                         {% elseif isOrganizer and event.state.label == 'En cours' %}
-                            <td><a href="{{ path('edit',{id: event.id }) }}">Modifier</a> / <a
+                            <td class="noSmartphone"><a href="{{ path('edit',{id: event.id }) }}">Modifier</a> / <a
                                         href="{{ path('publish',{id: event.id }) }}">Publier</a></td>
                         {% elseif isOrganizer and event.state.label == 'En creation' %}
-                            <td><a href="{{ path('edit',{id: event.id }) }}">Modifier</a></td>
+                            <td class="noSmartphone"><a href="{{ path('edit',{id: event.id }) }}">Modifier</a></td>
                         {% elseif event.limitDate | date("m/d/Y")|date('U') <= today | date("m/d/Y")|date('U') or event.state.label == 'Ferme' %}
-                            <td><a href="{{ path('show',{id: event.id }) }}">Afficher</a></td>
+                            <td class="noSmartphone"><a href="{{ path('show',{id: event.id }) }}">Afficher</a></td>
                         {% elseif event.state.label == 'Ouvert' and isOrganizer %}
-                            <td><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
+                            <td class="noSmartphone"><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
                                         href="{{ path('cancel',{id: event.id }) }}">Annuler</a></td>
                         {% endif %}
+			<td class="smartphone">{{ event.campus }}</td>
                     </tr>
                 {% endfor %}
             {% endif %}

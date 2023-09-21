@@ -93,9 +93,22 @@ span{
     width: 10rem;
 }
 
+.smartphone {
+	display: none;
+}
+
 @media screen and (max-width: 425px) {
 	.search-container,
-	button {
+	button,
+	.noSmartphone{
 		display: none;
+	}
+
+	.smartphone {
+		display: inline;
+	}
+
+	h1 {
+		font-size: 2rem;
 	}
 }

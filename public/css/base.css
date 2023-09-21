@@ -126,7 +126,13 @@ ul {
 	.m-1,
 	.mr-1,
 	.mr-1 + p,
-	.separator-header {
+       	.menu {
 		display: none;
+	}
+
+	header a {
+		width: 100%;
+		display: flex;
+		justify-content: center;
 	}
 }
