@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,8 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class RegistrationController extends AbstractController
 {
     #[Route('/admin/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(CampusRepository $campusRepository, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        $campusCsv = $campusRepository->find(1);
         $user = new User();
         $user->setRoles(["ROLE_USER"]);
 
@@ -23,7 +25,30 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            $csvFile = $form->get('chargerCSV')->getData();
+
+            if (($handle = fopen($csvFile->getPathname(), 'r')) !== false) {
+                while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+                    $userCsv = new User();
+
+                    $userCsv->setRoles(["ROLE_USER"]);
+                    $userCsv->setPseudo($data[0]);
+                    $userCsv->setName($data[1]);
+                    $userCsv->setFirstname($data[2]);
+                    $userCsv->setEmail($data[3]);
+                    $userCsv->setTelephone($data[4]);
+                    $userCsv->setPassword($userPasswordHasher->hashPassword(
+                        $user,
+                        "!ChangeMe!"
+                    ));
+                    $userCsv->setCampus($campusCsv);
+
+                    $entityManager->persist($userCsv);
+                }
+                $entityManager->flush();
+                fclose($handle);
+            }
+
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -33,7 +58,6 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
             return $this->redirectToRoute('app_register');
         }
@@ -42,6 +66,4 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
-
-
 }

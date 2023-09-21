@@ -43,6 +43,11 @@
                     {{ form_widget(registrationForm.plainPassword) }}
                     {{ form_errors(registrationForm.plainPassword) }}
                 </div>
+                <div class="row">
+                    {{ form_label(registrationForm.chargerCSV) }}
+                    {{ form_widget(registrationForm.chargerCSV) }}
+                </div>
+                    {{ form_errors(registrationForm.chargerCSV) }}
                 <div class="row middle">
                     <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
                 </div>
@@ -50,5 +55,4 @@
         </div>
         {{ form_end(registrationForm) }}
     </div>
-
 {% endblock %}
