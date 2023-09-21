@@ -131,7 +131,6 @@ class EventController extends AbstractController
 	
 	if ($mobileDetector->isMobile()) {
 		$filterEvent->setIsMember(true);
-		dd($filterEvent);
 		$events = $filterEventRepository->findDynamic($user, $filterEvent, $state);
 	}
 	else if ($researchForm->isSubmitted() && $researchForm->isValid()) {
@@ -186,6 +185,18 @@ class EventController extends AbstractController
 
     #[Route('/cancel/{id}', name: 'cancel')]
     public function cancel(Event $event, StateRepository $stateRepository, EntityManagerInterface $entityManager): Response
+    {
+        $closeState = $stateRepository->find(3);
+        $event->setState($closeState);
+        $entityManager->flush();
+
+        return $this->render('event/cancelEvent.html.twig', [
+            'event' => $event,
+        ]);
+    }
+
+    #[Route('/cancelAdmin/{id}', name: 'cancelAdmin')]
+    public function cancelAdmin(Event $event, StateRepository $stateRepository, EntityManagerInterface $entityManager): Response
     {
         $closeState = $stateRepository->find(3);
         $event->setState($closeState);

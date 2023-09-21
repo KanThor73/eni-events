@@ -39,7 +39,7 @@
                     <td>
                         <div class="btn">
                             {% if event.state.label != 'Ferme' %}
-                                <a href="{{ path('cancel',{id: event.id }) }}">
+                                <a href="{{ path('cancelAdmin',{id: event.id }) }}">
                                     <button class="btn-primary" type="submit" name="disable">Annuler</button>
                                 </a>
                             {% endif %}

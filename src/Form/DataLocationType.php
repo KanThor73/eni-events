@@ -38,7 +38,6 @@ class DataLocationType extends AbstractType
             ])
             ->add('postCode', TextType::class, [
                 'mapped' => false,
-                'data'=> '73000',
                 'label' => 'Code postale :'
             ])
             ->add('street', TextType::class, ['label' => 'Rue :'])
