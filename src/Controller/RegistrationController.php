@@ -40,14 +40,14 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('app_register');
 	}
 
 	if ($formCSV->isSubmitted() && $formCSV->isValid()) {
             $csvFile = $formCSV->get('chargerCSV')->getData();
 
-            if (($handle = fopen($csvFile->getPathname(), 'r')) !== false) {
-                while (($data = fgetcsv($handle, 1000, ',')) !== false) {
+	    if (($handle = fopen($csvFile->getPathname(), 'r'))) {
+		    while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
                     $userCsv = new User();
 
                     $userCsv->setRoles(["ROLE_USER"]);
@@ -65,7 +65,9 @@ class RegistrationController extends AbstractController
                     $entityManager->persist($userCsv);
                 }
                 $entityManager->flush();
-                fclose($handle);
+		fclose($handle);
+
+		return $this->redirectToRoute('app_register');
             }
 	}
 
