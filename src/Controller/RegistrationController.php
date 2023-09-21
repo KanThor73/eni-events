@@ -47,7 +47,7 @@ class RegistrationController extends AbstractController
             $csvFile = $formCSV->get('chargerCSV')->getData();
 
 	    if (($handle = fopen($csvFile->getPathname(), 'r'))) {
-		    while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+		    while (($data = fgetcsv($handle, 1000, ',')) !== false) {
                     $userCsv = new User();
 
                     $userCsv->setRoles(["ROLE_USER"]);
@@ -59,8 +59,8 @@ class RegistrationController extends AbstractController
                     $userCsv->setPassword('$2y$13$aOUoLq5GdLeNzdyKApDt5ez4g6b3XtPYmdlnCpK.QIHQZMNoI4bri');
                     $userCsv->setCampus($campusCsv);
                     $entityManager->persist($userCsv);
+                    $entityManager->flush();
                 }
-                $entityManager->flush();
 		fclose($handle);
 
 		return $this->redirectToRoute('app_register');
