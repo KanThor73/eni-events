@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Form\DataLocationType;
 use App\Form\EventType;
 use App\Form\FilterEventType;
+use App\Repository\EventRepository;
 use App\Repository\FilterEventRepository;
 use App\Repository\StateRepository;
 use App\Repository\UserRepository;
@@ -184,10 +185,23 @@ class EventController extends AbstractController
     }
 
     #[Route('/cancel/{id}', name: 'cancel')]
-    public function cancel(Event $event): Response
+    public function cancel(Event $event, StateRepository $stateRepository, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('event/cancelEvent.html.twig', [
-            'event' => $event,
+        $closeState = $stateRepository->find(3);
+        $event->setState($closeState);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('cancelEvent');
+    }
+
+    #[Route('/deleteEvent/{id}', name: 'deleteEvent')]
+    public function deleteEvent(Event $event, EntityManagerInterface $entityManager, EventRepository $eventRepository): Response
+    {
+        $entityManager->remove($event);
+        $entityManager->flush();
+        $events = $eventRepository->findAll();
+        return $this->render('admin/cancel.html.twig', [
+            'events' => $events,
         ]);
     }
 
