@@ -1,0 +1,55 @@
+/*Responsive pour tablette pour la page _header.html.twig*/
+@media screen and (max-width: 768px) {
+
+    header {
+        display: flex;
+        flex-direction: column;
+    }
+    .logo {
+        margin-bottom: 8px;
+
+    }
+    h1{
+        font-size: 20px;
+    }
+
+}
+
+
+/*Responsive pour tablette pour la page eventShowroom.html.twig.css*/
+@media screen and (max-width: 768px) {
+
+    h1 {
+        color: #93c5fd;
+        margin-top: 8px;
+    }
+    .form-container{
+        padding: 1rem;
+    }
+
+    .search-container {
+        flex-direction: column;
+        margin:10px 10px;
+        min-width: 50rem;
+        padding: 20px;
+    }
+
+    .separator {
+        width: 25rem;
+        margin: 1.5rem 0rem;
+        height: 2px;
+        border-bottom: 2px solid var(--primary);
+    }
+    .part1{
+        align-items: flex-start;
+    }
+
+    /*Responsive pour tablette pour la page eventShowroom.html.twig.css*/
+    @media screen and (max-width: 768px){
+        .form-row{
+            flex-direction: column;
+        }
+    }
+
+
+}

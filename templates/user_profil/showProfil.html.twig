@@ -1,22 +1,28 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/userProfil.css') }}">
+{% endblock %}
 
 {% block title %}
     Profil de {{ user.name }}
 {% endblock %}
 
 {% block body %}
-    <h1>Profil de {{ user.name }} {{ user.firstname }}</h1>
-<div class="form-container">
-    <p><strong>Nom :</strong> {{ user.name }}</p>
-    <p><strong>Prénom :</strong> {{ user.firstname }}</p>
-    <p><strong>Email :</strong> {{ user.email }}</p>
-    <p><strong>Téléphone :</strong> {{ user.telephone ?: 'Non renseigné' }}</p>
-    <p><strong>Campus :</strong> {{ user.campus }}</p>
 
-    <div class="buttons">
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Retour</button>
+    <h1>Profil de {{ user.firstname }} {{ user.name }}</h1>
+    <div class="form-container">
+        <p><strong>Nom :</strong> {{ user.name }}</p>
+        <p><strong>Prénom :</strong> {{ user.firstname }}</p>
+        <p><strong>Email :</strong> {{ user.email }}</p>
+        <p><strong>Téléphone :</strong> {{ user.telephone ?: 'Non renseigné' }}</p>
+        <p><strong>Campus :</strong> {{ user.campus }}</p>
+
+        <div class="buttons">
+            <div class="form-actions">
+
+                <button type="submit" class="btn btn-primary">Retour</button>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

@@ -25,6 +25,7 @@
             {% endif %}
         </div>
     {% endif %}
+
     <form method="post">
         <h1>Veuillez vous connecter</h1>
         <div class="form-container">
@@ -35,7 +36,9 @@
                        autocomplete="email" required autofocus>
             </div>
             <div class="form-row">
+
                 <label for="inputPassword">Mot de passe :</label>
+
                 <input type="password" name="password" id="inputPassword" class="form-control"
                        autocomplete="current-password" required>
             </div>
@@ -47,6 +50,7 @@
 
                 <input type="checkbox" class="form-check-input" id="rememberMe" name="remember_me">
                 <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+
             </div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <button class="btn btn-lg btn-primary" type="submit">
@@ -54,4 +58,5 @@
             </button>
         </div>
     </form>
+
 {% endblock %}

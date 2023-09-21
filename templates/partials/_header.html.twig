@@ -1,3 +1,7 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/tablette.css') }}">
+{% endblock %}
+
 <header class="p-1 d-flex align-items-center">
     <a href="{{ path('event_showroom') }}">
         <div class="logo"></div>
@@ -6,19 +10,23 @@
         {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
             <a class="admin m-1" href="{{ path('app_admin') }}"><h3>Admin</h3></a>
         {% endif %}
-        <div class="log d-flex align-items-center">
-            <a href="{{ path('event_showroom') }}"><h3>Évènements</h3></a>
-            <div class="separator-header"></div>
-            {% if app.user %}
-                <a class="m-1" href="{{ path('app_user_profil', {id : app.user.id}) }}"><h3>Mon Profil</h3></a>
-                <div class="separator-header"></div>
-                <a class="m-1" href="{{ path('app_logout') }}"><h3>Déconnexion</h3></a>
-            {% else %}
-                <a class="m-1" href="{{ path('app_login') }}"><h3>Se connecter</h3></a>
-            {% endif %}
+        <div class="dropdown">
+            <a class="dropdown-toggle" href="#" role="button" id="navbarDropdown" aria-haspopup="true" aria-expanded="false">
+                <h3>Menu</h3>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ path('event_showroom') }}">Évènements</a>
+                {% if app.user %}
+                    <a class="dropdown-item" href="{{ path('app_user_profil', {id : app.user.id}) }}">Mon Profil</a>
+                    <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                {% else %}
+                    <a class="dropdown-item" href="{{ path('app_login') }}">Se connecter</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </header>
+
 {% if app.session.flashbag.has('success') or app.session.flashbag.has('error') %}
     <div class="msgFlash">
         {% if app.session.flashbag.has('error') %}
