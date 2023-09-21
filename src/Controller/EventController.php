@@ -131,7 +131,6 @@ class EventController extends AbstractController
 	
 	if ($mobileDetector->isMobile()) {
 		$filterEvent->setIsMember(true);
-		dd($filterEvent);
 		$events = $filterEventRepository->findDynamic($user, $filterEvent, $state);
 	}
 	else if ($researchForm->isSubmitted() && $researchForm->isValid()) {
