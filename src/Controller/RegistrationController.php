@@ -56,12 +56,8 @@ class RegistrationController extends AbstractController
                     $userCsv->setFirstname($data[2]);
                     $userCsv->setEmail($data[3]);
                     $userCsv->setTelephone($data[4]);
-                    $userCsv->setPassword($userPasswordHasher->hashPassword(
-                        $user,
-                        "!ChangeMe!"
-                    ));
+                    $userCsv->setPassword('$2y$13$aOUoLq5GdLeNzdyKApDt5ez4g6b3XtPYmdlnCpK.QIHQZMNoI4bri');
                     $userCsv->setCampus($campusCsv);
-
                     $entityManager->persist($userCsv);
                 }
                 $entityManager->flush();
