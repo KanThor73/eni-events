@@ -1,9 +1,7 @@
-dans /user/profil et dans /event/create, on ne peut pas annuler sans avoir rempli le champ mail (faire un <a> plutôt qu'un button)
-
 est-ce normal de pouvoir modifier son prénom, nom, campus, en tant qu'utilisateur ?
 
 numéro de téléphone : regex
 
 faire la validation des données dans les Entity plutôt que dans les formulaires
 
-tr td th sur event showroom
+check date creation event

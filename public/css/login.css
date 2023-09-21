@@ -10,6 +10,25 @@ body{
     align-items: center;
     height: 100vh;
     justify-content: center;
+
+h1 {
+	text-align: center;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 20px;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+}
+
+.sub-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-top: 30px;
 }
 
 .form-container {
@@ -48,4 +67,26 @@ body{
     color: var(--warning);
     background: var(--warning-soft);
     border: 3px solid var(--warning);
+}
+
+@media screen and (max-width: 425px) {
+	
+	h1 {
+		font-size: 2rem;
+	}
+
+	.sub-container {
+		align-items: center;
+	}
+
+	.row {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.middle {
+		display: flex;
+		justify-content: center;
+	}
 }

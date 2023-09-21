@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/accesDenied.css') }}">
+{% endblock %}
+{% block title %}Acces Denied{% endblock %}
+{% block header %}
+{% endblock %}
+{% block body %}
+    <div class="form-container">
+        <h2>Vous n'etes pas autorise a acceder a cette page, veuillez contacter un administrateur</h2>
+        <a class="btn-primary" href="{{ path('event_showroom') }}">Retour</a>
+    </div>
+{% endblock %}
