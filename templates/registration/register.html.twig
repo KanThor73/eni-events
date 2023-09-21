@@ -43,16 +43,22 @@
                     {{ form_widget(registrationForm.plainPassword) }}
                     {{ form_errors(registrationForm.plainPassword) }}
                 </div>
-                <div class="row">
-                    {{ form_label(registrationForm.chargerCSV) }}
-                    {{ form_widget(registrationForm.chargerCSV) }}
-                </div>
-                    {{ form_errors(registrationForm.chargerCSV) }}
                 <div class="row middle">
                     <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
                 </div>
             </div>
         </div>
         {{ form_end(registrationForm) }}
+	
+	{{ form_start(csvForm) }}
+	<div class="row">
+        	{{ form_label(csvForm.chargerCSV) }}
+        	{{ form_widget(csvForm.chargerCSV) }}
+        </div>
+        {{ form_errors(csvForm.chargerCSV) }}
+        <div class="row right">
+        	<button type="submit" class="btn btn-lg btn-primary">Soumettre</button>
+        </div>
+	{{ form_end(csvForm) }}
     </div>
 {% endblock %}

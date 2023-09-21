@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\CSVType;
 use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,11 +22,29 @@ class RegistrationController extends AbstractController
         $user = new User();
         $user->setRoles(["ROLE_USER"]);
 
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+	$form = $this->createForm(RegistrationFormType::class, $user);
+	$form->handleRequest($request);
+
+	$formCSV = $this->createForm(CSVType::class);
+	$formCSV->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $csvFile = $form->get('chargerCSV')->getData();
+
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+	    );
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            // return $this->redirectToRoute('app_register');
+	}
+
+	if ($formCSV->isSubmitted() && $formCSV->isValid()) {
+            $csvFile = $formCSV->get('chargerCSV')->getData();
 
             if (($handle = fopen($csvFile->getPathname(), 'r')) !== false) {
                 while (($data = fgetcsv($handle, 1000, ',')) !== false) {
@@ -48,22 +67,11 @@ class RegistrationController extends AbstractController
                 $entityManager->flush();
                 fclose($handle);
             }
-
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_register');
-        }
+	}
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+		'registrationForm' => $form->createView(),
+		'csvForm' => $formCSV->createView()
         ]);
     }
 }
