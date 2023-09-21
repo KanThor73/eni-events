@@ -50,7 +50,10 @@
             {% endif %}
             <div class="form-row">
                 {{ form_label(locationForm.city) }}
-                {{ form_widget(locationForm.city) }}
+                <div>
+                    {{ form_widget(locationForm.city) }}
+                    <a class="btn-primary btn-add" href="{{ path('createCity.html.twig') }}">+</a>
+                </div>
             </div>
             <div class="form-row">
                 {{ form_label(locationForm.name) }}
@@ -82,7 +85,7 @@
         <a href="#">
             <button class="btn-primary" type="submit" name="publish">Publier</button>
         </a>
-        <a class="btn-primary"href="{{ path('event_showroom') }}">Annuler
+        <a class="btn-primary" href="{{ path('event_showroom') }}">Annuler
         </a>
     </div>
     {{ form_widget(eventForm._token) }}

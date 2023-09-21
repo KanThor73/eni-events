@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
 use App\Entity\Place;
+use App\Form\CityType;
 use App\Form\PlaceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +17,7 @@ class LocationController extends AbstractController
 {
 
     #[Route('/createPlace', name: 'createPlace')]
-    public function index(EntityManagerInterface $entityManager, Request $request): Response
+    public function createPlace(EntityManagerInterface $entityManager, Request $request): Response
     {
         $place = new Place();
 
@@ -25,11 +27,30 @@ class LocationController extends AbstractController
             $entityManager->persist($place);
             $entityManager->flush();
             $this->addFlash('success', 'Nouveau lieu ajoute');
-            $this->redirectToRoute('create_event');
+            return $this->redirectToRoute('create_event');
         }
 
         return $this->render('location/createPlace.html.twig', [
             'form' => $placeForm->createView(),
+        ]);
+    }
+
+    #[Route('/createCity.html.twig', name: 'createCity.html.twig')]
+    public function createCity(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $city = new City();
+
+        $cityForm = $this->createForm(CityType::class, $city)->handleRequest($request);
+
+        if($cityForm->isSubmitted() && $cityForm->isValid()){
+            $entityManager->persist($city);
+            $entityManager->flush();
+            $this->addFlash('success', 'Nouvelle ville ajoutee');
+            return $this->redirectToRoute('create_event');
+        }
+
+        return $this->render('location/createCity.html.twig', [
+            'form' => $cityForm->createView(),
         ]);
     }
 }

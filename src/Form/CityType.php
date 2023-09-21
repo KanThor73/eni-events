@@ -20,11 +20,7 @@ class CityType extends AbstractType
     {
         $builder
 //            ->add('name')
-            ->add('name', EntityType::class, [
-                'placeholder' => 'Choisir une ville',
-                'class' => City::class,
-                'choice_label' => 'name',
-                'required' => false,
+            ->add('name', null, [
                 'label' => 'Ville :'
             ])
             ->add('postCode', null, [
