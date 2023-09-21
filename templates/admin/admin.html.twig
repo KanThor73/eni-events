@@ -4,18 +4,26 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 {% endblock %}
 {% block title %}Admin{% endblock %}
-
-
 {% block body %}
     <div class="form-container">
-        <a href="{{ path('app_register') }}">
-            <button class="btn-primary">Utilisateurs</button>
-        </a>
-        <a href="">
-            <button class="btn-primary">Campus</button>
-        </a>
-        <a href="">
-            <button class="btn-primary">Villes</button>
-        </a>
+        <h4 class="m-1">Gestion utilisateurs</h4>
+        <div class="user">
+            <a href="{{ path('app_register') }}">
+                <button class="btn-primary">Ajouter</button>
+            </a>
+            <a href="{{ path('manage') }}">
+                <button class="btn-primary">Gerer</button>
+            </a>
+        </div>
+        <h4 class="m-1">Gestion lieux / villes</h4>
+        <div class="location">
+            <a href="">
+                <button class="btn-primary">Campus</button>
+            </a>
+            <a href="">
+                <button class="btn-primary">Villes</button>
+            </a>
+        </div>
+
     </div>
 {% endblock %}

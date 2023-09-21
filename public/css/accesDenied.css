@@ -1,0 +1,13 @@
+h2{
+    text-align: center;
+    color: var(--warning)
+}
+
+.form-container{
+    margin: 10rem 4rem;
+}
+
+
+.btn-primary{
+    margin-top: 3rem;
+}
