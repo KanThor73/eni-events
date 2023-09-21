@@ -21,3 +21,17 @@ span {
     text-align: center;
     min-width: 12rem;
 }
+
+@media screen and (max-width: 425px) {
+	.form-container {
+		flex-direction: column;
+	}
+
+	.form-details {
+		display: flex;
+	}
+
+	.form-location {
+		display: flex;
+	}
+}

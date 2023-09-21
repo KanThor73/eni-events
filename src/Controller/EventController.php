@@ -21,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use MobileDetectBundle\DeviceDetector\MobileDetectorInterface;
 
 #[Route('/event')]
 class EventController extends AbstractController
@@ -118,7 +119,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/showroom', name: 'event_showroom')]
-    public function eventShowroom(Request $request, EntityManagerInterface $entityManager, StateRepository $stateRepository, FilterEventRepository $filterEventRepository): Response
+    public function eventShowroom(Request $request, EntityManagerInterface $entityManager, StateRepository $stateRepository, FilterEventRepository $filterEventRepository, MobileDetectorInterface $mobileDetector): Response
     {
         $filterEvent = new FilterEvent();
 
@@ -126,17 +127,23 @@ class EventController extends AbstractController
         $eventRepo = $entityManager->getRepository(Event::class);
         $researchForm->handleRequest($request);
 
-        if ($researchForm->isSubmitted() && $researchForm->isValid()) {
-            $state = $stateRepository->find(3);
-            $user = $this->getUser();
+        $user = $this->getUser();
+        $state = $stateRepository->find(3);
+	
+	if ($mobileDetector->isMobile()) {
+		$filterEvent->setIsMember(true);
+		dd($filterEvent);
+		$events = $filterEventRepository->findDynamic($user, $filterEvent, $state);
+	}
+	else if ($researchForm->isSubmitted() && $researchForm->isValid()) {
             $events = $filterEventRepository->findDynamic($user, $filterEvent, $state);
         } else {
-            $events = $eventRepo->findBy([], [], 10);
+		$events = $eventRepo->findBy([], [], 10);
         }
 
         return $this->render('event/eventShowroom.html.twig', [
             'form' => $researchForm->createView(),
-            'events' => $events
+	    'events' => $events
         ]);
     }
 
