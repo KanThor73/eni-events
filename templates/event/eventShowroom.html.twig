@@ -130,6 +130,8 @@
                         {% elseif event.state.label == 'Ouvert' and isOrganizer %}
                             <td><a href="{{ path('show',{id: event.id }) }}">Afficher</a> / <a
                                         href="{{ path('cancel',{id: event.id }) }}">Annuler</a></td>
+                        {% else %}
+                            <td></td>
                         {% endif %}
                     </tr>
                 {% endfor %}

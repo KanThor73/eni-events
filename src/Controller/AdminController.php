@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\EventRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class AdminController extends AbstractController
 {
@@ -61,6 +63,16 @@ class AdminController extends AbstractController
         $entityManager->flush();
         return $this->render('admin/manage.html.twig', [
             'users' => $users
+        ]);
+    }
+
+    #[Route('/admin/cancel', name: 'cancelEvent')]
+    public function cancel(EventRepository $eventRepository, EntityManagerInterface $entityManager): Response
+    {
+        $events = $eventRepository->findAll();
+
+        return $this->render('admin/cancel.html.twig', [
+            'events' => $events
         ]);
     }
 

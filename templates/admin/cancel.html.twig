@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/manage.css') }}">
+{% endblock %}
+{% block title %}Admin{% endblock %}
+{% block body %}
+    <div class="form-container">
+        <h4 class="m-1">Utilisateurs</h4>
+        <table>
+            <thead>
+            <tr>
+                <td>Nom</td>
+                <td>Campus</td>
+                <td>Date de debut</td>
+                <td>Limite inscription</td>
+                <td>inscrits/places</td>
+                <td>Statut</td>
+                <td>Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for event in events %}
+                <tr class="{{ cycle(['dark', 'light'], loop.index) }}">
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.campus }}</td>
+                    <td>{{ event.beginDate | date("m/d/Y") }}</td>
+                    <td>{{ event.limitDate | date("m/d/Y") }}</td>
+                    <td>{{ event.getNbrOfMembers }}/{{ event.nbMaxInscription }}</td>
+                    {% if event.state.label == 'En cours' %}
+                        <td>En cours</td>
+                    {% elseif event.state.label == 'Ouvert' %}
+                        <td>Ouvert</td>
+                    {% elseif event.state.label == 'Ferme' %}
+                        <td>Ferme</td>
+                    {% elseif event.state.label == 'En creation' %}
+                        <td>En creation</td>
+                    {% endif %}
+                    <td>
+                        <div class="btn">
+                            {% if event.state.label != 'Ferme' %}
+                                <a href="{{ path('cancel',{id: event.id }) }}">
+                                    <button class="btn-primary" type="submit" name="disable">Annuler</button>
+                                </a>
+                            {% endif %}
+                            <a href="{{ path('deleteEvent',{id: event.id }) }}">
+                                <button class="btn-primary" type="submit" name="delete">Supprimer</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
