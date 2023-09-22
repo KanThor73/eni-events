@@ -8,12 +8,15 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class UserProfilType extends AbstractType
 {
@@ -46,8 +49,17 @@ class UserProfilType extends AbstractType
             ->add('firstname', null, [
                 'label' => 'Prenom :'
             ])
-            ->add('telephone', null, [
-                'label' => 'Telephone :'
+            ->add('telephone', TelType::class, [
+                'label' => 'Telephone :',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Ce champ ne peut pas être vide.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^\d{10}$/',
+                        'message' => 'Le numéro de téléphone doit contenir 10 chiffres.',
+                    ]),
+                ]
             ])
             ->add('pseudo', null, [
                 'label' => 'pseudo :'
@@ -68,6 +80,7 @@ class UserProfilType extends AbstractType
                         'mimeTypesMessage' => 'Formats autorises : {{ types }}',
                     ])
                 ],
+                'required' => false,
                 'mapped' => false,
                 'label' => 'Avatar :'
             ]);

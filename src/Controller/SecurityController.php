@@ -157,7 +157,7 @@ class SecurityController extends AbstractController
 
                 $email = new TemplatedEmail();
                 $email
-                    ->to('bidule@eni.com')
+                    ->to($emailFromForm)
                     ->subject('Reinitialisation de mot de passe')
                     ->htmlTemplate('emails/reset_password.html.twig')
                     ->context([
