@@ -50,6 +50,43 @@
             flex-direction: column;
         }
     }
+}
 
+/* header smartphone */
+@media screen and (max-width: 425px) {
+	.m-1,
+	.mr-1,
+	.mr-1 + p,
+       	.menu {
+		display: none;
+	}
 
+	#smartphoneDisconnect {
+		display: block;
+	}
+
+	header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+	}
+}
+
+/* eventshow smartphone */
+@media screen and (max-width: 425px) {
+	.form-container {
+		flex-direction: column;
+	}
+
+	.form-details {
+		display: flex;
+	}
+
+	.form-location {
+		display: flex;
+	}
+
+	label {
+		font-weight: bold;
+	}
 }
